@@ -1,3 +1,7 @@
+/*
+ * Missionari e Cannibali
+ * Author: KappaEvin
+ */
 package it.unibo.ia.missionaricannibali;
 
 import java.util.ArrayList;
