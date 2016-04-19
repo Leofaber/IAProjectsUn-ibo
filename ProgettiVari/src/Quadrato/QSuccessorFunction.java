@@ -16,6 +16,11 @@ public class QSuccessorFunction implements SuccessorFunction {
 		count = 0;
 	}
 	
+	public String getPathChar(Object state,int r,int c){
+		QState qState = (QState) state;
+		return qState.pathGrid.percorsiGriglia[r][c];
+	}
+	
 	public List getSuccessors(Object state) {
 		
 		List result = new ArrayList();
@@ -26,21 +31,29 @@ public class QSuccessorFunction implements SuccessorFunction {
 			QState qState = (QState) state;
 			count++;
 			
+			
+			
 			String[][] g = new String[10][10];
 			g = qState.getGriglia();
 			int lastValue = qState.getLastValue();
 			int riga = qState.getRigaLastValue();
 			int colonna = qState.getColonnaLastValue();
 			
-			System.out.println("Valore Attuale: "+lastValue+" e numero di stati espansi: "+count+"\n");
-			
+			System.out.println("Sto calcolando i successori di "+getPathChar(qState,riga,colonna)+". Row: "+riga+" Col: "+colonna+" Valore Attuale: "+lastValue+" e numero di stati espansi: "+count+"\n");
+			try {
+				br.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	//		qState.getState();
 
 			if (colonna <= 6) { 
 				if (isAllowed(qState, qState.E)) {
-					QState newState = new QState(g);
-					newState.addValue(riga, colonna+3,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga, colonna+3,lastValue+1);
 		//			newState.getState();
+					QState newState = new QState(g,riga,colonna+3,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.e, newState));
 				}
 			}
@@ -54,20 +67,22 @@ try {
 }*/
 			if (colonna >= 3) {
 				if (isAllowed(qState, qState.O)) {
-					QState newState = new QState(g);
-					newState.addValue(riga, colonna-3,lastValue+1);
+			//		QState newState = new QState(g);
+		//			newState.addValue(riga, colonna-3,lastValue+1);
 		//			newState.getState();
 			//		QState newState = moveO(qState, lastValue);
+					QState newState = new QState(g,riga,colonna-3,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.o, newState));
 				}
 			}
 			
 			if (riga <= 6) {
 				if (isAllowed(qState, qState.S)) {
-					QState newState = new QState(g);
-					newState.addValue(riga+3, colonna,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga+3, colonna,lastValue+1);
 		//			newState.getState();
 //					QState newState = moveS(qState, lastValue);
+					QState newState = new QState(g,riga+3,colonna,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.s, newState));
 				}
 			}
@@ -81,40 +96,44 @@ try {
 	*/		
 			if (riga >= 3) {
 				if (isAllowed(qState, qState.N)) {
-					QState newState = new QState(g);
-					newState.addValue(riga-3, colonna,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga-3, colonna,lastValue+1);
 		//			newState.getState();
 //					QState newState = moveN(qState, lastValue);
+					QState newState = new QState(g,riga-3,colonna,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.n, newState));
 				}
 			}
 			
 			if (colonna <= 7 && riga >= 2) {
 				if (isAllowed(qState, qState.NE)) {
-					QState newState = new QState(g);
-					newState.addValue(riga-2, colonna+2,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga-2, colonna+2,lastValue+1);
 		//			newState.getState();
 //					QState newState = moveNE(qState, lastValue);
+					QState newState = new QState(g,riga-2,colonna+2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.ne, newState));
 				}
 			}
 			
 			if (colonna >= 2 && riga >= 2) {
 				if (isAllowed(qState, qState.NO)) {
-					QState newState = new QState(g);
-					newState.addValue(riga-2, colonna-2,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga-2, colonna-2,lastValue+1);
 		//			newState.getState();
 //					QState newState = moveNO(qState, lastValue);
+					QState newState = new QState(g,riga-2,colonna-2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.no, newState));
 				}
 			}
 			
 			if (colonna <= 7 && riga <= 7) {
 				if (isAllowed(qState, qState.SE)) {
-					QState newState = new QState(g);
-					newState.addValue(riga+2, colonna+2,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga+2, colonna+2,lastValue+1);
 		//			newState.getState();
 //					QState newState = moveSE(qState, lastValue);
+					QState newState = new QState(g,riga+2,colonna+2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.se, newState));
 				}
 			}
@@ -128,10 +147,11 @@ try {
 		*/	
 			if (colonna >= 2 && riga <= 7) {
 				if (isAllowed(qState, qState.SO)) {
-					QState newState = new QState(g);
-					newState.addValue(riga+2, colonna-2,lastValue+1);
+		//			QState newState = new QState(g);
+		//			newState.addValue(riga+2, colonna-2,lastValue+1);
 		//			newState.getState();
 //					QState newState = moveSO(qState, lastValue);
+					QState newState = new QState(g,riga+2,colonna-2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.so, newState));
 				}
 			}
@@ -143,7 +163,7 @@ try {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
-		return result;
+ 		return result;
 	}
 
 	private QState moveE(QState s, int v) {

@@ -8,11 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+  
 import aima.search.framework.GraphSearch;
 import aima.search.framework.Problem;
 import aima.search.framework.Search;
 import aima.search.framework.SearchAgent;
 import aima.search.framework.TreeSearch;
+import aima.search.informed.AStarSearch;
 import aima.search.uninformed.BreadthFirstSearch;
 import aima.search.uninformed.DepthFirstSearch;
 
@@ -27,7 +29,7 @@ public class QuadratoDemo {
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			
-			Problem problem = new Problem(initState, new QSuccessorFunction(), initState);
+		//	Problem problem = new Problem(initState, new QSuccessorFunction(), initState);
 	
 			System.out.println("\nPress enter to execute Breadth First Search (Tree Search)...");
 			br.readLine();
@@ -39,7 +41,16 @@ public class QuadratoDemo {
 //	        System.out.println("Tempo millisecondi: "+millis);
 //	        System.out.println( sdf.format(cal.getTime()) );
 	        
-			Search search = new DepthFirstSearch(new TreeSearch());
+//			Search search = new DepthFirstSearch(new TreeSearch());
+//			SearchAgent agent = new SearchAgent(problem, search);
+//			printActions(agent.getActions());
+//			printInstrumentation(agent.getInstrumentation());
+			
+			
+			// RICERCA A* - E' NECESSARIO CHIAMARE UN DIVERSO COSTRUTTORE DI PROBLEM
+			//initState, new WorldStateSuccessorFunction(), initState, initState, new WorldStateHeuristicFunction()
+			Problem problem = new Problem(initState, new QSuccessorFunction(), initState, initState, new QHeuristicFunction());
+			AStarSearch search = new AStarSearch(new GraphSearch());
 			SearchAgent agent = new SearchAgent(problem, search);
 			printActions(agent.getActions());
 			printInstrumentation(agent.getInstrumentation());

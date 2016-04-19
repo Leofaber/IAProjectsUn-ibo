@@ -1,6 +1,5 @@
 package Quadrato;
 
-import java.util.Arrays;
 
 import aima.search.framework.GoalTest;
 import aima.search.framework.HeuristicFunction;
@@ -24,7 +23,7 @@ diminuisce il fattore di ramificazione
 • La profondità dell’albero è 100 (dobbiamo assegnare 100 numeri – 99
 se il primo è già stato assegnato)
  */
-public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cloneable {
+public class QState implements GoalTest, StepCostFunction, Cloneable {
 
 	static public final String n = "Nord";
 	static public final String s = "Sud";
@@ -47,6 +46,10 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 	public String[][] griglia;
 	public int lastValue, rigaLastValue, colonnaLastValue;
 	
+	public PathGrid pathGrid;
+	public String parentPathChar;
+	
+	
 	public QState() {
 		griglia = new String[10][10];
 		int i,j;
@@ -56,9 +59,14 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 			}
 		}
 		griglia[0][0] = "1";
+		parentPathChar = "A";
 		lastValue = 1;
 		rigaLastValue = 0;
 		colonnaLastValue = 0;
+		
+		pathGrid = PathGrid.getPathGrid();
+		
+ 		
 	}
 	
 	public void addValue(int riga, int colonna, int valore){
@@ -74,6 +82,8 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 			}
 		}
 				
+		pathGrid = PathGrid.getPathGrid();
+		
 	/*	griglia = new String[10][];
 		for(int i = 0; i < 10; i++)
 		{
@@ -82,12 +92,21 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 		}*/
 	}
 	
-	public QState(String[][] g, int riga, int colonna, int val) {
-		griglia = g;
+	public QState(String[][] g, int riga, int colonna, int val, String s) {
+		griglia = new String[10][10];
+		int i,j;
+		for(i=0;i<10;i++) {
+			for (j=0;j<10;j++) {
+				griglia[i][j] = g[i][j];
+			}
+		}
 		griglia[riga][colonna] = Integer.toString(val);
 		lastValue = val;
 		rigaLastValue = riga;
 		colonnaLastValue = colonna;
+		
+		pathGrid = PathGrid.getPathGrid();
+		parentPathChar = s;
 	}
 	
 	public String[][] getGriglia() {
@@ -105,6 +124,20 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 		}
 		System.out.println("-----------------------------\n");
 	}
+	
+	public void getPathState() {
+		int i,j;
+		for(i=0;i<10;i++) {
+			for (j=0;j<10;j++) {
+				System.out.print(""+pathGrid.percorsiGriglia[i][j]);
+				System.out.print("  ");
+			}
+			System.out.println("");
+		}
+		System.out.println("-----------------------------\n");
+	}
+	
+	
 	
 	public String getValue(int riga, int colonna) {
 		return griglia[riga][colonna];
@@ -133,17 +166,7 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 	public int getColonnaLastValue() {
 		return colonnaLastValue;
 	}
-	
-	@Override
-	public double getHeuristicValue(Object state) {
-		if (state instanceof QState) {
- 			QState qState = (QState) state;
- 			int hVal = 100 - qState.getLastValue();
- 			return hVal;
- 		}
- 		else return Integer.MAX_VALUE;
-	}
-
+	 
 	@Override
 	public Double calculateStepCost(Object arg0, Object arg1, String arg2) {
 		return new Double(1);
@@ -154,8 +177,9 @@ public class QState implements GoalTest, StepCostFunction, HeuristicFunction, Cl
 		if (state instanceof QState) {
 			QState qState = (QState) state;
 		//	System.out.println("********************Testo il Goal*********   val: "+qState.getLastValue());
-			if (qState.getLastValue() == 10) {
+			if (qState.getLastValue() == 100) {
 				qState.getState();
+				qState.getPathState();
 				return true;
 			}else 
 				return false;
