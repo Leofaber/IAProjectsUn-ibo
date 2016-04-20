@@ -29,37 +29,53 @@ public class QuadratoDemo {
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			
-		//	Problem problem = new Problem(initState, new QSuccessorFunction(), initState);
+			Problem problem = new Problem(initState, new QSuccessorFunction(), initState);
 	
-			System.out.println("\nPress enter to execute Breadth First Search (Tree Search)...");
+			System.out.println(java.lang.Runtime.getRuntime().maxMemory());
+			System.out.println("\nPress enter to execute Depth First Search (Tree Search)...");
 			br.readLine();
-			System.out.println("\nBreadth First (Tree Search):");
+			System.out.println("\nDepth First (Tree Search):");
 
-//			Calendar cal = Calendar.getInstance();
-//	        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-//	        long millis = System.currentTimeMillis() % 1000;
-//	        System.out.println("Tempo millisecondi: "+millis);
-//	        System.out.println( sdf.format(cal.getTime()) );
-	        
-//			Search search = new DepthFirstSearch(new TreeSearch());
-//			SearchAgent agent = new SearchAgent(problem, search);
-//			printActions(agent.getActions());
-//			printInstrumentation(agent.getInstrumentation());
+			
+			/*
+			 * Utilizzato per prendere il tempo di partenza
+			Calendar cal = Calendar.getInstance();
+	        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	        long millis = System.currentTimeMillis() % 1000;
+	        System.out.println("Tempo millisecondi: "+millis);
+	        System.out.println( sdf.format(cal.getTime()) );
+*/	        
+			Search search = new DepthFirstSearch(new TreeSearch());
+			SearchAgent agent = new SearchAgent(problem, search);
+			printActions(agent.getActions());
+			printInstrumentation(agent.getInstrumentation());
+			
+			/*
+			 * Per fare la breadth decommentare questo e commentare la depth
+			Search search = new BreadthFirstSearch(new TreeSearch());
+			SearchAgent agent = new SearchAgent(problem, search);
+			printActions(agent.getActions());
+			printInstrumentation(agent.getInstrumentation());
+			*/
 			
 			
-			// RICERCA A* - E' NECESSARIO CHIAMARE UN DIVERSO COSTRUTTORE DI PROBLEM
+	/*		// RICERCA A* - E' NECESSARIO CHIAMARE UN DIVERSO COSTRUTTORE DI PROBLEM
 			//initState, new WorldStateSuccessorFunction(), initState, initState, new WorldStateHeuristicFunction()
 			Problem problem = new Problem(initState, new QSuccessorFunction(), initState, initState, new QHeuristicFunction());
 			AStarSearch search = new AStarSearch(new GraphSearch());
 			SearchAgent agent = new SearchAgent(problem, search);
 			printActions(agent.getActions());
 			printInstrumentation(agent.getInstrumentation());
-		
-//			cal = Calendar.getInstance();
-//	        sdf = new SimpleDateFormat("HH:mm:ss");
-//	        millis = System.currentTimeMillis() % 1000;
-//	        System.out.println("Tempo millisecondi: "+millis);
-//	        System.out.println( sdf.format(cal.getTime()) );
+		*/
+			
+/*
+ * Fornisce il tempo a fine calcolo
+			cal = Calendar.getInstance();
+	        sdf = new SimpleDateFormat("HH:mm:ss");
+	        millis = System.currentTimeMillis() % 1000;
+	        System.out.println("Tempo millisecondi: "+millis);
+	        System.out.println( sdf.format(cal.getTime()) ); 
+ */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

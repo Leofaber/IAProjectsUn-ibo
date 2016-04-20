@@ -13,7 +13,7 @@ public class QSuccessorFunction implements SuccessorFunction {
 
 	public int count;
 	public QSuccessorFunction() {
-		count = 0;
+		count = 0;	//contatore dei nodi espansi
 	}
 	
 	public String getPathChar(Object state,int r,int c){
@@ -33,27 +33,36 @@ public class QSuccessorFunction implements SuccessorFunction {
 			
 			
 			
-			String[][] g = new String[10][10];
+			String[][] g = new String[10][10];	//griglia temporanea
 			g = qState.getGriglia();
-			int lastValue = qState.getLastValue();
-			int riga = qState.getRigaLastValue();
-			int colonna = qState.getColonnaLastValue();
+			int lastValue = qState.getLastValue();	//ultimo valore inserito (nonchè il maggiore)
+			int riga = qState.getRigaLastValue();	//riga dell'ultimo valore inserito
+			int colonna = qState.getColonnaLastValue();	//colonna dell'ultimo valore inserito
 			
-			System.out.println("Sto calcolando i successori di "+getPathChar(qState,riga,colonna)+". Row: "+riga+" Col: "+colonna+" Valore Attuale: "+lastValue+" e numero di stati espansi: "+count+"\n");
+	/*		System.out.println("Sto calcolando i successori di "+getPathChar(qState,riga,colonna)+". Row: "+riga+" Col: "+colonna+" Valore Attuale: "+lastValue+" e numero di stati espansi: "+count+"\n");
 			try {
 				br.read();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	*/
 	//		qState.getState();
 
-			if (colonna <= 6) { 
+			if (lastValue >= 95)
+				System.out.println("Valore Attuale: "+lastValue+", Stati espansi: "+count);
+			
+			if (lastValue == 99)
+				System.out.println("******************UOOOOOOOOOOOOOOOO quasi");
+			
+			//in ogni if controllo di non uscire mai dalla griglia 
+			
+			if (colonna <= 6) {
 				if (isAllowed(qState, qState.E)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga, colonna+3,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga, colonna+3,lastValue+1);
 		//			newState.getState();
-					QState newState = new QState(g,riga,colonna+3,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = new QState(g,riga,colonna+3,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.e, newState));
 				}
 			}
@@ -67,22 +76,22 @@ try {
 }*/
 			if (colonna >= 3) {
 				if (isAllowed(qState, qState.O)) {
-			//		QState newState = new QState(g);
-		//			newState.addValue(riga, colonna-3,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga, colonna-3,lastValue+1);
 		//			newState.getState();
-			//		QState newState = moveO(qState, lastValue);
-					QState newState = new QState(g,riga,colonna-3,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveO(qState, lastValue);
+		//			QState newState = new QState(g,riga,colonna-3,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.o, newState));
 				}
 			}
 			
 			if (riga <= 6) {
 				if (isAllowed(qState, qState.S)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga+3, colonna,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga+3, colonna,lastValue+1);
 		//			newState.getState();
-//					QState newState = moveS(qState, lastValue);
-					QState newState = new QState(g,riga+3,colonna,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveS(qState, lastValue);
+		//			QState newState = new QState(g,riga+3,colonna,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.s, newState));
 				}
 			}
@@ -96,44 +105,44 @@ try {
 	*/		
 			if (riga >= 3) {
 				if (isAllowed(qState, qState.N)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga-3, colonna,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga-3, colonna,lastValue+1);
 		//			newState.getState();
-//					QState newState = moveN(qState, lastValue);
-					QState newState = new QState(g,riga-3,colonna,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveN(qState, lastValue);
+		//			QState newState = new QState(g,riga-3,colonna,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.n, newState));
 				}
 			}
 			
 			if (colonna <= 7 && riga >= 2) {
 				if (isAllowed(qState, qState.NE)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga-2, colonna+2,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga-2, colonna+2,lastValue+1);
 		//			newState.getState();
-//					QState newState = moveNE(qState, lastValue);
-					QState newState = new QState(g,riga-2,colonna+2,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveNE(qState, lastValue);
+		//			QState newState = new QState(g,riga-2,colonna+2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.ne, newState));
 				}
 			}
 			
 			if (colonna >= 2 && riga >= 2) {
 				if (isAllowed(qState, qState.NO)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga-2, colonna-2,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga-2, colonna-2,lastValue+1);
 		//			newState.getState();
-//					QState newState = moveNO(qState, lastValue);
-					QState newState = new QState(g,riga-2,colonna-2,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveNO(qState, lastValue);
+		//			QState newState = new QState(g,riga-2,colonna-2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.no, newState));
 				}
 			}
 			
 			if (colonna <= 7 && riga <= 7) {
 				if (isAllowed(qState, qState.SE)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga+2, colonna+2,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga+2, colonna+2,lastValue+1);
 		//			newState.getState();
-//					QState newState = moveSE(qState, lastValue);
-					QState newState = new QState(g,riga+2,colonna+2,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveSE(qState, lastValue);
+		//			QState newState = new QState(g,riga+2,colonna+2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.se, newState));
 				}
 			}
@@ -147,11 +156,11 @@ try {
 		*/	
 			if (colonna >= 2 && riga <= 7) {
 				if (isAllowed(qState, qState.SO)) {
-		//			QState newState = new QState(g);
-		//			newState.addValue(riga+2, colonna-2,lastValue+1);
+					QState newState = new QState(g);
+					newState.addValue(riga+2, colonna-2,lastValue+1);
 		//			newState.getState();
-//					QState newState = moveSO(qState, lastValue);
-					QState newState = new QState(g,riga+2,colonna-2,lastValue+1,getPathChar(qState,riga,colonna));
+		//			QState newState = moveSO(qState, lastValue);
+		//			QState newState = new QState(g,riga+2,colonna-2,lastValue+1,getPathChar(qState,riga,colonna));
 					result.add(new Successor(newState.so, newState));
 				}
 			}
@@ -166,6 +175,10 @@ try {
  		return result;
 	}
 
+	/*
+	* Funzioni per il movimento
+	* che alla fine ho deciso di integrare nell'if
+	* 
 	private QState moveE(QState s, int v) {
 		String [][] g = new String[10][10]; 
 		g = s.getGriglia();
@@ -215,6 +228,8 @@ try {
 		g[s.getRigaLastValue()+2][s.getColonnaLastValue()-2] = Integer.toString(v+1);
 		return new QState(g);
 	}
+	
+	*/
 	
 	// controlla che la mia futura casella sia vuota
 	private boolean isAllowed(QState s, int dir) {

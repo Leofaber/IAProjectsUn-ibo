@@ -43,7 +43,7 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
 	static public final int SE = 7;
 	static public final int SO = 8;
 	
-	public String[][] griglia;
+	public String[][] griglia;	//il mio stato è rappresentato tramite matrice
 	public int lastValue, rigaLastValue, colonnaLastValue;
 	
 	public PathGrid pathGrid;
@@ -69,10 +69,14 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
  		
 	}
 	
+	//aggiungo alla griglia il nuovo valore
 	public void addValue(int riga, int colonna, int valore){
 		griglia[riga][colonna] = Integer.toString(valore);
 	}
 	
+	//copio il vecchio stato nel nuovo stato
+	//la copia è stata fatta così, anche perchè abbiamo testato con i tempi
+	//e il for batte in velocità l'Arrays.copyOf e la clone()
 	public QState(String[][] g) {
 		griglia = new String[10][10];
 		int i,j;
@@ -92,6 +96,7 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
 		}*/
 	}
 	
+	//costruttore usato con la funzione euristica e l'A*
 	public QState(String[][] g, int riga, int colonna, int val, String s) {
 		griglia = new String[10][10];
 		int i,j;
@@ -109,10 +114,12 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
 		parentPathChar = s;
 	}
 	
+	//restituisce la griglia
 	public String[][] getGriglia() {
 		return griglia;
 	}
 	
+	//Stampa la mia matrice
 	public void getState() {
 		int i,j;
 		for(i=0;i<10;i++) {
@@ -125,6 +132,7 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
 		System.out.println("-----------------------------\n");
 	}
 	
+	//Stampa la matrice modificata apposta per l'euristica che avevamo trovato
 	public void getPathState() {
 		int i,j;
 		for(i=0;i<10;i++) {
@@ -143,6 +151,8 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
 		return griglia[riga][colonna];
 	}
 	
+	//oltre all'ultimo valore, salvo anche riga e colonna relativi a quel valore
+	//non ho trovato niente di meglio per trovare il massimo valore all'interno di una matrice
 	public int getLastValue() {
 		int i,j;
 		for(i=0;i<10;i++) {
@@ -172,7 +182,7 @@ public class QState implements GoalTest, StepCostFunction, Cloneable {
 		return new Double(1);
 	}
 
-	@Override
+	//controllo se ho raggiunto 100
 	public boolean isGoalState(Object state) {
 		if (state instanceof QState) {
 			QState qState = (QState) state;
