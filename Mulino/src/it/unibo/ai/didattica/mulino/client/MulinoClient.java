@@ -28,9 +28,11 @@ public class MulinoClient {
 		switch (player) {
 			case WHITE:
 				port = TCPMulino.whiteSocket;
+				System.out.println(port);
 				break;
 			case BLACK:
 				port = TCPMulino.blackSocket;
+				System.out.println(port);
 				break;
 			default:
 				System.exit(5);
