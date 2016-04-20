@@ -57,7 +57,7 @@ public class QSuccessorFunction implements SuccessorFunction {
 
 			if (lastValue > max) {
 				max = lastValue;
-				System.out.print("Siamo al: "+max+" dopo aver espanso: "+count);
+				System.out.println("Siamo al: "+max+" dopo aver espanso: "+count);
 	//il tempo non funziona, non sappiamo perchè e non abbiamo troppa voglia di pensarci
 	//			System.out.println(" al tempo: "+sdf.format(cal.getTime()) );
 				if (lastValue == 99)
