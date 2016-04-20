@@ -54,7 +54,7 @@ public class QuadratoDemo {
 			printInstrumentation(agent.getInstrumentation());
 			
 			/*
-			//Per fare la breadth decommentare questo e commentare la depth
+			// Per fare la breadth decommentare questo e commentare la depth
 			Search search = new BreadthFirstSearch(new TreeSearch());
 			SearchAgent agent = new SearchAgent(problem, search);
 			printActions(agent.getActions());

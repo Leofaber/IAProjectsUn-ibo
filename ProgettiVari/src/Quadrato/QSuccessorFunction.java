@@ -64,7 +64,7 @@ public class QSuccessorFunction implements SuccessorFunction {
 					System.out.println("******************UOOOOOOOOOOOOOOOO quasi");
 			}
 			
-			//in ogni if controllo di non uscire mai dalla griglia 
+			//In ogni if controllo di non uscire mai dalla griglia 
 			
 			if (colonna <= 6) {
 				if (isAllowed(qState, qState.E)) {
