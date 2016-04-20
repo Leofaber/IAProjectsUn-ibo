@@ -3,7 +3,9 @@ package Quadrato;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import aima.search.framework.Successor;
@@ -12,8 +14,12 @@ import aima.search.framework.SuccessorFunction;
 public class QSuccessorFunction implements SuccessorFunction {
 
 	public int count;
+	public static int max;
+	Calendar cal = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 	public QSuccessorFunction() {
 		count = 0;	//contatore dei nodi espansi
+		max = 0;
 	}
 	
 	public String getPathChar(Object state,int r,int c){
@@ -49,11 +55,14 @@ public class QSuccessorFunction implements SuccessorFunction {
 	*/
 	//		qState.getState();
 
-			if (lastValue >= 95)
-				System.out.println("Valore Attuale: "+lastValue+", Stati espansi: "+count);
-			
-			if (lastValue == 99)
-				System.out.println("******************UOOOOOOOOOOOOOOOO quasi");
+			if (lastValue > max) {
+				max = lastValue;
+				System.out.print("Siamo al: "+max+" dopo aver espanso: "+count);
+	//il tempo non funziona, non sappiamo perchè e non abbiamo troppa voglia di pensarci
+	//			System.out.println(" al tempo: "+sdf.format(cal.getTime()) );
+				if (lastValue == 99)
+					System.out.println("******************UOOOOOOOOOOOOOOOO quasi");
+			}
 			
 			//in ogni if controllo di non uscire mai dalla griglia 
 			
