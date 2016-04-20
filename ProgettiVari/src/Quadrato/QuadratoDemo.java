@@ -18,6 +18,8 @@ import aima.search.informed.AStarSearch;
 import aima.search.uninformed.BreadthFirstSearch;
 import aima.search.uninformed.DepthFirstSearch;
 
+//-Xmx4G da aggiungere per dargli come limite superiore 4Gb di RAM 
+
 public class QuadratoDemo {
 	public static void main(String[] args) {
 		
