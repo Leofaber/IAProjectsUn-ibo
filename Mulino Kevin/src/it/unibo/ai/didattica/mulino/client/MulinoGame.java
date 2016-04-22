@@ -133,7 +133,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	
 	//Verifica se l'azione action genera un nuovo tris
 	private boolean madeNewMill(State state, String action){
-		
+		//TODO
 		return true;
 	}
 	

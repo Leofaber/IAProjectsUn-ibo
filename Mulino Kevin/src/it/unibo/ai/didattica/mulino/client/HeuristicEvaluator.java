@@ -38,6 +38,7 @@ public class HeuristicEvaluator {
 	 * 0 otherwise
 	 */
 	 private double closedMorris(){
+		 //TODO
 		return 0;
 	}
 	
@@ -45,6 +46,7 @@ public class HeuristicEvaluator {
 	 * Difference between the number of yours and yours opponent’s morrises
 	 */
 	private double numberOfMorris(){
+		//TODO
 		return 0;
 	}
 	
@@ -52,6 +54,7 @@ public class HeuristicEvaluator {
 	 * (pieces which don’t have an empty adjacent point)
 	 */
 	private double numberOfBlockedOpponentPieces(){
+		//TODO
 		return 0;
 	}
 	
@@ -59,6 +62,7 @@ public class HeuristicEvaluator {
 	 *  Difference between the number of yours and yours opponent’s pieces
 	 */
 	private double numberOfPieces(){
+		//TODO
 		return 0;
 	}
 	
@@ -67,6 +71,7 @@ public class HeuristicEvaluator {
 	 * adding one more piece would close a morris)
 	 */
 	private double numberOf2PieceConfigurations(){
+		//TODO
 		return 0;
 	}
 	
@@ -75,6 +80,7 @@ public class HeuristicEvaluator {
 	 * a piece can be added in which one of two ways to close a morris)
 	 */
 	private double numberOf3PieceConfigurations(){
+		//TODO
 		return 0;
 	}
 	
@@ -82,6 +88,7 @@ public class HeuristicEvaluator {
 	 * (A double morris is one in which two morrises share a common piece) 
 	 */
 	private double doubleMorris(){
+		//TODO
 		return 0;
 	}
 	
@@ -89,6 +96,7 @@ public class HeuristicEvaluator {
 	 * 1 if the state is winning for the player, -1 if losing, 0 otherwise
 	 */
 	private double winningConfiguration(){
+		//TODO
 		return 0;
 	}
 
