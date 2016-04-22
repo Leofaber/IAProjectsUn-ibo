@@ -7,7 +7,18 @@ import java.util.Map.Entry;
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import aima.core.search.adversarial.Game;
-
+/*
+ * S0: The initial state, which specifies how the game is set up at the
+ * start.
+ * PLAYER(s): Defines which player has the move in a state.
+ * ACTIONS(s): Returns the set of legal moves in a state.
+ * RESULT(s, a): The transition model, which defines the result of a move.
+ * TERMINAL-TEST(s): A terminal test, which is true when the game is over
+ * and false TERMINAL STATES otherwise. States where the game has ended are
+ * called terminal states.</li>
+ * UTILITY(s, p): A utility function, defines the final numeric value for a game 
+ * that ends in terminal state s for a player p.
+ */
 public class MulinoGame implements Game<State, String, State.Checker> {
 	private State currentState;
 	
