@@ -39,7 +39,7 @@ public class HeuristicEvaluator {
 	 */
 	 private double closedMorris(){
 		 //TODO
-		return 0;
+		return 1;
 	}
 	
 	/* 
@@ -47,7 +47,7 @@ public class HeuristicEvaluator {
 	 */
 	private double numberOfMorris(){
 		//TODO
-		return 0;
+		return 1;
 	}
 	
 	/* Difference between the number of yours opponent’s and yours blocked pieces
@@ -55,7 +55,7 @@ public class HeuristicEvaluator {
 	 */
 	private double numberOfBlockedOpponentPieces(){
 		//TODO
-		return 0;
+		return 1;
 	}
 	
 	/*
@@ -63,7 +63,7 @@ public class HeuristicEvaluator {
 	 */
 	private double numberOfPieces(){
 		//TODO
-		return 0;
+		return 1;
 	}
 	
 	/* Difference between the number of yours and yours opponent’s 
@@ -72,7 +72,7 @@ public class HeuristicEvaluator {
 	 */
 	private double numberOf2PieceConfigurations(){
 		//TODO
-		return 0;
+		return 1;
 	}
 	
 	/* Difference between the number of yours and yours opponent’s 
@@ -81,7 +81,7 @@ public class HeuristicEvaluator {
 	 */
 	private double numberOf3PieceConfigurations(){
 		//TODO
-		return 0;
+		return 1;
 	}
 	
 	/* Difference between number of yours and yours opponent’s double morrises 
@@ -89,7 +89,7 @@ public class HeuristicEvaluator {
 	 */
 	private double doubleMorris(){
 		//TODO
-		return 0;
+		return 1;
 	}
 	
 	/*
@@ -97,7 +97,7 @@ public class HeuristicEvaluator {
 	 */
 	private double winningConfiguration(){
 		//TODO
-		return 0;
+		return 1;
 	}
 
 	public State getState() {

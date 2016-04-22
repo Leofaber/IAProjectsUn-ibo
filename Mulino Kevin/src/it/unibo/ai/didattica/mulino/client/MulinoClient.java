@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import aima.core.search.adversarial.IterativeDeepeningAlphaBetaSearch;
 import it.unibo.ai.didattica.mulino.actions.Action;
 import it.unibo.ai.didattica.mulino.actions.Phase1Action;
 import it.unibo.ai.didattica.mulino.domain.State;
@@ -87,6 +88,13 @@ public class MulinoClient {
 			BufferedReader in = new BufferedReader( new InputStreamReader(System.in));
 			while (true) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
+				
+				try{
+					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch<State, String, State.Checker>(new MulinoGame(currentState), -10000, 10000, 60);
+					System.out.println("decision: "+search.makeDecision(currentState.clone()));
+				}catch(Exception e){
+					System.out.println(e);
+				}
 				actionString = in.readLine();
 				action = new Phase1Action();
 				action.setPutPosition(actionString.substring(0, 2));

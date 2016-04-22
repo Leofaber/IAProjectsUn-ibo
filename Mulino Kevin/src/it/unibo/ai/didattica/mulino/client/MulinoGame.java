@@ -44,14 +44,14 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 
 	@Override
 	public boolean isTerminal(State state) {
-		switch (state.getCurrentPhase()){
-		case FIRST: 
-			return state.getBlackCheckers()==0 && state.getWhiteCheckers()==0;
-		case SECOND:
-			break;
-		case FINAL:
-			break;
-		}
+//		switch (state.getCurrentPhase()){
+//		case FIRST: 
+//			return state.getBlackCheckers()==0 && state.getWhiteCheckers()==0;
+//		case SECOND:
+//			break;
+//		case FINAL:
+//			break;
+//		}
 		return false;
 		
 	}
@@ -66,11 +66,11 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	@Override
 	public State getResult(State state, String action) {
 		State newState = state.clone();
-		String replaceAction=action.substring(0,2);
+		String putAction=action.substring(0,2);
 		String removeAction;
 		switch (getPlayer(state)){
 		case BLACK:
-			newState.getBoard().replace(replaceAction, Checker.BLACK);
+			newState.getBoard().replace(putAction, Checker.BLACK);
 			newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()+1);
 			newState.setBlackCheckers(newState.getBlackCheckers()-1);
 			if(action.length()==4){
@@ -80,7 +80,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 			}
 			break;
 		case WHITE:
-			newState.getBoard().replace(replaceAction, Checker.WHITE);
+			newState.getBoard().replace(putAction, Checker.WHITE);
 			newState.setWhiteCheckersOnBoard(newState.getWhiteCheckersOnBoard()+1);
 			newState.setWhiteCheckers(newState.getWhiteCheckers()-1);
 			if(action.length()==4){
