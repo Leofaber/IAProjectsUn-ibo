@@ -9,8 +9,18 @@ public class HeuristicEvaluator {
 	private Checker player;
 	private Phase phase;
 	
+	public int[] tempTrisOrizz = new int[15];
+	public int[] tempTrisVert = new int[15];
+	
+	
 	public HeuristicEvaluator(State state, Checker player, Phase phase){
 		setState(state); setPlayer(player); setPhase(phase);
+		
+		//azzero tutta l'array
+		for (int t: tempTrisOrizz)
+			t = 0;
+		for (int t: tempTrisVert)
+			t = 0;
 	}
 
 	public double evaluate(){
@@ -46,7 +56,10 @@ public class HeuristicEvaluator {
 	 * Difference between the number of yours and yours opponent’s morrises
 	 */
 	private double numberOfMorris(){
-		//TODO
+		int morrisBlack = 0;
+		for (int i:tempTrisOrizz)
+			if (i == 3)
+				morrisBlack++;
 		return 1;
 	}
 	
@@ -122,6 +135,80 @@ public class HeuristicEvaluator {
 	
 	public Phase getPhase(){
 		return phase;
+	}
+
+	public void morrisOrizzontali(Checker c) {
+		
+		for (String s : state.positions) {
+			char first = s.charAt(0);
+			char second = s.charAt(1);
+			//cerco tris in orizzontale
+			switch (first) {
+				case 'a' : 	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 'b':	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 'c':	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 'd':	if (second <4) {
+								if (state.getBoard().get(s) == c)
+									tempTrisOrizz[0]++;
+							} else {
+								if (state.getBoard().get(s) == c)
+									tempTrisOrizz[0]++;
+							}
+							break;
+				case 'e':	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 'f':	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 'g':	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+			}
+		}
+	}
+	
+	public void morrisVerticali(Checker c) {
+		
+		for (String s : state.positions) {
+			char first = s.charAt(0);
+			char second = s.charAt(1);
+			//cerco tris in verticale
+			switch (second) {
+				case 1 : 	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 2 :	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 3: 	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 4: 	if (second < 'd') {
+								if (state.getBoard().get(s) == c)
+									tempTrisOrizz[0]++;
+							} else {
+								if (state.getBoard().get(s) == c)
+									tempTrisOrizz[0]++;
+							}
+							break;
+				case 5: 	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 6: 	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+				case 7: 	if (state.getBoard().get(s) == c)
+								tempTrisOrizz[0]++;
+							break;
+			}
+		}
 	}
 
 }
