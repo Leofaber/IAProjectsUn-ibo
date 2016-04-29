@@ -74,6 +74,9 @@ public class HeuristicEvaluator {
 			if (i == 3)
 				morrisWhite++;
 		
+		//importante! In questo momento i due array tempTrisOrizz e Vert
+		// 		sono stati riempiti con i valori relativi ai bianchi
+		
 		//a questo punto a secondo che io sia il bianco o il nero
 		//faccio la differenza tra i miei tris e i suoi
 		
@@ -155,6 +158,8 @@ public class HeuristicEvaluator {
 		return phase;
 	}
 
+	//le due funzioni sono senza dubbio migliorabili, ma almeno ne abbiamo un abbozzo
+	
 	public void morrisOrizzontali(Checker c) {
 		
 		for (String s : state.positions) {
@@ -162,6 +167,9 @@ public class HeuristicEvaluator {
 			char second = s.charAt(1);
 			//cerco tris in orizzontale
 			switch (first) {
+			// se mi trovo nella riga 'a', vado a controllare se nella mia casella
+			// della board il valore corrisponde a c. se è così allora incremento
+			// il mio array.
 				case 'a' : 	if (state.getBoard().get(s) == c)
 								tempTrisOrizz[0]++;
 							break;
