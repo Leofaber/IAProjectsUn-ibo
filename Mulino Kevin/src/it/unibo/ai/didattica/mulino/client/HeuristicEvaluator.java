@@ -56,11 +56,29 @@ public class HeuristicEvaluator {
 	 * Difference between the number of yours and yours opponent’s morrises
 	 */
 	private double numberOfMorris(){
+		morrisOrizzontali(Checker.BLACK);
 		int morrisBlack = 0;
 		for (int i:tempTrisOrizz)
 			if (i == 3)
 				morrisBlack++;
-		return 1;
+		for (int i:tempTrisVert)
+			if (i == 3)
+				morrisBlack++;
+		
+		morrisOrizzontali(Checker.WHITE);
+		int morrisWhite = 0;
+		for (int i:tempTrisOrizz)
+			if (i == 3)
+				morrisWhite++;
+		for (int i:tempTrisVert)
+			if (i == 3)
+				morrisWhite++;
+		
+		//a questo punto a secondo che io sia il bianco o il nero
+		//faccio la differenza tra i miei tris e i suoi
+		
+		double differenza = morrisWhite - morrisBlack;	//ad esempio
+		return differenza;
 	}
 	
 	/* Difference between the number of yours opponent’s and yours blocked pieces
