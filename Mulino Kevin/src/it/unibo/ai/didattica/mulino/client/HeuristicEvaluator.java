@@ -1,5 +1,6 @@
 package it.unibo.ai.didattica.mulino.client;
 
+import it.unibo.ai.didattica.mulino.customExceptions.InvalidPositionException;
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import it.unibo.ai.didattica.mulino.domain.State.Phase;
@@ -93,8 +94,50 @@ public class HeuristicEvaluator {
 	 * (pieces which don’t have an empty adjacent point)
 	 */
 	private double numberOfBlockedOpponentPieces(){
-		//TODO
-		return 1;
+		int whiteBlocked = 0;
+		int blackBlocked = 0;
+			// se tutte sono occupate, il Checker è bloccato.
+			// altrimenti il Checker è libero.
+		
+		// si cicla sulla board
+		for (String position : state.getPositions()) {
+			
+			
+			// appena si trova sulla board un Checker WHITE or BLACK (quindi NON EMPTY)
+			switch(state.getBoard().get(position)){
+				case EMPTY:
+					break;	
+			
+				// si chiama la funzione getAdjacentPositions(String pos) per ottenere le posizioni adiacenti (connesse a quest'ultimo)
+				case BLACK:
+					try {
+						String [] adjacentPositions = state.getAdjacentPositions(position);
+						// TODO
+						
+					} catch (InvalidPositionException e) {
+						e.printStackTrace();
+					}
+				break;
+				
+				case WHITE:
+					
+					break;
+				default:
+					break;
+		}
+			 
+		}
+		
+		
+		//faccio la differenza tra i SUOI bloccati e i MIEI bloccati
+		switch (player){
+			case WHITE:
+	 				return blackBlocked - whiteBlocked;
+			case BLACK:
+	 				return  whiteBlocked - blackBlocked;
+			default:
+					return 0;
+		}
 	}
 	
 	/*
