@@ -59,7 +59,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	@Override
 	//USE HEURISTIC EVALUATOR HERE
 	public double getUtility(State state, Checker player) {
-		HeuristicEvaluator evaluator=new HeuristicEvaluator(state, player, state.getCurrentPhase());
+		HeuristicEvaluator evaluator=new HeuristicEvaluator(state, player);
 		return evaluator.evaluate();
 	}
 
@@ -134,7 +134,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	//Verifica se l'azione action genera un nuovo tris
 	private boolean madeNewMill(State state, String action){
 		//TODO
-		return true;
+		return false;
 	}
 	
 	//genera la lista dei checker del giocatore player
