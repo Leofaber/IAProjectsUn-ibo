@@ -9,18 +9,13 @@ public class HeuristicEvaluator {
 	private Checker player;
 	private Phase phase;
 	
-	public int[] tempTrisOrizz = new int[8];
-	public int[] tempTrisVert = new int[8];
+
 	
 	
 	public HeuristicEvaluator(State state, Checker player){
 		setState(state); setPlayer(player); setPhase(state.getCurrentPhase());
 		
-		//azzero tutta l'array
-//		for (int t: tempTrisOrizz)
-//			t = 0;
-//		for (int t: tempTrisVert)
-//			t = 0;
+		 
 	}
 
 	public double evaluate(){
@@ -56,21 +51,24 @@ public class HeuristicEvaluator {
 	 * Difference between the number of yours and yours opponent’s morrises
 	 */
 	public double numberOfMorris(){
-		morrisOrizzontali(Checker.BLACK);
+		
+		state.setArrayOfMorrisOrizzontali(Checker.BLACK);
+		state.setArrayOfMorrisVerticali(Checker.BLACK);
 		int morrisBlack = 0;
-		for (int i:tempTrisOrizz)
+		for (int i:state.tempTrisOrizz)
 			if (i == 3)
 				morrisBlack++;
-		for (int i:tempTrisVert)
+		for (int i:state.tempTrisVert)
 			if (i == 3)
 				morrisBlack++;
 		
-		morrisOrizzontali(Checker.WHITE);
+		state.setArrayOfMorrisOrizzontali(Checker.WHITE);
+		state.setArrayOfMorrisVerticali(Checker.WHITE);
 		int morrisWhite = 0;
-		for (int i:tempTrisOrizz)
+		for (int i:state.tempTrisOrizz)
 			if (i == 3)
 				morrisWhite++;
-		for (int i:tempTrisVert)
+		for (int i:state.tempTrisVert)
 			if (i == 3)
 				morrisWhite++;
 		
@@ -81,9 +79,9 @@ public class HeuristicEvaluator {
 		//faccio la differenza tra i miei tris e i suoi
 		switch (player){
 		case WHITE:
-				return morrisWhite - morrisBlack;
+ 				return morrisWhite - morrisBlack;
 		case BLACK:
-				return  morrisBlack - morrisWhite;
+ 				return  morrisBlack - morrisWhite;
 		default:
 				return 0;
 		}
@@ -136,21 +134,23 @@ public class HeuristicEvaluator {
 	 * (A double morris is one in which two morrises share a common piece) 
 	 */
 	public double doubleMorris(){
-		morrisOrizzontali(Checker.BLACK);
+		state.setArrayOfMorrisOrizzontali(Checker.BLACK);
+		state.setArrayOfMorrisVerticali(Checker.BLACK);
 		int doubleMorrisBlack = 0;
-		for (int i:tempTrisOrizz)
+		for (int i:state.tempTrisOrizz)
 			if (i == 2)
 				doubleMorrisBlack++;
-		for (int i:tempTrisVert)
+		for (int i:state.tempTrisVert)
 			if (i == 2)
 				doubleMorrisBlack++;
 		
-		morrisOrizzontali(Checker.WHITE);
+		state.setArrayOfMorrisOrizzontali(Checker.WHITE);
+		state.setArrayOfMorrisVerticali(Checker.WHITE);
 		int doubleMorrisWhite = 0;
-		for (int i:tempTrisOrizz)
+		for (int i:state.tempTrisOrizz)
 			if (i == 2)
 				doubleMorrisWhite++;
-		for (int i:tempTrisVert)
+		for (int i:state.tempTrisVert)
 			if (i == 2)
 				doubleMorrisWhite++;
 		
@@ -201,92 +201,5 @@ public class HeuristicEvaluator {
 		return phase;
 	}
 
-	//le due funzioni sono senza dubbio migliorabili, ma almeno ne abbiamo un abbozzo
 	
-	public void morrisOrizzontali(Checker c) {
-		//bisogna azzerare gli array ogni volta
-		azzeraArray();
-		for (String s : state.positions) {
-			char first = s.charAt(0);
-			char second = s.charAt(1);
-			//cerco tris in orizzontale
-			switch (first) {
-			// se mi trovo nella riga 'a', vado a controllare se nella mia casella
-			// della board il valore corrisponde a c. se è così allora incremento
-			// il mio array.
-				case 'a' : 	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[0]++;
-							break;
-				case 'b':	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[1]++;
-							break;
-				case 'c':	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[2]++;
-							break;
-				case 'd':	if (second <4) {
-								if (state.getBoard().get(s) == c)
-									tempTrisOrizz[3]++;
-							} else {
-								if (state.getBoard().get(s) == c)
-									tempTrisOrizz[4]++;
-							}
-							break;
-				case 'e':	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[5]++;
-							break;
-				case 'f':	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[6]++;
-							break;
-				case 'g':	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[7]++;
-							break;
-			}
-		}
-	}
-	
-	public void morrisVerticali(Checker c) {
-		
-		for (String s : state.positions) {
-			char first = s.charAt(0);	//carattere 0 di s (ad esempio 'a')
-			char second = s.charAt(1);	//carattere 1 di s (ad esempio 1)
-			//cerco tris in verticale
-			switch (second) {
-				// se mi trovo nella colonna 1, vado a controllare se nella mia casella
-				// della board il valore corrisponde a c. se è così allora incremento
-				// il mio array.
-				case 1 : 	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[0]++;
-							break;
-				case 2 :	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[1]++;
-							break;
-				case 3: 	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[2]++;
-							break;
-				case 4: 	if (second < 'd') {
-								if (state.getBoard().get(s) == c)
-									tempTrisOrizz[3]++;
-							} else {
-								if (state.getBoard().get(s) == c)
-									tempTrisOrizz[4]++;
-							}
-							break;
-				case 5: 	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[5]++;
-							break;
-				case 6: 	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[6]++;
-							break;
-				case 7: 	if (state.getBoard().get(s) == c)
-								tempTrisOrizz[7]++;
-							break;
-			}
-		}
-	}
-	public void azzeraArray(){
-		for(int i=0; i<tempTrisOrizz.length;i++){
-			tempTrisOrizz[i]=0;
-			tempTrisVert[i]=0;
-		}
-	}
 }
