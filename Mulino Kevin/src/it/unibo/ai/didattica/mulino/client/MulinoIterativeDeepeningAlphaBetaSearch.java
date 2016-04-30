@@ -1,5 +1,7 @@
 package it.unibo.ai.didattica.mulino.client;
 
+import java.util.List;
+
 import it.unibo.ai.didattica.mulino.domain.State;
 import aima.core.search.adversarial.AdversarialSearch;
 import aima.core.search.adversarial.Game;
@@ -13,10 +15,17 @@ public class MulinoIterativeDeepeningAlphaBetaSearch<State,String,Checker> exten
 			Game<State, String, Checker> game, double utilMin, double utilMax,
 			int time) {
 		super(game, utilMin, utilMax, time);
+		super.setLogEnabled(true);
 	}
 	
 	public String makeDecision(State state) {
 		return super.makeDecision(game.getInitialState());
+	}
+	
+	@Override
+	public List<String> orderActions(State state, List<String> actions,
+			Checker player, int depth) {
+		return actions;
 	}
 	
 

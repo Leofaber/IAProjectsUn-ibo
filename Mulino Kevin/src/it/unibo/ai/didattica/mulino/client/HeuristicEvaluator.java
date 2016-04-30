@@ -13,14 +13,14 @@ public class HeuristicEvaluator {
 	public int[] tempTrisVert = new int[8];
 	
 	
-	public HeuristicEvaluator(State state, Checker player, Phase phase){
-		setState(state); setPlayer(player); setPhase(phase);
+	public HeuristicEvaluator(State state, Checker player){
+		setState(state); setPlayer(player); setPhase(state.getCurrentPhase());
 		
 		//azzero tutta l'array
-		for (int t: tempTrisOrizz)
-			t = 0;
-		for (int t: tempTrisVert)
-			t = 0;
+//		for (int t: tempTrisOrizz)
+//			t = 0;
+//		for (int t: tempTrisVert)
+//			t = 0;
 	}
 
 	public double evaluate(){
@@ -55,7 +55,7 @@ public class HeuristicEvaluator {
 	/* 
 	 * Difference between the number of yours and yours opponent’s morrises
 	 */
-	private double numberOfMorris(){
+	public double numberOfMorris(){
 		morrisOrizzontali(Checker.BLACK);
 		int morrisBlack = 0;
 		for (int i:tempTrisOrizz)
@@ -79,9 +79,16 @@ public class HeuristicEvaluator {
 		
 		//a questo punto a secondo che io sia il bianco o il nero
 		//faccio la differenza tra i miei tris e i suoi
-		
-		double differenza = morrisWhite - morrisBlack;	//ad esempio
-		return differenza;
+		switch (player){
+		case WHITE:
+				return morrisWhite - morrisBlack;
+		case BLACK:
+				return  morrisBlack - morrisWhite;
+		default:
+				return 0;
+		}
+//		double differenza = morrisWhite - morrisBlack;	//ad esempio
+//		return differenza;
 	}
 	
 	/* Difference between the number of yours opponent’s and yours blocked pieces
@@ -95,9 +102,16 @@ public class HeuristicEvaluator {
 	/*
 	 *  Difference between the number of yours and yours opponent’s pieces
 	 */
-	private double numberOfPieces(){
-		//TODO
-		return 1;
+	public double numberOfPieces(){
+		switch(player){
+		case WHITE:
+			return state.getWhiteCheckersOnBoard()-state.getBlackCheckersOnBoard();
+		case BLACK:
+			return state.getBlackCheckersOnBoard()-state.getWhiteCheckersOnBoard();
+		default:
+			return 0;
+		}
+		
 	}
 	
 	/* Difference between the number of yours and yours opponent’s 
@@ -121,9 +135,38 @@ public class HeuristicEvaluator {
 	/* Difference between number of yours and yours opponent’s double morrises 
 	 * (A double morris is one in which two morrises share a common piece) 
 	 */
-	private double doubleMorris(){
-		//TODO
-		return 1;
+	public double doubleMorris(){
+		morrisOrizzontali(Checker.BLACK);
+		int doubleMorrisBlack = 0;
+		for (int i:tempTrisOrizz)
+			if (i == 2)
+				doubleMorrisBlack++;
+		for (int i:tempTrisVert)
+			if (i == 2)
+				doubleMorrisBlack++;
+		
+		morrisOrizzontali(Checker.WHITE);
+		int doubleMorrisWhite = 0;
+		for (int i:tempTrisOrizz)
+			if (i == 2)
+				doubleMorrisWhite++;
+		for (int i:tempTrisVert)
+			if (i == 2)
+				doubleMorrisWhite++;
+		
+		//importante! In questo momento i due array tempTrisOrizz e Vert
+		// 		sono stati riempiti con i valori relativi ai bianchi
+		
+		//a questo punto a secondo che io sia il bianco o il nero
+		//faccio la differenza tra i miei tris e i suoi
+		switch (player){
+		case WHITE:
+				return doubleMorrisWhite - doubleMorrisBlack;
+		case BLACK:
+				return  doubleMorrisBlack - doubleMorrisWhite;
+		default:
+				return 0;
+		}
 	}
 	
 	/*
@@ -161,7 +204,8 @@ public class HeuristicEvaluator {
 	//le due funzioni sono senza dubbio migliorabili, ma almeno ne abbiamo un abbozzo
 	
 	public void morrisOrizzontali(Checker c) {
-		
+		//bisogna azzerare gli array ogni volta
+		azzeraArray();
 		for (String s : state.positions) {
 			char first = s.charAt(0);
 			char second = s.charAt(1);
@@ -239,5 +283,10 @@ public class HeuristicEvaluator {
 			}
 		}
 	}
-
+	public void azzeraArray(){
+		for(int i=0; i<tempTrisOrizz.length;i++){
+			tempTrisOrizz[i]=0;
+			tempTrisVert[i]=0;
+		}
+	}
 }

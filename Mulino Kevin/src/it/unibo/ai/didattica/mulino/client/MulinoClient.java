@@ -91,11 +91,12 @@ public class MulinoClient {
 				
 				try{
 					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch<State, String, State.Checker>(new MulinoGame(currentState), -10000, 10000, 60);
-					System.out.println("decision: "+search.makeDecision(currentState.clone()));
+					actionString=search.makeDecision(currentState.clone());
+					System.out.println("decision: "+actionString);
 				}catch(Exception e){
 					System.out.println(e);
 				}
-				actionString = in.readLine();
+//				actionString = in.readLine();
 				action = new Phase1Action();
 				action.setPutPosition(actionString.substring(0, 2));
 				if (actionString.length() == 4)
