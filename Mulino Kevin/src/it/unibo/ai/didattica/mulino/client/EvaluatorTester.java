@@ -20,9 +20,9 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
-			System.out.println("TRIS NERI-TRIS BIANCHI: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE NERI-DOUBLE BIANCHI: "+ eval.doubleMorris());
-			System.out.println("PEZZI NERI-PEZZI BIANCHI: "+eval.numberOfPieces());
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -34,9 +34,9 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
-			System.out.println("TRIS NERI-TRIS BIANCHI: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE NERI-DOUBLE BIANCHI: "+ eval.doubleMorris());
-			System.out.println("PEZZI NERI-PEZZI BIANCHI: "+eval.numberOfPieces());
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -47,9 +47,9 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.WHITE);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
-			System.out.println("TRIS NERI-TRIS BIANCHI: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE NERI-DOUBLE BIANCHI: "+ eval.doubleMorris());
-			System.out.println("PEZZI NERI-PEZZI BIANCHI: "+eval.numberOfPieces());
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -61,9 +61,9 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
-			System.out.println("TRIS NERI-TRIS BIANCHI: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE NERI-DOUBLE BIANCHI: "+ eval.doubleMorris());
-			System.out.println("PEZZI NERI-PEZZI BIANCHI: "+eval.numberOfPieces());
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -75,14 +75,51 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.WHITE);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
-			System.out.println("TRIS NERI-TRIS BIANCHI: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE NERI-DOUBLE BIANCHI: "+ eval.doubleMorris());
-			System.out.println("PEZZI NERI-PEZZI BIANCHI: "+eval.numberOfPieces());
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+
+		}catch(Exception e){
+			System.out.println("Exception: "+e);
+		}
+		
+		try{						
+			action = new Phase1Action();
+			action.setPutPosition("a1");
+			state=Phase1.applyMove(state, action, Checker.WHITE);
+			System.out.println(state.toString());
+			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
+
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
 		}
 
+		try{						
+			action = new Phase1Action();
+			action.setPutPosition("c3");
+			state=Phase1.applyMove(state, action, Checker.WHITE);
+			action = new Phase1Action();
+			action.setPutPosition("e3");
+			state=Phase1.applyMove(state, action, Checker.BLACK);
+			
+			System.out.println(state.toString());
+			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
+			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
+			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
+
+
+		}catch(Exception e){
+			System.out.println("Exception: "+e);
+		}
+
+		
 		
 	}
 

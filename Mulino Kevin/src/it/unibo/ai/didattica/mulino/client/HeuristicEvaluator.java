@@ -1,5 +1,7 @@
 package it.unibo.ai.didattica.mulino.client;
 
+import java.util.HashMap;
+
 import it.unibo.ai.didattica.mulino.customExceptions.InvalidPositionException;
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
@@ -93,38 +95,54 @@ public class HeuristicEvaluator {
 	/* Difference between the number of yours opponent’s and yours blocked pieces
 	 * (pieces which don’t have an empty adjacent point)
 	 */
-	private double numberOfBlockedOpponentPieces(){
+	public double numberOfBlockedOpponentPieces(){
 		int whiteBlocked = 0;
 		int blackBlocked = 0;
-			// se tutte sono occupate, il Checker è bloccato.
-			// altrimenti il Checker è libero.
+		String [] adjacentPositions;
+		HashMap<String, Checker> board = state.getBoard(); // cosi si chiama una volta sola.
 		
 		// si cicla sulla board
 		for (String position : state.getPositions()) {
 			
+			// si prende il Checker di ogni posizione così ciclata
+			Checker checker = board.get(position);
 			
 			// appena si trova sulla board un Checker WHITE or BLACK (quindi NON EMPTY)
-			switch(state.getBoard().get(position)){
-				case EMPTY:
-					break;	
+			if(checker != Checker.EMPTY){
 			
-				// si chiama la funzione getAdjacentPositions(String pos) per ottenere le posizioni adiacenti (connesse a quest'ultimo)
-				case BLACK:
-					try {
-						String [] adjacentPositions = state.getAdjacentPositions(position);
-						// TODO
-						
-					} catch (InvalidPositionException e) {
-						e.printStackTrace();
-					}
-				break;
 				
-				case WHITE:
+				try {
 					
-					break;
-				default:
-					break;
-		}
+					// si prendono le posizione adiacenti
+					adjacentPositions = state.getAdjacentPositions(position);
+					
+					// si cerca se tra queste c'è un Checer EMPTY
+					boolean existEmpty = false;						
+					for(String adjPos : adjacentPositions){
+						if(board.get(adjPos) == Checker.EMPTY){
+							existEmpty = true;
+						}
+					}
+					
+					
+					// se non ci sono Checker EMPTY tra le posizioni adiacenti, il Checker è bloccato.
+					if(existEmpty==false && checker == Checker.BLACK){
+						blackBlocked++;
+					}
+						
+					if(existEmpty==false && checker == Checker.WHITE){
+						whiteBlocked++;
+					}
+
+					
+					
+				} catch (InvalidPositionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			
+			}
 			 
 		}
 		
