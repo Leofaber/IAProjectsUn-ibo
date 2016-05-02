@@ -194,32 +194,77 @@ public class HeuristicEvaluator {
 	/* Difference between number of yours and yours opponent’s double morrises 
 	 * (A double morris is one in which two morrises share a common piece) 
 	 */
+	
+	/*
+	 * Ogni double morris è condiviso tra una posizione d'incrontro tra una riga e una colonna.
+	 * Ogni double morris è condiviso per una sola posizione.
+	 * Usa il metodo getIndexOfLinkedColumnsToRow(int row).
+	 */
 	public double doubleMorris(){
+		int doubleMorrisBlack = 0;
+		int doubleMorrisWhite = 0;
+		
+		// si costruiscono gli arrayOfMorris. 
 		state.setArrayOfMorrisOrizzontali(Checker.BLACK);
 		state.setArrayOfMorrisVerticali(Checker.BLACK);
-		int doubleMorrisBlack = 0;
-		for (int i:state.tempTrisOrizz)
-			if (i == 2)
-				doubleMorrisBlack++;
-		for (int i:state.tempTrisVert)
-			if (i == 2)
-				doubleMorrisBlack++;
 		
-		state.setArrayOfMorrisOrizzontali(Checker.WHITE);
-		state.setArrayOfMorrisVerticali(Checker.WHITE);
-		int doubleMorrisWhite = 0;
-		for (int i:state.tempTrisOrizz)
-			if (i == 2)
-				doubleMorrisWhite++;
-		for (int i:state.tempTrisVert)
-			if (i == 2)
-				doubleMorrisWhite++;
+		// si ciclano
+		for(int i=0; i<state.tempTrisOrizz.length;i++){
+			int numOfCheckerInRow = state.tempTrisOrizz[i];
+
+			// se una riga contiene un morris
+			if(numOfCheckerInRow == 3){
+ 				//si prendono le colonne connesse a quella riga (i parte da 0, le righe partono da 1)
+				int [] linkedColumns = state.getIndexOfLinkedColumnsToRow(i+1);
+				
+				// si cercano uno o più morris in quelle colonne
+				for(int c=0;c<linkedColumns.length;c++){
+										// si sottrae uno, perchè le colonne vanno da 0 a 7.
+					if(state.tempTrisVert[linkedColumns[c]-1]==3){
+						doubleMorrisBlack++;
+					}
+				}
+				
+				
+				
+			}
+		}
+		
+		// si costruiscono gli arrayOfMorris. 
+				state.setArrayOfMorrisOrizzontali(Checker.WHITE);
+				state.setArrayOfMorrisVerticali(Checker.WHITE);
+		
+		// si ciclano
+				for(int i=0; i<state.tempTrisOrizz.length;i++){
+					int numOfCheckerInRow = state.tempTrisOrizz[i];
+ 
+					// se una riga contiene un morris
+					if(numOfCheckerInRow == 3){
+		 				//si prendono le colonne connesse a quella riga (i parte da 0, le righe partono da 1)
+						int [] linkedColumns = state.getIndexOfLinkedColumnsToRow(i+1);
+						
+						// si cercano uno o più morris in quelle colonne
+						for(int c=0;c<linkedColumns.length;c++){
+							if(state.tempTrisVert[linkedColumns[c]-1]==3){
+								doubleMorrisWhite++;
+							}
+						}
+						
+						
+						
+					}
+				}
+		System.out.println("DubleMorrisWHite: "+doubleMorrisWhite+" DoubleMorrusBalck: "+doubleMorrisBlack);
+				
+ 		
 		
 		//importante! In questo momento i due array tempTrisOrizz e Vert
 		// 		sono stati riempiti con i valori relativi ai bianchi
 		
 		//a questo punto a secondo che io sia il bianco o il nero
 		//faccio la differenza tra i miei tris e i suoi
+		
+	  
 		switch (player){
 		case WHITE:
 				return doubleMorrisWhite - doubleMorrisBlack;

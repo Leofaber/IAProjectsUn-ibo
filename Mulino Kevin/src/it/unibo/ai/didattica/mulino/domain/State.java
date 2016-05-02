@@ -163,21 +163,21 @@ public class State implements Serializable {
 				char first = s.charAt(0);
 				char second = s.charAt(1);
 				//cerco tris in orizzontale
-				switch (first) {
+				switch (second) {
 				
 				// se mi trovo nella riga 'a', vado a controllare se nella mia casella
 				// della board il valore corrisponde a c. se è così allora incremento
 				// il mio array.
-					case 'a' : 	if (this.board.get(s) == c)
+					case '1' : 	if (this.board.get(s) == c)
 									tempTrisOrizz[0]++;
 								break;
-					case 'b':	if (this.getBoard().get(s) == c)
+					case '2':	if (this.getBoard().get(s) == c)
 									tempTrisOrizz[1]++;
 								break;
-					case 'c':	if (this.getBoard().get(s) == c)
+					case '3':	if (this.getBoard().get(s) == c)
 									tempTrisOrizz[2]++;
 								break;
-					case 'd':	if (second <4) {
+					case '4':	if (first < 'd') {
 						
 									if (this.getBoard().get(s) == c)
 										tempTrisOrizz[3]++;
@@ -188,13 +188,13 @@ public class State implements Serializable {
 										tempTrisOrizz[4]++;
 								}
 								break;
-					case 'e':	if (this.getBoard().get(s) == c)
+					case '5':	if (this.getBoard().get(s) == c)
 									tempTrisOrizz[5]++;
 								break;
-					case 'f':	if (this.getBoard().get(s) == c)
+					case '6':	if (this.getBoard().get(s) == c)
 									tempTrisOrizz[6]++;
 								break;
-					case 'g':	if (this.getBoard().get(s) == c)
+					case '7':	if (this.getBoard().get(s) == c)
 									tempTrisOrizz[7]++;
 								break;
 				}
@@ -220,20 +220,20 @@ public class State implements Serializable {
 		//		System.out.println("get(s): "+this.getBoard().get(s).toString());
 		//		System.out.println("c: "+c.toString());
 				//cerco tris in verticale
-				switch (second) {
+				switch (first) {
 					// se mi trovo nella colonna 1, vado a controllare se nella mia casella
 					// della board il valore corrisponde a c. se è così allora incremento
 					// il mio array.
-					case '1' : 	if (this.getBoard().get(s) == c)
+					case 'a' : 	if (this.getBoard().get(s) == c)
 									tempTrisVert[0]++;
 								break;
-					case '2' :	if (this.getBoard().get(s) == c)
+					case 'b' :	if (this.getBoard().get(s) == c)
 									tempTrisVert[1]++;
 								break;
-					case '3': 	if (this.getBoard().get(s) == c)
+					case 'c': 	if (this.getBoard().get(s) == c)
 									tempTrisVert[2]++;
 								break;
-					case '4': 	if (first < 'd') {
+					case 'd': 	if (second < 4) {
 									if (this.getBoard().get(s) == c)
 										tempTrisVert[3]++;
 								} else {
@@ -241,13 +241,13 @@ public class State implements Serializable {
 										tempTrisVert[4]++;
 								}
 								break;
-					case '5': 	if (this.getBoard().get(s) == c)
+					case 'e': 	if (this.getBoard().get(s) == c)
 									tempTrisVert[5]++;
 								break;
-					case '6': 	if (this.getBoard().get(s) == c)
+					case 'f': 	if (this.getBoard().get(s) == c)
 									tempTrisVert[6]++;
 								break;
-					case '7': 	if (this.getBoard().get(s) == c)
+					case 'g': 	if (this.getBoard().get(s) == c)
 									tempTrisVert[7]++;
 								break;
 				}
@@ -366,6 +366,29 @@ public class State implements Serializable {
 		}
 		
 		
+	}
+	
+	public int[] getIndexOfLinkedColumnsToRow(int rowIndex){
+		switch(rowIndex){
+		case 1:
+			return new int[] {1,4,8};
+		case 2:
+			return new int[] {2,4,7};
+		case 3:
+			return new int[] {3,4,6};
+		case 4:
+			return new int[] {1,2,3};
+		case 5:
+			return new int[] {6,7,8};
+		case 6:
+			return new int[] {3,5,6};
+		case 7:
+			return new int[] {2,5,7};
+		case 8:
+			return new int[] {1,5,8};
+		default:
+			return new int[] {};
+		}
 	}
 
 	
