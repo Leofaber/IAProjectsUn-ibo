@@ -420,7 +420,13 @@ public class HeuristicEvaluator {
 		}
 	}
 	
-	/* * 1 if the state is winning for the player, -1 if losing, 0 otherwise */ /* * fase 2: il primo che arriva a 3 pedine perde. * fase 3: il primo che arriva a 2 pedine perde. * */ 
+	/* 
+	 * 1 if the state is winning for the player, -1 if losing, 0 otherwise
+	 */
+	/* 
+	 * fase 2: il primo che arriva a 3 pedine perde.
+	 *  fase 3: il primo che arriva a 2 pedine perde.
+	 */ 
 	private double winningConfiguration(){ 
 		int whiteCheckersOnBoard = state.getWhiteCheckersOnBoard(); 
 		int blackCheckersOnBoard = state.getBlackCheckersOnBoard(); 

@@ -1,9 +1,13 @@
 package it.unibo.ai.didattica.mulino.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import it.unibo.ai.didattica.mulino.actions.Action;
+import it.unibo.ai.didattica.mulino.actions.Phase1;
+import it.unibo.ai.didattica.mulino.actions.Phase1Action;
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import aima.core.search.adversarial.Game;
@@ -105,7 +109,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 					 * Se invece con questa mossa faccio tris, aggiungo s + la posizione
 					 * di una pedina avversaria da eliminare[?]. 
 					 */
-					if(madeNewMill(state, s))
+					if(closedMill(state, s, Checker.BLACK))
 						for (String oppCheck : opponentCheckers(state, Checker.WHITE))
 							result.add(s+oppCheck);
 					else
@@ -119,7 +123,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 					 * di una pedina avversaria da eliminare[?].
 					 * LO METTO QUI O NEI GETRESULT?
 					 */
-					if(madeNewMill(state, s))
+					if(closedMill(state, s, Checker.WHITE))
 						for (String oppCheck : opponentCheckers(state, Checker.BLACK))
 							result.add(s+oppCheck);
 					else
@@ -131,10 +135,38 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 		return result;
 	}	
 	
+	
 	//Verifica se l'azione action genera un nuovo tris
-	private boolean madeNewMill(State state, String action){
-		//TODO
-		return false;
+	public boolean closedMill(State state, String action,Checker player){
+		Double oldNumMorris, newNumMorris=0.0;
+		state.setArrayOfMorris();
+		State newState=state.clone();
+		System.out.println(newState.toString());
+		//HashMap<String, Checker> newBoard=newState.getBoard();
+		
+		oldNumMorris=state.getNumberOfMorris(player);
+		System.out.println("OLD NUM MORRIS: "+ oldNumMorris);
+		
+		newState.getBoard().put(action, player);		
+		switch(player){
+		case WHITE:
+			newState.setWhiteCheckers(newState.getWhiteCheckers()-1);
+			newState.setWhiteCheckersOnBoard(newState.getWhiteCheckersOnBoard()+1);
+			break;
+		case BLACK:
+			newState.setBlackCheckers(newState.getBlackCheckers()-1);
+			newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()+1);
+			break;
+		}
+		System.out.println(newState.toString());
+		newState.setArrayOfMorris();
+			
+		newNumMorris=newState.getNumberOfMorris(player);
+
+		System.out.println("NEW NUM MORRIS: "+ newNumMorris);
+		
+		
+		return newNumMorris-oldNumMorris>0;
 	}
 	
 	//genera la lista dei checker del giocatore player

@@ -1,5 +1,6 @@
 package it.unibo.ai.didattica.mulino.client;
 
+import java.util.Comparator;
 import java.util.List;
 
 import it.unibo.ai.didattica.mulino.domain.State;
@@ -18,6 +19,7 @@ public class MulinoIterativeDeepeningAlphaBetaSearch<State,String,Checker> exten
 		super.setLogEnabled(true);
 	}
 	
+	@Override
 	public String makeDecision(State state) {
 		return super.makeDecision(game.getInitialState());
 	}
@@ -25,9 +27,16 @@ public class MulinoIterativeDeepeningAlphaBetaSearch<State,String,Checker> exten
 	@Override
 	public List<String> orderActions(State state, List<String> actions,
 			Checker player, int depth) {
+		actions.sort(new Comparator<String>() {
+
+			@Override
+			public int compare(String action1, String action2) {
+				//TODO
+				return 0;
+			}
+		});
 		return actions;
 	}
-	
 
 	
 }
