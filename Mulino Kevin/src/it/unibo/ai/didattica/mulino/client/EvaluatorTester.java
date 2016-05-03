@@ -253,6 +253,7 @@ public class EvaluatorTester {
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
 			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
 			System.out.println("DOUBLE MORRIS BLACK - DOUBLE MORRIS WHITE: "+eval.doubleMorris());
+			System.out.println("2PIECEBLACK - 2PIECEWHITE "+eval.numberOf2PieceConfigurations());
  
 
 		}catch(Exception e){

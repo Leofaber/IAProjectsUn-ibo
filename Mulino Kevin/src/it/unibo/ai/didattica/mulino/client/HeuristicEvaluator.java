@@ -202,7 +202,7 @@ public class HeuristicEvaluator {
 	 * 2 piece configurations (A 2-piece configuration is one to which 
 	 * adding one more piece would close a morris)
 	 */
-	private double numberOf2PieceConfigurations(){
+	public double numberOf2PieceConfigurations(){
 		
 		
 	//	state.setArrayOfMorrisOrizzontali(Checker.BLACK);
@@ -210,32 +210,33 @@ public class HeuristicEvaluator {
 		
 		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
 		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
+		int[] morrisArrayEmptyOrizz = state.getMorrisArray("EMPTY", "ROW");
+		int[] morrisArrayEmptyVert = state.getMorrisArray("EMPTY", "COLUMN");
 		
-        int doubleMorrisBlack = 0;
-        int indexOrizz = 0;
-        int indexVert = 0;
+        int twoPieceMorrisBlack = 0;
         
 		// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
-        for (int i:morrisArrayBlackOrizz){
-            if (i == 2){
+        for (int i=0;i<morrisArrayBlackOrizz.length;i++){
+            if (morrisArrayBlackOrizz[i] == 2){
         		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
-            	
-            	
-            	
-            	doubleMorrisBlack++;
+            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+            	if (morrisArrayEmptyOrizz[i] == 1)
+            		twoPieceMorrisBlack++;
             }
-                
-        	indexOrizz++;
         }
         	
         	
-        for (int i:morrisArrayBlackVert){
-            if (i == 2){
-                doubleMorrisBlack++;
-                
-               
+        for (int i=0;i<morrisArrayBlackVert.length;i++){
+        	System.out.print("checkerVert: "+morrisArrayBlackVert[i]+ " all'indice: "+i);
+    		System.out.println(" checkerVertEmpty: "+morrisArrayEmptyVert[i]+ " all'indice: "+i);
+            if (morrisArrayBlackVert[i] == 2){
+        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+            	if (morrisArrayEmptyVert[i] == 1){
+            		twoPieceMorrisBlack++;
+            		
+            	}
             }
-            indexVert++;
         }
                 
    //     state.setArrayOfMorrisOrizzontali(Checker.WHITE);
@@ -245,24 +246,37 @@ public class HeuristicEvaluator {
 		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
 		
 		
-        int doubleMorrisWhite = 0;
-        for (int i:morrisArrayWhiteOrizz)
-            if (i == 2)
-                doubleMorrisWhite++;
-        for (int i:morrisArrayWhiteVert)
-            if (i == 2)
-                doubleMorrisWhite++;
+        int twoPieceMorrisWhite = 0;
+        for (int i=0;i<morrisArrayWhiteOrizz.length;i++){
+            if (morrisArrayWhiteOrizz[i] == 2){
+        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+            	if (morrisArrayEmptyOrizz[i] == 1)
+            		twoPieceMorrisWhite++;
+            }
+        }
+        for (int i=0;i<morrisArrayWhiteVert.length;i++){
+            if (morrisArrayWhiteVert[i] == 2){
+        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+            	if (morrisArrayEmptyVert[i] == 1)
+            		twoPieceMorrisWhite++;
+            }
+        }
        
         //importante! In questo momento i due array tempTrisOrizz e Vert
         //      sono stati riempiti con i valori relativi ai bianchi
        
         //a questo punto a secondo che io sia il bianco o il nero
         //faccio la differenza tra i miei tris e i suoi
+        System.out.println("2PieceBlack: "+twoPieceMorrisBlack);
+        System.out.println("2PieceWhite: "+twoPieceMorrisWhite);
+
         switch (player){
         case WHITE:
-                return doubleMorrisWhite - doubleMorrisBlack;
+                return twoPieceMorrisWhite - twoPieceMorrisBlack;
         case BLACK:
-                return  doubleMorrisBlack - doubleMorrisWhite;
+                return  twoPieceMorrisBlack - twoPieceMorrisWhite;
         default:
                 return 0;
         }
