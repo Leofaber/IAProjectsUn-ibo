@@ -227,8 +227,8 @@ public class HeuristicEvaluator {
         	
         	
         for (int i=0;i<morrisArrayBlackVert.length;i++){
-        	System.out.print("checkerVert: "+morrisArrayBlackVert[i]+ " all'indice: "+i);
-    		System.out.println(" checkerVertEmpty: "+morrisArrayEmptyVert[i]+ " all'indice: "+i);
+//        	System.out.print("checkerVert: "+morrisArrayBlackVert[i]+ " all'indice: "+i);
+//    		System.out.println(" checkerVertEmpty: "+morrisArrayEmptyVert[i]+ " all'indice: "+i);
             if (morrisArrayBlackVert[i] == 2){
         		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
             	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
@@ -256,7 +256,7 @@ public class HeuristicEvaluator {
             }
         }
         for (int i=0;i<morrisArrayWhiteVert.length;i++){
-            if (morrisArrayWhiteVert[i] == 2){
+        	if (morrisArrayWhiteVert[i] == 2){
         		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
             	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
             	if (morrisArrayEmptyVert[i] == 1)

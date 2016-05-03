@@ -202,6 +202,8 @@ public class EvaluatorTester {
 			action = new Phase1Action();
 			action.setPutPosition("g4");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
+			action = new Phase1Action();
+			
 			
 			action = new Phase1Action();
 			action.setPutPosition("a7");
@@ -226,14 +228,24 @@ public class EvaluatorTester {
  			state=Phase1.applyMove(state, action, Checker.WHITE);
  			
  			action = new Phase1Action();
-			action.setPutPosition("e3");
-			action.setRemoveOpponentChecker("c3");
+			action.setPutPosition("c5");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
+ 			
+ 			
 			
-			action = new Phase1Action();
-			action.setPutPosition("g7");
-			action.setRemoveOpponentChecker("d3");
-			state=Phase1.applyMove(state, action, Checker.WHITE);
+//			action = new Phase1Action();
+//			action.setPutPosition("g7");
+//			action.setRemoveOpponentChecker("d3");
+//			state=Phase1.applyMove(state, action, Checker.WHITE);
+			
+//			action = new Phase1Action();
+//			action.setPutPosition("b2");
+//			state=Phase1.applyMove(state, action, Checker.BLACK);
+//			
+//			action = new Phase1Action();
+//			action.setPutPosition("c3");
+//			state=Phase1.applyMove(state, action, Checker.WHITE);
+			
 			
  			
 			System.out.println(state.toString());
