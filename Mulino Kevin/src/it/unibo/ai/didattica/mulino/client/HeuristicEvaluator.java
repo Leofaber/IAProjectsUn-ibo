@@ -22,6 +22,17 @@ public class HeuristicEvaluator {
 	}
 
 	public double evaluate(){
+		
+		/* * * * * * * * * * * * * * * * *
+		 * 	 CALA'S POWER FUNCTION CALL  * 
+		 * * * * * * * * * * * * * * * * */
+		
+		state.setArrayOfMorris();
+		
+		/* * * * * * * * * * * * * * * * * *
+		 *  END CALA'S POWER FUNCTION CALL *
+		 * * * * * * * * * * * * * * * * * */
+		
 		double result=0;
 		switch(getPhase()){
 		// 18 * (1) + 26 * (2) + 1 * (3) + 9 * (4) + 10 * (5) + 7 * (6)
@@ -55,9 +66,9 @@ public class HeuristicEvaluator {
 	 */
 	public double numberOfMorris(){
 		
-		state.setArrayOfMorrisOrizzontali(Checker.BLACK);
-		state.setArrayOfMorrisVerticali(Checker.BLACK);
-		int morrisBlack = 0;
+		//state.setArrayOfMorrisOrizzontali(Checker.BLACK);
+		//state.setArrayOfMorrisVerticali(Checker.BLACK);
+		/*int morrisBlack = 0;
 		for (int i:state.tempTrisOrizz)
 			if (i == 3)
 				morrisBlack++;
@@ -65,8 +76,8 @@ public class HeuristicEvaluator {
 			if (i == 3)
 				morrisBlack++;
 		
-		state.setArrayOfMorrisOrizzontali(Checker.WHITE);
-		state.setArrayOfMorrisVerticali(Checker.WHITE);
+		//state.setArrayOfMorrisOrizzontali(Checker.WHITE);
+	//	state.setArrayOfMorrisVerticali(Checker.WHITE);
 		int morrisWhite = 0;
 		for (int i:state.tempTrisOrizz)
 			if (i == 3)
@@ -89,7 +100,8 @@ public class HeuristicEvaluator {
 				return 0;
 		}
 //		double differenza = morrisWhite - morrisBlack;	//ad esempio
-//		return differenza;
+//		return differenza;*/
+		return 1;
 	}
 	
 	/* Difference between the number of yours opponent’s and yours blocked pieces
@@ -137,7 +149,6 @@ public class HeuristicEvaluator {
 					
 					
 				} catch (InvalidPositionException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -178,18 +189,93 @@ public class HeuristicEvaluator {
 	 * adding one more piece would close a morris)
 	 */
 	private double numberOf2PieceConfigurations(){
-		//TODO
-		return 1;
+		
+		
+	//	state.setArrayOfMorrisOrizzontali(Checker.BLACK);
+    //    state.setArrayOfMorrisVerticali(Checker.BLACK);
+		
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ORIZZ");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","VERT");
+		
+        int doubleMorrisBlack = 0;
+        int indexOrizz = 0;
+        int indexVert = 0;
+        
+		// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
+        for (int i:morrisArrayBlackOrizz){
+            if (i == 2){
+        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+            	
+            	
+            	
+            	doubleMorrisBlack++;
+            }
+                
+        	indexOrizz++;
+        }
+        	
+        	
+        for (int i:morrisArrayBlackVert){
+            if (i == 2){
+                doubleMorrisBlack++;
+                
+               
+            }
+            indexVert++;
+        }
+                
+   //     state.setArrayOfMorrisOrizzontali(Checker.WHITE);
+   //     state.setArrayOfMorrisVerticali(Checker.WHITE);
+        
+        int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ORIZZ");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","VERT");
+		
+		
+        int doubleMorrisWhite = 0;
+        for (int i:morrisArrayWhiteOrizz)
+            if (i == 2)
+                doubleMorrisWhite++;
+        for (int i:morrisArrayWhiteVert)
+            if (i == 2)
+                doubleMorrisWhite++;
+       
+        //importante! In questo momento i due array tempTrisOrizz e Vert
+        //      sono stati riempiti con i valori relativi ai bianchi
+       
+        //a questo punto a secondo che io sia il bianco o il nero
+        //faccio la differenza tra i miei tris e i suoi
+        switch (player){
+        case WHITE:
+                return doubleMorrisWhite - doubleMorrisBlack;
+        case BLACK:
+                return  doubleMorrisBlack - doubleMorrisWhite;
+        default:
+                return 0;
+        }
+		
 	}
 	
 	/* Difference between the number of yours and yours opponent’s 
 	 * 3 piece configurations (A 3-piece configuration is one to which 
 	 * a piece can be added in which one of two ways to close a morris)
 	 */
+	/*
+	 * Per trovare un 3piece configuration bisogna cercare una riga che si interseca con una colonna (condividendo un checker) e 
+	 * sia nella riga e nella colonna ci dovranno essere 2 checker e i restanti due posti dovranno essere vuoti.
+	 * 
+	 * Nota: se la riga e la colonna condividono un checker EMPTY allora la possibilità non è la 3 piece configuration ma il 
+	 * doppio morris. (non contemplato)
+	 */
 	private double numberOf3PieceConfigurations(){
 		//TODO
 		return 1;
 	}
+	
+	
+	
+	
+	
+	
 	
 	/* Difference between number of yours and yours opponent’s double morrises 
 	 * (A double morris is one in which two morrises share a common piece) 
@@ -205,12 +291,15 @@ public class HeuristicEvaluator {
 		int doubleMorrisWhite = 0;
 		
 		// si costruiscono gli arrayOfMorris. 
-		state.setArrayOfMorrisOrizzontali(Checker.BLACK);
-		state.setArrayOfMorrisVerticali(Checker.BLACK);
+	//	state.setArrayOfMorrisOrizzontali(Checker.BLACK);
+//		state.setArrayOfMorrisVerticali(Checker.BLACK);
+		
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ORIZZ");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","VERT");
 		
 		// si ciclano
-		for(int i=0; i<state.tempTrisOrizz.length;i++){
-			int numOfCheckerInRow = state.tempTrisOrizz[i];
+		for(int i=0; i<morrisArrayBlackOrizz.length;i++){
+			int numOfCheckerInRow = morrisArrayBlackOrizz[i];
 
 			// se una riga contiene un morris
 			if(numOfCheckerInRow == 3){
@@ -220,7 +309,7 @@ public class HeuristicEvaluator {
 				// si cercano uno o più morris in quelle colonne
 				for(int c=0;c<linkedColumns.length;c++){
 										// si sottrae uno, perchè le colonne vanno da 0 a 7.
-					if(state.tempTrisVert[linkedColumns[c]-1]==3){
+					if(morrisArrayBlackVert[linkedColumns[c]-1]==3){
 						doubleMorrisBlack++;
 					}
 				}
@@ -231,12 +320,14 @@ public class HeuristicEvaluator {
 		}
 		
 		// si costruiscono gli arrayOfMorris. 
-				state.setArrayOfMorrisOrizzontali(Checker.WHITE);
-				state.setArrayOfMorrisVerticali(Checker.WHITE);
+	//			state.setArrayOfMorrisOrizzontali(Checker.WHITE);
+	//			state.setArrayOfMorrisVerticali(Checker.WHITE);
+		int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ORIZZ");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","VERT");
 		
 		// si ciclano
-				for(int i=0; i<state.tempTrisOrizz.length;i++){
-					int numOfCheckerInRow = state.tempTrisOrizz[i];
+				for(int i=0; i<morrisArrayWhiteOrizz.length;i++){
+					int numOfCheckerInRow = morrisArrayWhiteOrizz[i];
  
 					// se una riga contiene un morris
 					if(numOfCheckerInRow == 3){
@@ -245,7 +336,7 @@ public class HeuristicEvaluator {
 						
 						// si cercano uno o più morris in quelle colonne
 						for(int c=0;c<linkedColumns.length;c++){
-							if(state.tempTrisVert[linkedColumns[c]-1]==3){
+							if(morrisArrayWhiteVert[linkedColumns[c]-1]==3){
 								doubleMorrisWhite++;
 							}
 						}
@@ -256,15 +347,7 @@ public class HeuristicEvaluator {
 				}
 		System.out.println("DubleMorrisWHite: "+doubleMorrisWhite+" DoubleMorrusBalck: "+doubleMorrisBlack);
 				
- 		
-		
-		//importante! In questo momento i due array tempTrisOrizz e Vert
-		// 		sono stati riempiti con i valori relativi ai bianchi
-		
-		//a questo punto a secondo che io sia il bianco o il nero
-		//faccio la differenza tra i miei tris e i suoi
-		
-	  
+ 	
 		switch (player){
 		case WHITE:
 				return doubleMorrisWhite - doubleMorrisBlack;

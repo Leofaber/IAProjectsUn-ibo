@@ -140,123 +140,185 @@ public class State implements Serializable {
 	 *  FUNZIONI CUSTOM BARONCELLI CALABRIA ZAINI 						   *
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
-	
-	public int[] tempTrisOrizz = new int[8];
-	public int[] tempTrisVert = new int[8];
-
+	public int[] rowMorrisBlack = new int[8];
+	public int[] columnMorrisBlack = new int[8];
+	public int[] rowMorrisWhite = new int[8];
+	public int[] columnMorrisWhite = new int[8];
+	public int[] rowEmpty = new int[8];
+	public int[] columnEmpty = new int[8];
 	//le due funzioni sono senza dubbio migliorabili, ma almeno ne abbiamo un abbozzo
 	
-	/*
-	 * 	QUESTA FUNZIONE VA A POPOLARE L'ARRAY tempTrisOrizz. Ogni posizione dell'array corrisponde
-	 * ad una RIGA CONNESSA della BOARD. Ogni Checker dello stesso tipo su di una riga incrementa il valore
-	 * nella posizione dell'array corrispondente. Una riga avrà un tris se, tempTrisOrizz[<indice-riga>]=3.
-	 * 
-	 */
-		public void setArrayOfMorrisOrizzontali(Checker c) {
-			//azzero tuttA l'array
-			for (int t=0;t<tempTrisOrizz.length;t++){
-				tempTrisOrizz[t]=0;
-			}
-				 
-			 
-			for (String s : this.positions) {
-				char first = s.charAt(0);
-				char second = s.charAt(1);
-				//cerco tris in orizzontale
-				switch (second) {
-				
-				// se mi trovo nella riga 'a', vado a controllare se nella mia casella
-				// della board il valore corrisponde a c. se è così allora incremento
-				// il mio array.
-					case '1' : 	if (this.board.get(s) == c)
-									tempTrisOrizz[0]++;
-								break;
-					case '2':	if (this.getBoard().get(s) == c)
-									tempTrisOrizz[1]++;
-								break;
-					case '3':	if (this.getBoard().get(s) == c)
-									tempTrisOrizz[2]++;
-								break;
-					case '4':	if (first < 'd') {
-						
-									if (this.getBoard().get(s) == c)
-										tempTrisOrizz[3]++;
-								} else {
-									
-									if (this.getBoard().get(s) == c)
-										
-										tempTrisOrizz[4]++;
-								}
-								break;
-					case '5':	if (this.getBoard().get(s) == c)
-									tempTrisOrizz[5]++;
-								break;
-					case '6':	if (this.getBoard().get(s) == c)
-									tempTrisOrizz[6]++;
-								break;
-					case '7':	if (this.getBoard().get(s) == c)
-									tempTrisOrizz[7]++;
-								break;
-				}
-			}
+public void setArrayOfMorris() {
+		
+		//ho preso la lunghezza di un solo array, tanto sono tutti lunghi uguali
+		for (int t=0;t<rowMorrisBlack.length;t++){	
+			rowMorrisBlack[t]=0;
+			columnMorrisBlack[t]=0;
+			rowMorrisWhite[t]=0;
+			columnMorrisWhite[t]=0;
+			rowEmpty[t]=0;
+			columnEmpty[t]=0;
 		}
 		
-		/*
-		 * 	QUESTA FUNZIONE VA A POPOLARE L'ARRAY tempTrisOrizz. Ogni posizione dell'array corrisponde
-		 * ad una COLONNA CONNESSA della BOARD. Ogni Checker dello stesso tipo su di una COLONNA incrementa
-		 * il valore nella posizione dell'array corrispondente. Una COLONNA avrà un tris se, 
-		 * tempTrisVert[<indice-colonna>]=3.
-		 */
-		public void setArrayOfMorrisVerticali(Checker c) {
-			for (int t=0;t<tempTrisVert.length;t++){
-				tempTrisVert[t]=0;
+		for (String s : this.positions) {
+			char first = s.charAt(0);
+			char second = s.charAt(1);
+			//cerco tris in orizzontale
+			//incremento nel relativo array se trovo la pedina bianca, nera o empty
+			switch (first) {
+			
+			// se mi trovo nella riga 'a', vado a controllare se nella mia casella
+			// della board il valore corrisponde a c. se è così allora incremento
+			// il mio array.
+				case 'a' : 	if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[0]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								rowMorrisBlack[0]++;
+							else
+								rowEmpty[0]++;
+							break;
+				case 'b':	if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[1]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								rowMorrisBlack[1]++;
+							else
+								rowEmpty[1]++;
+							break;
+				case 'c':	if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[2]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								rowMorrisBlack[2]++;
+							else
+								rowEmpty[2]++;
+							break;
+				case 'd':	if (second < 4) {
+					
+								if (this.board.get(s) == Checker.WHITE)
+									rowMorrisWhite[3]++;
+								else if (this.board.get(s) == Checker.BLACK)
+									rowMorrisBlack[3]++;
+								else
+									rowEmpty[3]++;
+								break;
+							} else {
+								
+								if (this.board.get(s) == Checker.WHITE)
+									rowMorrisWhite[4]++;
+								else if (this.board.get(s) == Checker.BLACK)
+									rowMorrisBlack[4]++;
+								else
+									rowEmpty[4]++;
+								break;
+							}
+				case 'e':	if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[5]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								rowMorrisBlack[5]++;
+							else
+								rowEmpty[5]++;
+							break;
+				case 'f':	if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[6]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								rowMorrisBlack[6]++;
+							else
+								rowEmpty[6]++;
+							break;
+				case 'g':	if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[7]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								rowMorrisBlack[7]++;
+							else
+								rowEmpty[7]++;
+							break;
 			}
 			
-			for (String s : this.positions) {
-				char first = s.charAt(0);	//carattere 0 di s (ad esempio 'a')
-				char second = s.charAt(1);	//carattere 1 di s (ad esempio 1)
-				
-		//		System.out.println(this.getBoard().get(s) ==c);
-		//		System.out.println("get(s): "+this.getBoard().get(s).toString());
-		//		System.out.println("c: "+c.toString());
-				//cerco tris in verticale
-				switch (first) {
-					// se mi trovo nella colonna 1, vado a controllare se nella mia casella
-					// della board il valore corrisponde a c. se è così allora incremento
-					// il mio array.
-					case 'a' : 	if (this.getBoard().get(s) == c)
-									tempTrisVert[0]++;
+			switch (second) {
+			// se mi trovo nella colonna 1, vado a controllare se nella mia casella
+			// della board il valore corrisponde a c. se è così allora incremento
+			// il mio array.
+				case '1' : 	if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[0]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								columnMorrisBlack[0]++;
+							else
+								columnEmpty[0]++;
+							break;
+				case '2' :	if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[1]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								columnMorrisBlack[1]++;
+							else
+								columnEmpty[1]++;
+							break;
+				case '3': 	if (this.board.get(s) == Checker.WHITE)
+							columnMorrisWhite[2]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								columnMorrisBlack[2]++;
+							else
+								columnEmpty[2]++;
+							break;
+				case '4': 	if (first < 'd') {
+								if (this.board.get(s) == Checker.WHITE)
+									columnMorrisWhite[3]++;
+								else if (this.board.get(s) == Checker.BLACK)
+									columnMorrisBlack[3]++;
+								else
+									columnEmpty[3]++;
 								break;
-					case 'b' :	if (this.getBoard().get(s) == c)
-									tempTrisVert[1]++;
+							} else {
+								if (this.board.get(s) == Checker.WHITE)
+									columnMorrisWhite[4]++;
+								else if (this.board.get(s) == Checker.BLACK)
+									columnMorrisBlack[4]++;
+								else
+									columnEmpty[4]++;
 								break;
-					case 'c': 	if (this.getBoard().get(s) == c)
-									tempTrisVert[2]++;
-								break;
-					case 'd': 	if (second < 4) {
-									if (this.getBoard().get(s) == c)
-										tempTrisVert[3]++;
-								} else {
-									if (this.getBoard().get(s) == c)
-										tempTrisVert[4]++;
-								}
-								break;
-					case 'e': 	if (this.getBoard().get(s) == c)
-									tempTrisVert[5]++;
-								break;
-					case 'f': 	if (this.getBoard().get(s) == c)
-									tempTrisVert[6]++;
-								break;
-					case 'g': 	if (this.getBoard().get(s) == c)
-									tempTrisVert[7]++;
-								break;
-				}
-				
+							}
+				case '5': 	if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[5]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								columnMorrisBlack[5]++;
+							else
+								columnEmpty[5]++;
+							break;
+				case '6': 	if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[5]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								columnMorrisBlack[5]++;
+							else
+								columnEmpty[5]++;
+							break;
+				case '7': 	if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[5]++;
+							else if (this.board.get(s) == Checker.BLACK)
+								columnMorrisBlack[5]++;
+							else
+								columnEmpty[5]++;
+							break;
 			}
-
+			
 		}
-		 
-	 
+	}
+
+	public int[] getMorrisArray(String colour, String verso) {
+		switch (colour) {
+		case "BLACK":	if (verso.equalsIgnoreCase("ROW"))
+							return rowMorrisBlack;
+						else
+							return columnMorrisBlack;
+		case "WHITE":	if (verso.equalsIgnoreCase("ROW"))
+							return rowMorrisWhite;
+						else
+							return columnMorrisWhite;
+		case "EMPTY":	if (verso.equalsIgnoreCase("ROW"))
+							return rowEmpty;
+						else
+							return columnEmpty;
+		}
+		//non dovrei mai arrivarci
+		return null;
+	}
 	
 	
 	/*

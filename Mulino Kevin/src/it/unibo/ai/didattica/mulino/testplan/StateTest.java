@@ -54,14 +54,18 @@ public class StateTest {
 	
 	@Test
 	public void testMorrisOrizzontali() {
- 		whiteHorizontalTrisState.setArrayOfMorrisOrizzontali(Checker.WHITE);
-	 	assertEquals("Tris orizzontale di d5-d6-d7", true, whiteHorizontalTrisState.tempTrisOrizz[4]==3);
+ 		whiteHorizontalTrisState.setArrayOfMorris();
+ 		for(int i =0; i< whiteHorizontalTrisState.getMorrisArray("WHITE", "ROW").length;i++){
+ 	 		System.out.println(whiteHorizontalTrisState.getMorrisArray("WHITE", "ROW")[i]);
+
+ 		}
+	 	assertEquals("Tris orizzontale di d5-d6-d7", true, whiteHorizontalTrisState.rowMorrisWhite[4]==3);
     }
 
 	@Test
 	public void testMorrisVerticali() {
-		whiteVerticalTrisState.setArrayOfMorrisVerticali(Checker.WHITE);
- 		assertEquals("LoL", true, whiteVerticalTrisState.tempTrisVert[0]==3);
+		whiteVerticalTrisState.setArrayOfMorris();
+ 		assertEquals("LoL", true, whiteVerticalTrisState.columnMorrisWhite[0]==3);
 
 	}
 	
