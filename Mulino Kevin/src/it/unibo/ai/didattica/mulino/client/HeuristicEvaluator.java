@@ -304,6 +304,7 @@ public class HeuristicEvaluator {
 				           	}
 						}
 				}
+		    
 	/*	    
 			if (morrisArrayWhiteVert[i] == 2)
 				if (morrisArrayEmptyVert[i] == 1) {

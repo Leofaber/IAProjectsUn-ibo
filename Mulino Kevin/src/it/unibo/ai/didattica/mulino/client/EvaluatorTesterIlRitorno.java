@@ -46,7 +46,6 @@ public class EvaluatorTesterIlRitorno {
 			action.setPutPosition("a7");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			
-			
 			action = new Phase1Action();
 			action.setPutPosition("d7");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
@@ -62,9 +61,7 @@ public class EvaluatorTesterIlRitorno {
 			action = new Phase1Action();
 			action.setPutPosition("b6");
 			state=Phase1.applyMove(state, action, Checker.WHITE);
-			
-			
-			
+
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
 			
