@@ -67,53 +67,13 @@ public class HeuristicEvaluator {
 	 */
 	public double numberOfMorris(){
 		
-		//state.setArrayOfMorrisOrizzontali(Checker.BLACK);
-		//state.setArrayOfMorrisVerticali(Checker.BLACK);
-		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
-		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
-		
-	
-		int morrisBlack = 0;
-		for (int i:morrisArrayBlackOrizz)
-			if (i == 3)
-				morrisBlack++;
-		for (int i:morrisArrayBlackVert)
-			if (i == 3)
-				morrisBlack++;
-		
-		//state.setArrayOfMorrisOrizzontali(Checker.WHITE);
-	//	state.setArrayOfMorrisVerticali(Checker.WHITE);
-		System.out.println("Numero di Morris Black: "+morrisBlack);
-		
-		
-		 int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
-		 int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
-			
-			
-			
-		int morrisWhite = 0;
-		for (int i:morrisArrayWhiteOrizz)
-			if (i == 3)
-				morrisWhite++;
-		for (int i:morrisArrayWhiteVert)
-			if (i == 3)
-				morrisWhite++;
-		
-		
-		System.out.println("Numero di Morris White: "+morrisWhite);
-
-		//importante! In questo momento i due array tempTrisOrizz e Vert
-		// 		sono stati riempiti con i valori relativi ai bianchi
-		
-		//a questo punto a secondo che io sia il bianco o il nero
-		//faccio la differenza tra i miei tris e i suoi
 		switch (player){
-		case WHITE:
- 				return morrisWhite - morrisBlack;
-		case BLACK:
- 				return  morrisBlack - morrisWhite;
-		default:
-				return 0;
+			case WHITE:
+	 				return state.getNumberOfMorris(Checker.WHITE) - state.getNumberOfMorris(Checker.BLACK);
+			case BLACK:
+	 				return  state.getNumberOfMorris(Checker.BLACK) - state.getNumberOfMorris(Checker.WHITE);
+			default:
+					return 0;
 		}
  
 	}

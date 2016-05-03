@@ -453,6 +453,39 @@ public void setArrayOfMorris() {
 			return new int[] {};
 		}
 	}
+/*
+ *  public int[] rowMorrisBlack = new int[8];
+	public int[] columnMorrisBlack = new int[8];
+	public int[] rowMorrisWhite = new int[8];
+	public int[] columnMorrisWhite = new int[8];
+	 
+ */
+	public double getNumberOfMorris(Checker color){
 
-	
+		if(color == Checker.BLACK){
+			int morrisBlack = 0;
+			for (int i:rowMorrisBlack)
+				if (i == 3)
+					morrisBlack++;
+			for (int i:columnMorrisBlack)
+				if (i == 3)
+					morrisBlack++;
+			
+			System.out.println("Numero di Morris Black: "+morrisBlack);
+			return morrisBlack;
+		}
+	 	else {
+			
+			int morrisWhite = 0;
+			for (int i:rowMorrisWhite)
+				if (i == 3)
+					morrisWhite++;
+			for (int i:columnMorrisWhite)
+				if (i == 3)
+					morrisWhite++;
+			System.out.println("Numero di Morris White: "+morrisWhite);
+			return morrisWhite;
+			
+	    }
+	}
 }
