@@ -170,66 +170,66 @@ public void setArrayOfMorris() {
 			// se mi trovo nella riga 'a', vado a controllare se nella mia casella
 			// della board il valore corrisponde a c. se è così allora incremento
 			// il mio array.
-				case 'a' : 	if (this.board.get(s) == Checker.WHITE)
-								rowMorrisWhite[0]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								rowMorrisBlack[0]++;
-							else
+				case 'a' : 	if (this.board.get(s) == Checker.EMPTY)
 								rowEmpty[0]++;
-							break;
-				case 'b':	if (this.board.get(s) == Checker.WHITE)
-								rowMorrisWhite[1]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								rowMorrisBlack[1]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[0]++;
 							else
+								rowMorrisBlack[0]++;
+							break;
+				case 'b':	if (this.board.get(s) == Checker.EMPTY)
 								rowEmpty[1]++;
-							break;
-				case 'c':	if (this.board.get(s) == Checker.WHITE)
-								rowMorrisWhite[2]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								rowMorrisBlack[2]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[1]++;
 							else
+								rowMorrisBlack[1]++;
+							break;
+				case 'c':	if (this.board.get(s) == Checker.EMPTY)
 								rowEmpty[2]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[2]++;
+							else
+								rowMorrisBlack[2]++;
 							break;
 				case 'd':	if (second < 4) {
 					
-								if (this.board.get(s) == Checker.WHITE)
-									rowMorrisWhite[3]++;
-								else if (this.board.get(s) == Checker.BLACK)
-									rowMorrisBlack[3]++;
-								else
+								if (this.board.get(s) == Checker.EMPTY)
 									rowEmpty[3]++;
+								else if (this.board.get(s) == Checker.WHITE)
+									rowMorrisWhite[3]++;
+								else
+									rowMorrisBlack[3]++;
 								break;
 							} else {
 								
-								if (this.board.get(s) == Checker.WHITE)
-									rowMorrisWhite[4]++;
-								else if (this.board.get(s) == Checker.BLACK)
-									rowMorrisBlack[4]++;
-								else
+								if (this.board.get(s) == Checker.EMPTY)
 									rowEmpty[4]++;
+								else if (this.board.get(s) == Checker.WHITE)
+									rowMorrisWhite[4]++;
+								else
+									rowMorrisBlack[4]++;
 								break;
 							}
-				case 'e':	if (this.board.get(s) == Checker.WHITE)
-								rowMorrisWhite[5]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								rowMorrisBlack[5]++;
-							else
+				case 'e':	if (this.board.get(s) == Checker.EMPTY)
 								rowEmpty[5]++;
-							break;
-				case 'f':	if (this.board.get(s) == Checker.WHITE)
-								rowMorrisWhite[6]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								rowMorrisBlack[6]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[5]++;
 							else
+								rowMorrisBlack[5]++;
+							break;
+				case 'f':	if (this.board.get(s) == Checker.EMPTY)
 								rowEmpty[6]++;
-							break;
-				case 'g':	if (this.board.get(s) == Checker.WHITE)
-								rowMorrisWhite[7]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								rowMorrisBlack[7]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[6]++;
 							else
+								rowMorrisBlack[6]++;
+							break;
+				case 'g':	if (this.board.get(s) == Checker.EMPTY)
 								rowEmpty[7]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								rowMorrisWhite[7]++;
+							else
+								rowMorrisBlack[7]++;
 							break;
 			}
 			
@@ -237,64 +237,64 @@ public void setArrayOfMorris() {
 			// se mi trovo nella colonna 1, vado a controllare se nella mia casella
 			// della board il valore corrisponde a c. se è così allora incremento
 			// il mio array.
-				case '1' : 	if (this.board.get(s) == Checker.WHITE)
-								columnMorrisWhite[0]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								columnMorrisBlack[0]++;
-							else
+				case '1' : 	if (this.board.get(s) == Checker.EMPTY)
 								columnEmpty[0]++;
-							break;
-				case '2' :	if (this.board.get(s) == Checker.WHITE)
-								columnMorrisWhite[1]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								columnMorrisBlack[1]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[0]++;
 							else
+								columnMorrisBlack[0]++;
+							break;
+				case '2' :	if (this.board.get(s) == Checker.EMPTY)
 								columnEmpty[1]++;
-							break;
-				case '3': 	if (this.board.get(s) == Checker.WHITE)
-							columnMorrisWhite[2]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								columnMorrisBlack[2]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[1]++;
 							else
+								columnMorrisBlack[1]++;
+							break;
+				case '3': 	if (this.board.get(s) == Checker.EMPTY)
 								columnEmpty[2]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[2]++;
+							else
+								columnMorrisBlack[2]++;
 							break;
 				case '4': 	if (first < 'd') {
-								if (this.board.get(s) == Checker.WHITE)
-									columnMorrisWhite[3]++;
-								else if (this.board.get(s) == Checker.BLACK)
-									columnMorrisBlack[3]++;
-								else
+								if (this.board.get(s) == Checker.EMPTY)
 									columnEmpty[3]++;
+								else if (this.board.get(s) == Checker.WHITE)
+									columnMorrisWhite[3]++;
+								else
+									columnMorrisBlack[3]++;
 								break;
 							} else {
-								if (this.board.get(s) == Checker.WHITE)
-									columnMorrisWhite[4]++;
-								else if (this.board.get(s) == Checker.BLACK)
-									columnMorrisBlack[4]++;
-								else
+								if (this.board.get(s) == Checker.EMPTY)
 									columnEmpty[4]++;
+								else if (this.board.get(s) == Checker.WHITE)
+									columnMorrisWhite[4]++;
+								else
+									columnMorrisBlack[4]++;
 								break;
 							}
-				case '5': 	if (this.board.get(s) == Checker.WHITE)
-								columnMorrisWhite[5]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								columnMorrisBlack[5]++;
-							else
+				case '5': 	if (this.board.get(s) == Checker.EMPTY)
 								columnEmpty[5]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[5]++;
+							else
+								columnMorrisBlack[5]++;
 							break;
-				case '6': 	if (this.board.get(s) == Checker.WHITE)
-								columnMorrisWhite[5]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								columnMorrisBlack[5]++;
+				case '6': 	if (this.board.get(s) == Checker.EMPTY)
+								columnEmpty[6]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[6]++;
 							else
-								columnEmpty[5]++;
+								columnMorrisBlack[6]++;
 							break;
-				case '7': 	if (this.board.get(s) == Checker.WHITE)
-								columnMorrisWhite[5]++;
-							else if (this.board.get(s) == Checker.BLACK)
-								columnMorrisBlack[5]++;
+				case '7': 	if (this.board.get(s) == Checker.EMPTY)
+								columnEmpty[7]++;
+							else if (this.board.get(s) == Checker.WHITE)
+								columnMorrisWhite[7]++;
 							else
-								columnEmpty[5]++;
+								columnMorrisBlack[7]++;
 							break;
 			}
 			
@@ -315,6 +315,8 @@ public void setArrayOfMorris() {
 							return rowEmpty;
 						else
 							return columnEmpty;
+		default:
+						System.out.println("[getMorrisArray] ERRORE");
 		}
 		//non dovrei mai arrivarci
 		return null;

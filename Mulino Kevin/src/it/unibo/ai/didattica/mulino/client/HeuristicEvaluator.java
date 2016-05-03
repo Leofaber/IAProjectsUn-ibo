@@ -23,15 +23,16 @@ public class HeuristicEvaluator {
 
 	public double evaluate(){
 		
+		
+		
 		/* * * * * * * * * * * * * * * * *
 		 * 	 CALA'S POWER FUNCTION CALL  * 
 		 * * * * * * * * * * * * * * * * */
-		
 		state.setArrayOfMorris();
-		
 		/* * * * * * * * * * * * * * * * * *
 		 *  END CALA'S POWER FUNCTION CALL *
 		 * * * * * * * * * * * * * * * * * */
+		
 		
 		double result=0;
 		switch(getPhase()){
@@ -68,24 +69,39 @@ public class HeuristicEvaluator {
 		
 		//state.setArrayOfMorrisOrizzontali(Checker.BLACK);
 		//state.setArrayOfMorrisVerticali(Checker.BLACK);
-		/*int morrisBlack = 0;
-		for (int i:state.tempTrisOrizz)
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
+		
+	
+		int morrisBlack = 0;
+		for (int i:morrisArrayBlackOrizz)
 			if (i == 3)
 				morrisBlack++;
-		for (int i:state.tempTrisVert)
+		for (int i:morrisArrayBlackVert)
 			if (i == 3)
 				morrisBlack++;
 		
 		//state.setArrayOfMorrisOrizzontali(Checker.WHITE);
 	//	state.setArrayOfMorrisVerticali(Checker.WHITE);
+		System.out.println("Numero di Morris Black: "+morrisBlack);
+		
+		
+		 int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
+		 int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
+			
+			
+			
 		int morrisWhite = 0;
-		for (int i:state.tempTrisOrizz)
+		for (int i:morrisArrayWhiteOrizz)
 			if (i == 3)
 				morrisWhite++;
-		for (int i:state.tempTrisVert)
+		for (int i:morrisArrayWhiteVert)
 			if (i == 3)
 				morrisWhite++;
 		
+		
+		System.out.println("Numero di Morris White: "+morrisWhite);
+
 		//importante! In questo momento i due array tempTrisOrizz e Vert
 		// 		sono stati riempiti con i valori relativi ai bianchi
 		
@@ -99,9 +115,7 @@ public class HeuristicEvaluator {
 		default:
 				return 0;
 		}
-//		double differenza = morrisWhite - morrisBlack;	//ad esempio
-//		return differenza;*/
-		return 1;
+ 
 	}
 	
 	/* Difference between the number of yours opponent’s and yours blocked pieces
@@ -146,8 +160,7 @@ public class HeuristicEvaluator {
 						whiteBlocked++;
 					}
 
-					
-					
+						
 				} catch (InvalidPositionException e) {
 					e.printStackTrace();
 				}
@@ -156,7 +169,8 @@ public class HeuristicEvaluator {
 			}
 			 
 		}
-		
+		System.out.println("Black bloccati: "+blackBlocked+" White bloccati: "+whiteBlocked);
+
 		
 		//faccio la differenza tra i SUOI bloccati e i MIEI bloccati
 		switch (player){
@@ -194,8 +208,8 @@ public class HeuristicEvaluator {
 	//	state.setArrayOfMorrisOrizzontali(Checker.BLACK);
     //    state.setArrayOfMorrisVerticali(Checker.BLACK);
 		
-		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ORIZZ");
-		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","VERT");
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
 		
         int doubleMorrisBlack = 0;
         int indexOrizz = 0;
@@ -227,8 +241,8 @@ public class HeuristicEvaluator {
    //     state.setArrayOfMorrisOrizzontali(Checker.WHITE);
    //     state.setArrayOfMorrisVerticali(Checker.WHITE);
         
-        int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ORIZZ");
-		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","VERT");
+        int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
 		
 		
         int doubleMorrisWhite = 0;
@@ -294,8 +308,8 @@ public class HeuristicEvaluator {
 	//	state.setArrayOfMorrisOrizzontali(Checker.BLACK);
 //		state.setArrayOfMorrisVerticali(Checker.BLACK);
 		
-		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ORIZZ");
-		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","VERT");
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
 		
 		// si ciclano
 		for(int i=0; i<morrisArrayBlackOrizz.length;i++){
@@ -322,8 +336,8 @@ public class HeuristicEvaluator {
 		// si costruiscono gli arrayOfMorris. 
 	//			state.setArrayOfMorrisOrizzontali(Checker.WHITE);
 	//			state.setArrayOfMorrisVerticali(Checker.WHITE);
-		int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ORIZZ");
-		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","VERT");
+		int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
 		
 		// si ciclano
 				for(int i=0; i<morrisArrayWhiteOrizz.length;i++){

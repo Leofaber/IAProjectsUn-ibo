@@ -20,6 +20,17 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -34,6 +45,17 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -47,6 +69,17 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.WHITE);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -61,6 +94,16 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -75,6 +118,16 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.WHITE);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -89,6 +142,16 @@ public class EvaluatorTester {
 			state=Phase1.applyMove(state, action, Checker.WHITE);
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -109,6 +172,16 @@ public class EvaluatorTester {
 			
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
@@ -165,6 +238,16 @@ public class EvaluatorTester {
  			
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
+			
+			/* * * * * * * * * * * * * * * * *
+			 * 	 CALA'S POWER FUNCTION CALL  * 
+			 * * * * * * * * * * * * * * * * */
+			state.setArrayOfMorris();
+			/* * * * * * * * * * * * * * * * * *
+			 *  END CALA'S POWER FUNCTION CALL *
+			 * * * * * * * * * * * * * * * * * */
+			
+			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
