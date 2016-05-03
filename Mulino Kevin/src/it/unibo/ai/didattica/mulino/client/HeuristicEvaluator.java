@@ -163,17 +163,16 @@ public class HeuristicEvaluator {
 	 * adding one more piece would close a morris)
 	 */
 	public double numberOf2PieceConfigurations(){
-		
-		
-	//	state.setArrayOfMorrisOrizzontali(Checker.BLACK);
-    //    state.setArrayOfMorrisVerticali(Checker.BLACK);
-		
+	
 		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
 		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
 		int[] morrisArrayEmptyOrizz = state.getMorrisArray("EMPTY", "ROW");
 		int[] morrisArrayEmptyVert = state.getMorrisArray("EMPTY", "COLUMN");
+		int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
 		
         int twoPieceMorrisBlack = 0;
+        int twoPieceMorrisWhite = 0;
         
 		// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
         for (int i=0;i<morrisArrayBlackOrizz.length;i++){
@@ -183,12 +182,6 @@ public class HeuristicEvaluator {
             	if (morrisArrayEmptyOrizz[i] == 1)
             		twoPieceMorrisBlack++;
             }
-        }
-        	
-        	
-        for (int i=0;i<morrisArrayBlackVert.length;i++){
-//        	System.out.print("checkerVert: "+morrisArrayBlackVert[i]+ " all'indice: "+i);
-//    		System.out.println(" checkerVertEmpty: "+morrisArrayEmptyVert[i]+ " all'indice: "+i);
             if (morrisArrayBlackVert[i] == 2){
         		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
             	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
@@ -198,15 +191,9 @@ public class HeuristicEvaluator {
             	}
             }
         }
-                
-   //     state.setArrayOfMorrisOrizzontali(Checker.WHITE);
-   //     state.setArrayOfMorrisVerticali(Checker.WHITE);
+        	
         
-        int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
-		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
 		
-		
-        int twoPieceMorrisWhite = 0;
         for (int i=0;i<morrisArrayWhiteOrizz.length;i++){
             if (morrisArrayWhiteOrizz[i] == 2){
         		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
@@ -214,23 +201,18 @@ public class HeuristicEvaluator {
             	if (morrisArrayEmptyOrizz[i] == 1)
             		twoPieceMorrisWhite++;
             }
-        }
-        for (int i=0;i<morrisArrayWhiteVert.length;i++){
-        	if (morrisArrayWhiteVert[i] == 2){
+            if (morrisArrayWhiteVert[i] == 2){
         		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
             	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
             	if (morrisArrayEmptyVert[i] == 1)
             		twoPieceMorrisWhite++;
             }
         }
-       
-        //importante! In questo momento i due array tempTrisOrizz e Vert
-        //      sono stati riempiti con i valori relativi ai bianchi
-       
+
         //a questo punto a secondo che io sia il bianco o il nero
         //faccio la differenza tra i miei tris e i suoi
-        System.out.println("2PieceBlack: "+twoPieceMorrisBlack);
-        System.out.println("2PieceWhite: "+twoPieceMorrisWhite);
+        System.out.print("2PieceBlack: "+twoPieceMorrisBlack);
+        System.out.println(" 2PieceWhite: "+twoPieceMorrisWhite);
 
         switch (player){
         case WHITE:
@@ -254,16 +236,107 @@ public class HeuristicEvaluator {
 	 * Nota: se la riga e la colonna condividono un checker EMPTY allora la possibilità non è la 3 piece configuration ma il 
 	 * doppio morris. (non contemplato)
 	 */
-	private double numberOf3PieceConfigurations(){
-		//TODO
-		return 1;
+	public double numberOf3PieceConfigurations(){
+		
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
+		int[] morrisArrayEmptyOrizz = state.getMorrisArray("EMPTY", "ROW");
+		int[] morrisArrayEmptyVert = state.getMorrisArray("EMPTY", "COLUMN");
+		int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
+		
+        int threePieceMorrisBlack = 0;
+        int threePieceMorrisWhite = 0;
+        
+		// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
+        for (int i=0;i<morrisArrayBlackOrizz.length;i++){
+            if (morrisArrayBlackOrizz[i] == 2)
+            	if (morrisArrayEmptyOrizz[i] == 1) {
+        		// se si, si va a controllare gli indici delle colonne per vedere se in una di quelle 
+            	// colonne si ha una two piece configuration
+            		int [] linkedColumnsBlack = state.getIndexOfLinkedColumnsToRow(i+1);
+				
+				// si cercano twoPieceConfiguration in quelle colonne
+            		for(int c=0;c<linkedColumnsBlack.length;c++){
+					// si sottrae uno, perchè le colonne vanno da 0 a 7.
+            			if (morrisArrayBlackVert[linkedColumnsBlack[c]-1] == 2)
+            				if (morrisArrayEmptyVert[linkedColumnsBlack[c]-1] == 1){
+            					threePieceMorrisBlack++;
+            				}
+            		}
+            	}
+     /*
+			if (morrisArrayBlackVert[i] == 2)
+	           	if (morrisArrayEmptyVert[i] == 1) {
+	        	// se si, si va a controllare gli indici delle colonne per vedere se in una di quelle 
+	           	// colonne si ha una two piece configuration
+	           		int [] linkedRowBlack = state.getIndexOfLinkedRowToColumn(i+1);
+				
+				// si cercano twoPieceConfiguration in quelle colonne
+	           		for(int c=0;c<linkedRowBlack.length;c++){
+					// si sottrae uno, perchè le colonne vanno da 0 a 7.
+	           			if (morrisArrayBlackOrizz[linkedRowBlack[c]-1] == 2)
+	           				if (morrisArrayEmptyOrizz[linkedRowBlack[c]-1] == 1){
+	           					threePieceMorrisBlack++;
+	           				}
+	           		}
+	           	}
+	*/		
+        }
+        
+        	
+        
+		
+		// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
+        for (int i=0;i<morrisArrayWhiteOrizz.length;i++){
+		    if (morrisArrayWhiteOrizz[i] == 2)
+		    	if (morrisArrayEmptyOrizz[i] == 1) {
+		    		// se si, si va a controllare gli indici delle colonne per vedere se in una di quelle 
+		            // colonne si ha una two piece configuration
+		            int [] linkedColumnsWhite = state.getIndexOfLinkedColumnsToRow(i+1);
+						
+					// si cercano twoPieceConfiguration in quelle colonne
+					for(int c=0;c<linkedColumnsWhite.length;c++){
+						// si sottrae uno, perchè le colonne vanno da 0 a 7.
+						if (morrisArrayWhiteVert[linkedColumnsWhite[c]-1] == 2)
+				           	if (morrisArrayEmptyVert[linkedColumnsWhite[c]-1] == 1){
+				           		threePieceMorrisWhite++;
+				           	}
+						}
+				}
+	/*	    
+			if (morrisArrayWhiteVert[i] == 2)
+				if (morrisArrayEmptyVert[i] == 1) {
+			       	// se si, si va a controllare gli indici delle colonne per vedere se in una di quelle 
+					// colonne si ha una two piece configuration
+			        int [] linkedRowWhite = state.getIndexOfLinkedRowToColumn(i+1);
+						
+					// si cercano twoPieceConfiguration in quelle colonne
+					for(int c=0;c<linkedRowWhite.length;c++){
+						// si sottrae uno, perchè le colonne vanno da 0 a 7.
+						if (morrisArrayWhiteOrizz[linkedRowWhite[c]-1] == 2)
+				           	if (morrisArrayEmptyOrizz[linkedRowWhite[c]-1] == 1){
+				           		threePieceMorrisWhite++;
+				           	}
+					}
+				}
+	*/		
+        }
+
+        //a questo punto a secondo che io sia il bianco o il nero
+        //faccio la differenza tra i miei tris e i suoi
+        System.out.print("3PieceBlack: "+threePieceMorrisBlack);
+        System.out.println(" 3PieceWhite: "+threePieceMorrisWhite);
+
+        switch (player){
+        case WHITE:
+                return threePieceMorrisWhite - threePieceMorrisBlack;
+        case BLACK:
+                return  threePieceMorrisBlack - threePieceMorrisWhite;
+        default:
+                return 0;
+        }
 	}
-	
-	
-	
-	
-	
-	
 	
 	/* Difference between number of yours and yours opponent’s double morrises 
 	 * (A double morris is one in which two morrises share a common piece) 
@@ -346,12 +419,46 @@ public class HeuristicEvaluator {
 		}
 	}
 	
-	/*
-	 * 1 if the state is winning for the player, -1 if losing, 0 otherwise
-	 */
-	private double winningConfiguration(){
-		//TODO
-		return 1;
+	/* * 1 if the state is winning for the player, -1 if losing, 0 otherwise */ /* * fase 2: il primo che arriva a 3 pedine perde. * fase 3: il primo che arriva a 2 pedine perde. * */ 
+	private double winningConfiguration(){ 
+		int whiteCheckersOnBoard = state.getWhiteCheckersOnBoard(); 
+		int blackCheckersOnBoard = state.getBlackCheckersOnBoard(); 
+		switch(getPhase()){ 
+			case FIRST: return 0; 
+			case SECOND: 
+				switch (player){ 
+					case WHITE: if( whiteCheckersOnBoard>3 && blackCheckersOnBoard<=3 ) 
+									return 1; 
+								else if (whiteCheckersOnBoard<=3 && blackCheckersOnBoard>3) 
+									return -1; 
+								else 
+									return 0; 
+					case BLACK: if( whiteCheckersOnBoard>3 && blackCheckersOnBoard<=3 ) 
+									return -1; 
+								else if (whiteCheckersOnBoard<=3 && blackCheckersOnBoard>3) 
+									return 1; 
+								else 
+									return 0; 
+					default: break; 
+				} 
+			case FINAL: 
+				switch (player){ 
+					case WHITE: if( whiteCheckersOnBoard>2 && blackCheckersOnBoard<=2 ) 
+									return 1; 
+								else if (whiteCheckersOnBoard<=2 && blackCheckersOnBoard>2) 
+									return -1; 
+								else 
+									return 0; 
+					case BLACK: if( whiteCheckersOnBoard>2 && blackCheckersOnBoard<=2 ) 
+									return -1; 
+								else if (whiteCheckersOnBoard<=2 && blackCheckersOnBoard>2) 
+									return 1; 
+								else 
+									return 0; 
+					default: break; 
+				} 
+			default: return 0; 
+		} 
 	}
 
 	public State getState() {

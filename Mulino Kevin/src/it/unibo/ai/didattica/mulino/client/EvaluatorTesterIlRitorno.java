@@ -59,6 +59,10 @@ public class EvaluatorTesterIlRitorno {
 			action.setPutPosition("f2");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			
+			action = new Phase1Action();
+			action.setPutPosition("b6");
+			state=Phase1.applyMove(state, action, Checker.WHITE);
+			
 			
 			
 			System.out.println(state.toString());
@@ -80,7 +84,8 @@ public class EvaluatorTesterIlRitorno {
 			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
 			System.out.println("DOUBLE MORRIS BLACK - DOUBLE MORRIS WHITE: "+eval.doubleMorris());
 			System.out.println("2PIECEBLACK - 2PIECEWHITE "+eval.numberOf2PieceConfigurations());
- 
+			System.out.println("3PIECEBLACK - 3PIECEWHITE "+eval.numberOf3PieceConfigurations());
+			
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
 		}

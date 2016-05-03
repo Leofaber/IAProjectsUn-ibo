@@ -453,6 +453,29 @@ public void setArrayOfMorris() {
 			return new int[] {};
 		}
 	}
+	
+	public int[] getIndexOfLinkedRowToColumn(int columnIndex){
+		switch(columnIndex){
+		case 1:
+			return new int[] {1,4,8};
+		case 2:
+			return new int[] {2,4,7};
+		case 3:
+			return new int[] {3,4,6};
+		case 4:
+			return new int[] {1,2,3};
+		case 5:
+			return new int[] {6,7,8};
+		case 6:
+			return new int[] {3,5,6};
+		case 7:
+			return new int[] {2,5,7};
+		case 8:
+			return new int[] {1,5,8};
+		default:
+			return new int[] {};
+		}
+	}
 /*
  *  public int[] rowMorrisBlack = new int[8];
 	public int[] columnMorrisBlack = new int[8];
