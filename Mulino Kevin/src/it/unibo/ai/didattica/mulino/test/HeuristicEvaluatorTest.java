@@ -1,4 +1,4 @@
-package it.unibo.ai.didattica.mulino.testplan;
+package it.unibo.ai.didattica.mulino.test;
 
 import static org.junit.Assert.*;
 
