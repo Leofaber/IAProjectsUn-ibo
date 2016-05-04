@@ -1,7 +1,8 @@
-package it.unibo.ai.didattica.mulino.client;
+package it.unibo.ai.didattica.mulino.test;
 
 import it.unibo.ai.didattica.mulino.actions.Phase1;
 import it.unibo.ai.didattica.mulino.actions.Phase1Action;
+import it.unibo.ai.didattica.mulino.client.HeuristicEvaluator;
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 

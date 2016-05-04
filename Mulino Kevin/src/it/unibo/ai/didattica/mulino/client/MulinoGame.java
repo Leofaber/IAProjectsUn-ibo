@@ -48,14 +48,14 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 
 	@Override
 	public boolean isTerminal(State state) {
-//		switch (state.getCurrentPhase()){
-//		case FIRST: 
-//			return state.getBlackCheckers()==0 && state.getWhiteCheckers()==0;
-//		case SECOND:
-//			break;
-//		case FINAL:
-//			break;
-//		}
+		switch (state.getCurrentPhase()){
+		case FIRST: 
+			return state.getBlackCheckers()==0 && state.getWhiteCheckers()==0;
+		case SECOND:
+			break;
+		case FINAL:
+			break;
+		}
 		return false;
 	}
 

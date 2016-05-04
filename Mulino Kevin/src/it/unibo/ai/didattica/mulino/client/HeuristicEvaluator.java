@@ -38,15 +38,18 @@ public class HeuristicEvaluator {
 		switch(getPhase()){
 		// 18 * (1) + 26 * (2) + 1 * (3) + 9 * (4) + 10 * (5) + 7 * (6)
 		case FIRST:
-			result=18*closedMorris()+26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations();
+//			result=18*closedMorris()+26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations();
+			result=26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations();
 			break;
 		//14 * (1) + 43 * (2) + 10 * (3) + 11 * (4) + 8 * (7) + 1086 * (8)
 		case SECOND:
-			result=14*closedMorris()+43*numberOfMorris()+10*numberOfBlockedOpponentPieces()+11*numberOfPieces()+8*doubleMorris()+1086*winningConfiguration();
+//			result=14*closedMorris()+43*numberOfMorris()+10*numberOfBlockedOpponentPieces()+11*numberOfPieces()+8*doubleMorris()+1086*winningConfiguration();
+			result=43*numberOfMorris()+10*numberOfBlockedOpponentPieces()+11*numberOfPieces()+8*doubleMorris()+1086*winningConfiguration();
 			break;
 		//16 * (1) + 10 * (5) + 1 * (6) + 1190 * (8)
 		case FINAL:
-			result=16*closedMorris()+10*numberOf2PieceConfigurations()+numberOf3PieceConfigurations()+1190*winningConfiguration();
+//			result=16*closedMorris()+10*numberOf2PieceConfigurations()+numberOf3PieceConfigurations()+1190*winningConfiguration();
+			result=10*numberOf2PieceConfigurations()+numberOf3PieceConfigurations()+1190*winningConfiguration();
 			break;
 		}
 		return result;
@@ -57,10 +60,10 @@ public class HeuristicEvaluator {
 	 * -1 if a morris was closed by the opponent in the last move,
 	 * 0 otherwise
 	 */
-	 private double closedMorris(){
+	/* private double closedMorris(){
 		 //TODO
 		return 1;
-	}
+	}*/
 	
 	/* 
 	 * Difference between the number of yours and yours opponent’s morrises
