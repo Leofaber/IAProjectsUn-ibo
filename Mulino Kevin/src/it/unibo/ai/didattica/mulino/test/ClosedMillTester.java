@@ -35,7 +35,7 @@ import it.unibo.ai.didattica.mulino.domain.State.Checker;
 //				System.out.println(state.toString());
 				
 				String actionString="d7";
-				System.out.println("BLACK TRIS CON "+actionString+"? "+ (new MulinoGame(state).closedMill(state, actionString, Checker.BLACK) ? "si" : "no"));	
+				System.out.println("BLACK TRIS CON "+actionString+"? "+ (MulinoGame.closedMill(state, actionString, Checker.BLACK) ? "si" : "no"));	
 
 			}catch(Exception e){
 				System.out.println("Exception: "+e);

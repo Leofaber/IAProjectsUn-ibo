@@ -90,7 +90,7 @@ public class MulinoClient {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
 				
 				try{
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch<State, String, State.Checker>(new MulinoGame(currentState), -10000, 10000, 60);
+					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -10000, 10000, 60);
 					actionString=search.makeDecision(currentState.clone());
 					System.out.println("decision: "+actionString);
 				}catch(Exception e){

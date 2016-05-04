@@ -135,7 +135,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	
 	
 	//Verifica se l'azione action genera un nuovo tris
-	public boolean closedMill(State state, String action,Checker player){
+	public static boolean closedMill(State state, String action,Checker player){
 		Double oldNumMorris, newNumMorris=0.0;
 		state.setArrayOfMorris();
 		State newState=state.clone();
