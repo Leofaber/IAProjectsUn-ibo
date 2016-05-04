@@ -60,7 +60,6 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	}
 
 	@Override
-	//USE HEURISTIC EVALUATOR HERE
 	public double getUtility(State state, Checker player) {
 		HeuristicEvaluator evaluator=new HeuristicEvaluator(state, player);
 		return evaluator.evaluate();
