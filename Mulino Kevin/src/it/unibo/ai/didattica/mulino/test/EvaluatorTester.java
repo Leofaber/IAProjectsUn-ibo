@@ -1,5 +1,7 @@
 package it.unibo.ai.didattica.mulino.test;
 
+import java.util.HashMap;
+
 import it.unibo.ai.didattica.mulino.actions.Phase1;
 import it.unibo.ai.didattica.mulino.actions.Phase1Action;
 import it.unibo.ai.didattica.mulino.client.HeuristicEvaluator;
@@ -12,6 +14,39 @@ public class EvaluatorTester {
 		
 	}
 
+	
+	public static void printEvaluations(HeuristicEvaluator eval){
+		
+		
+		
+		// 18 * (1) + 26 * (2) + 1 * (3) + 9 * (4) + 10 * (5) + 7 * (6)
+		HashMap<String,Integer> vals1 = new HashMap<String,Integer>();
+		vals1.put("numberOfPieces", 9);
+		vals1.put("numberOfMorris", 26);
+		vals1.put("doubleMorris", 9);
+		vals1.put("blockedOpponents", 1);
+		vals1.put("twoPieces", 10);
+		vals1.put("threePieces", 7);
+		
+		if(eval.getPlayer() == Checker.BLACK){
+			System.out.println("[EvaluatorTester]    Black Pieces - White Pieces = "+eval.numberOfPieces()+"\n");
+			System.out.println("[EvaluatorTester]    Black Morris - White Morris = "+ eval.numberOfMorris()+"\n");
+			System.out.println("[EvaluatorTester]    Black Double Morris - White Double Morris = "+ eval.doubleMorris()+"\n");
+			System.out.println("[EvaluatorTester]    White Blocked Pieces - Black Blocked Pieces = "+eval.numberOfBlockedOpponentPieces()+"\n");
+			System.out.println("[EvaluatorTester]    Black2PiecesConf - White2PiecesConf = "+eval.numberOf2PieceConfigurations()+"\n");
+			System.out.println("[EvaluatorTester]    Black3PiecesConf - White3PiecesConf = "+eval.numberOf3PieceConfigurations()+"\n");
+		
+		}else{
+			System.out.println("[EvaluatorTester]    White Pieces - Black Pieces = "+eval.numberOfPieces());
+			System.out.println("[EvaluatorTester]    White Morris - Black Morris = "+ eval.numberOfMorris());
+			System.out.println("[EvaluatorTester]    White Double Morris - Black Double Morris = "+ eval.doubleMorris());
+			System.out.println("[EvaluatorTester]    Black Blocked Pieces - White Blocked Pieces = "+eval.numberOfBlockedOpponentPieces());
+			System.out.println("[EvaluatorTester]    White2PiecesConf - Black2PiecesConf = "+eval.numberOf2PieceConfigurations());
+			System.out.println("[EvaluatorTester]    White3PiecesConf - Black3PiecesConf = "+eval.numberOf3PieceConfigurations());
+		
+		}
+	}
+	
 	public static void main(String[] args) {
 		State state=new State();
 		Phase1Action action;
@@ -31,11 +66,9 @@ public class EvaluatorTester {
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
 			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+			EvaluatorTester.printEvaluations(eval);
 
+		
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
 		}
@@ -55,11 +88,7 @@ public class EvaluatorTester {
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
 			
-			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+			EvaluatorTester.printEvaluations(eval);
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -79,11 +108,7 @@ public class EvaluatorTester {
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
 			
-			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+			EvaluatorTester.printEvaluations(eval);
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -103,11 +128,8 @@ public class EvaluatorTester {
 			/* * * * * * * * * * * * * * * * * *
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
-			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+	
+			EvaluatorTester.printEvaluations(eval);
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -127,11 +149,8 @@ public class EvaluatorTester {
 			/* * * * * * * * * * * * * * * * * *
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
-			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
+						
+			EvaluatorTester.printEvaluations(eval);
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -152,11 +171,7 @@ public class EvaluatorTester {
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
 			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
-			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
+			EvaluatorTester.printEvaluations(eval);
 
 
 		}catch(Exception e){
@@ -182,11 +197,7 @@ public class EvaluatorTester {
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
 			
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
-			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
+			EvaluatorTester.printEvaluations(eval);
 
 
 		}catch(Exception e){
@@ -259,14 +270,8 @@ public class EvaluatorTester {
 			/* * * * * * * * * * * * * * * * * *
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
-			
-			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
-			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
-			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());
-			System.out.println("PEZZI WHITE BLOCCATI - BLACK BLOCCATI: "+eval.numberOfBlockedOpponentPieces());
-			System.out.println("DOUBLE MORRIS BLACK - DOUBLE MORRIS WHITE: "+eval.doubleMorris());
-			System.out.println("2PIECEBLACK - 2PIECEWHITE "+eval.numberOf2PieceConfigurations());
- 
+		
+			EvaluatorTester.printEvaluations(eval);
 
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
@@ -275,5 +280,6 @@ public class EvaluatorTester {
 		
 		
 	}
-
+	
+	
 }

@@ -493,8 +493,7 @@ public void setArrayOfMorris() {
 				if (i == 3)
 					morrisBlack++;
 			
-			System.out.println("Numero di Morris Black: "+morrisBlack);
-			return morrisBlack;
+ 			return morrisBlack;
 		}
 	 	else {
 			
@@ -505,8 +504,7 @@ public void setArrayOfMorris() {
 			for (int i:columnMorrisWhite)
 				if (i == 3)
 					morrisWhite++;
-			System.out.println("Numero di Morris White: "+morrisWhite);
-			return morrisWhite;
+ 			return morrisWhite;
 			
 	    }
 	}
