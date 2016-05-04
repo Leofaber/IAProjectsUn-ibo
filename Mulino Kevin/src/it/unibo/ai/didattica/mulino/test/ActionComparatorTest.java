@@ -24,7 +24,7 @@ public class ActionComparatorTest {
 			action = new Phase1Action();
 			action.setPutPosition("a1");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
-			action = new Phase1Action();
+			/*action = new Phase1Action();
 			action.setPutPosition("c4");
 			state=Phase1.applyMove(state, action, Checker.WHITE);
 			action = new Phase1Action();
@@ -41,7 +41,7 @@ public class ActionComparatorTest {
 			action.setPutPosition("g7");
 			state=Phase1.applyMove(state, action, Checker.BLACK);
 			action = new Phase1Action();
-			System.out.println("ACTION COMPARATOR\n"+ state.toString());
+			System.out.println("ACTION COMPARATOR\n"+ state.toString());*/
 			
 			
 		}catch(Exception e){

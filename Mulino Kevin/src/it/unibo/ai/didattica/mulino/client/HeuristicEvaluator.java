@@ -155,13 +155,19 @@ public class HeuristicEvaluator {
 	 *  Difference between the number of yours and yours opponent’s pieces
 	 */
 	public double numberOfPieces(){
+		
+		int numWhite = state.getWhiteCheckersOnBoard();
+		int numBlack = state.getBlackCheckersOnBoard();
+		
+		System.out.println("[HeuristicEvaluator] Black Number = "+numBlack+" || White Number = "+numWhite);
+		
 		switch(player){
-		case WHITE:
-			return state.getWhiteCheckersOnBoard()-state.getBlackCheckersOnBoard();
-		case BLACK:
-			return state.getBlackCheckersOnBoard()-state.getWhiteCheckersOnBoard();
-		default:
-			return 0;
+			case WHITE:
+				return numWhite - numBlack;
+			case BLACK:
+				return numBlack - numWhite;
+			default:
+				return 0;
 		}
 		
 	}

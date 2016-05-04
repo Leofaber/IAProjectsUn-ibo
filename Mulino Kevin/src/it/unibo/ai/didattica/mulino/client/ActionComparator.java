@@ -148,9 +148,9 @@ public class ActionComparator implements Comparator<String>{
 		eval2=new HeuristicEvaluator(s2, getPlayer());
 		val1+=eval1.evaluate();
 		val2+=eval2.evaluate();
-		System.out.println(s1.toString());
+		System.out.println("STATE AFTER ACTION 1:\n"+s1.toString());
+		System.out.println("STATE AFTER ACTION 2:\n"+s2.toString());
 		System.out.println("State1 VAL: "+val1);
-		System.out.println(s2.toString());
 		System.out.println("State2 VAL: "+val2);
 		
 		if (val1>val2)
