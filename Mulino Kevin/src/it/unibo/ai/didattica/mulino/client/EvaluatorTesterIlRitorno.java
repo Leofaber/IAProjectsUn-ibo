@@ -65,7 +65,6 @@ public class EvaluatorTesterIlRitorno {
 			System.out.println(state.toString());
 			HeuristicEvaluator eval=new HeuristicEvaluator(state, Checker.BLACK);
 			
-			
 			/* * * * * * * * * * * * * * * * *
 			 * 	 CALA'S POWER FUNCTION CALL  * 
 			 * * * * * * * * * * * * * * * * */
@@ -73,7 +72,6 @@ public class EvaluatorTesterIlRitorno {
 			/* * * * * * * * * * * * * * * * * *
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
-			
 			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
@@ -86,9 +84,6 @@ public class EvaluatorTesterIlRitorno {
 		}catch(Exception e){
 			System.out.println("Exception: "+e);
 		}
-		
-		
-		
 		
 	}
 

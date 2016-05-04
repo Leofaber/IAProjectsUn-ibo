@@ -37,6 +37,4 @@ public class MulinoIterativeDeepeningAlphaBetaSearch<State,String,Checker> exten
 		});
 		return actions;
 	}
-
-	
 }

@@ -259,7 +259,6 @@ public class EvaluatorTester {
 			 *  END CALA'S POWER FUNCTION CALL *
 			 * * * * * * * * * * * * * * * * * */
 			
-			
 			System.out.println("TRIS BLACK-TRIS WHITE: "+ eval.numberOfMorris());
 			System.out.println("DOUBLE BLACK-DOUBLE WHITE: "+ eval.doubleMorris());
 			System.out.println("PEZZI BLACK-PEZZI WHITE: "+eval.numberOfPieces());

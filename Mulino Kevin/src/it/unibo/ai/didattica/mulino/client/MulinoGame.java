@@ -57,7 +57,6 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 //			break;
 //		}
 		return false;
-		
 	}
 
 	@Override

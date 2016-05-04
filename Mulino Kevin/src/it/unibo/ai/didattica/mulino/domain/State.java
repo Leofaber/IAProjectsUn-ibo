@@ -481,7 +481,6 @@ public void setArrayOfMorris() {
 	public int[] columnMorrisBlack = new int[8];
 	public int[] rowMorrisWhite = new int[8];
 	public int[] columnMorrisWhite = new int[8];
-	 
  */
 	public double getNumberOfMorris(Checker color){
 

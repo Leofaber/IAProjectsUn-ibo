@@ -284,9 +284,7 @@ public class HeuristicEvaluator {
 	*/		
         }
         
-        	
         
-		
 		// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
         for (int i=0;i<morrisArrayWhiteOrizz.length;i++){
 		    if (morrisArrayWhiteOrizz[i] == 2)

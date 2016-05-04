@@ -40,4 +40,5 @@ import it.unibo.ai.didattica.mulino.domain.State.Checker;
 				System.out.println("Exception: "+e);
 			}
 	}
+		
 }
