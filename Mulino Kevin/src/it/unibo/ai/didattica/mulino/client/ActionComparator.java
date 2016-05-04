@@ -104,7 +104,7 @@ public class ActionComparator implements Comparator<String>{
 				}
 				break;
 			}
-		}
+		} 
 		
 		eval1=new HeuristicEvaluator(s1, getPlayer());
 		eval2=new HeuristicEvaluator(s2, getPlayer());

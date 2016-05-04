@@ -50,7 +50,7 @@ public class ActionComparatorTest {
 		aC = new ActionComparator(state, Checker.BLACK);
 	}
 
-
+ 
 	
 	@Test
 	public void compareTest() {

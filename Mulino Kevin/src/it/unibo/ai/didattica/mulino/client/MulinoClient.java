@@ -113,7 +113,7 @@ public class MulinoClient {
 				System.out.println(currentState.toString());
 			}
 		}
-		else {
+		else { 
 			MulinoClient client = new MulinoClient(State.Checker.BLACK);
 			BufferedReader in = new BufferedReader( new InputStreamReader(System.in));
 			currentState = client.read();

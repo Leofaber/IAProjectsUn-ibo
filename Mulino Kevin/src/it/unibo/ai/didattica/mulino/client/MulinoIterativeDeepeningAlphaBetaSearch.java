@@ -19,7 +19,7 @@ public class MulinoIterativeDeepeningAlphaBetaSearch extends
 		super(game, utilMin, utilMax, time);
 		super.setLogEnabled(true);
 	}
-	
+	 
 	@Override
 	public String makeDecision(State state) {
 		return super.makeDecision(game.getInitialState());

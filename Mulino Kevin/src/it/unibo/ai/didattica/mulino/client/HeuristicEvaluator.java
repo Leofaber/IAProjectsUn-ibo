@@ -113,7 +113,7 @@ public class HeuristicEvaluator {
 						}
 					}
 					
-					
+					 
 					// se non ci sono Checker EMPTY tra le posizioni adiacenti, il Checker è bloccato.
 					if(existEmpty==false && checker == Checker.BLACK){
 						blackBlocked++;

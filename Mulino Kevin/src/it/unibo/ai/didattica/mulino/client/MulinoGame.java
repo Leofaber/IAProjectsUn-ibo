@@ -155,7 +155,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 			newState.setBlackCheckers(newState.getBlackCheckers()-1);
 			newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()+1);
 			break;
-		}
+		} 
 		System.out.println(newState.toString());
 		newState.setArrayOfMorris();
 			
