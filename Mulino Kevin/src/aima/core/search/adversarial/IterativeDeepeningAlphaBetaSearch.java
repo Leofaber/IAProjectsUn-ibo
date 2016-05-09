@@ -107,8 +107,8 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			}
 			if (logEnabled)
 				System.out.println("\n"+logText);
-				System.out.println(System.currentTimeMillis()-startTime);
-				System.out.println("NEW RESULTS:\n"+newResults);
+				System.out.println("Tempo:"+(System.currentTimeMillis()-startTime));
+			//	System.out.println("NEW RESULTS:\n"+newResults);
 			if (!exit || isSignificantlyBetter(newResultValue, resultValue)) {
 				results = newResults;
 				resultValue = newResultValue;
