@@ -1,9 +1,13 @@
 package aima.core.search.adversarial;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import aima.core.search.framework.Metrics;
+import it.unibo.ai.didattica.mulino.client.ActionComparator;
+import it.unibo.ai.didattica.mulino.domain.State.Checker;
 
 /**
  * Implements an iterative deepening Minimax search with alpha-beta pruning and
@@ -69,7 +73,9 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		currDepthLimit = 0;
 		long startTime = System.currentTimeMillis();
 		boolean exit = false;
+		HashMap<ACTION, Double> table;
 		do {
+			table= new HashMap<>();
 			incrementDepthLimit();
 			maxDepthReached = false;
 			List<ACTION> newResults = new ArrayList<ACTION>();
@@ -77,8 +83,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			double secondBestValue = Double.NEGATIVE_INFINITY;
 			if (logEnabled)
 				logText = new StringBuffer("depth " + currDepthLimit + ": ");
-			for (ACTION action : orderActions(state, game.getActions(state),
-					player, 0)) {
+			for (ACTION action : orderActions(state, game.getActions(state), player,currDepthLimit)) {
 				if (results != null
 						&& System.currentTimeMillis() > startTime + maxTime) {
 					exit = true;
@@ -86,6 +91,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				}
 				double value = minValue(game.getResult(state, action), player,
 						Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, 1);
+				table.put(action, value);
 				if (logEnabled)
 					logText.append(action + "->" + value + " ");
 				if (value >= newResultValue) {
@@ -100,7 +106,9 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				}
 			}
 			if (logEnabled)
-				System.out.println(logText);
+				System.out.println("\n"+logText);
+				System.out.println(System.currentTimeMillis()-startTime);
+				System.out.println("NEW RESULTS:\n"+newResults);
 			if (!exit || isSignificantlyBetter(newResultValue, resultValue)) {
 				results = newResults;
 				resultValue = newResultValue;
@@ -109,7 +117,16 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 					&& isSignificantlyBetter(resultValue, secondBestValue))
 				break;
 		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue));
-		return results.get(0);
+		Double max= -10000000.0;
+		ACTION actionMax= null;
+		for(Map.Entry<ACTION, Double> entry : table.entrySet()){
+			if(entry.getValue()>max){
+				max=entry.getValue();
+				actionMax=entry.getKey();
+			}
+		}
+//		return results.get(0);
+		return actionMax;
 	}
 
 	public double maxValue(STATE state, PLAYER player, double alpha,
@@ -117,7 +134,22 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		
 		updateMetrics(depth);
 		if (game.isTerminal(state) || depth >= currDepthLimit) {
-			return eval(state, player);
+			
+			/*
+			 * 	DEBUG **********************************
+			 * 
+			 
+			double evalDebug = eval(state, player);
+			if(game.isTerminal(state)){
+				System.out.println("\n[MAX] Questo stato è terminale:\n"+state.toString()+"\n ed ha valore: "+evalDebug);
+			}
+			if(depth >= currDepthLimit){
+				System.out.println("\n[MAX] Profondità: "+depth+"    \n"+state.toString()+"\n ed ha valore: "+evalDebug);
+							
+			}
+			return evalDebug;
+			 fine debug 
+			*/return eval(state, player);
 		} else {
 			double value = Double.NEGATIVE_INFINITY;
 			for (ACTION action : orderActions(state, game.getActions(state),
@@ -137,7 +169,26 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		
 		updateMetrics(depth);
 		if (game.isTerminal(state) || depth >= currDepthLimit) {
-			return eval(state, player);
+			
+			
+			/*
+			 * 	DEBUG **********************************
+			 * 
+			 
+			
+			
+			double evalDebug = eval(state, player);
+			if(game.isTerminal(state)){
+				System.out.println("\n[MIN] Questo stato è terminale:\n"+state.toString()+"\n ed ha valore: "+evalDebug);
+			}
+			if(depth >= currDepthLimit){
+				System.out.println("\n[MIN] Profondità: "+depth+"    \n"+state.toString()+"\n ed ha valore: "+evalDebug);
+					
+			}
+			return evalDebug;
+			fine debug 
+			
+			*/return eval(state, player);
 		} else {
 			double value = Double.POSITIVE_INFINITY;
 			for (ACTION action : orderActions(state, game.getActions(state),
@@ -199,10 +250,16 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	 */
 	protected double eval(STATE state, PLAYER player) {
 		if (game.isTerminal(state)) {
+			System.out.println("TERMINAL STATE REACHED");
 			return game.getUtility(state, player);
 		} else {
 			maxDepthReached = true;
+			if(currDepthLimit>6){
+				return game.getUtility(state, player);
+			}
 			return (utilMin + utilMax) / 2;
+			
+			//return (utilMin + utilMax) / 2;
 		}
 	}
 
@@ -210,8 +267,8 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	 * Primitive operation for action ordering. This implementation preserves
 	 * the original order (provided by the game).
 	 */
-	public List<ACTION> orderActions(STATE state, List<ACTION> actions,
-			PLAYER player, int depth) {
+	public List<ACTION> orderActions(STATE state, List<ACTION> actions, PLAYER player, int depth) {
+		
 		return actions;
 	}
 }

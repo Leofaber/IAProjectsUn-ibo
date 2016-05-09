@@ -139,11 +139,11 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 		Double oldNumMorris, newNumMorris=0.0;
 		state.setArrayOfMorris();
 		State newState=state.clone();
-		System.out.println(newState.toString());
+	//	System.out.println(newState.toString());
 		//HashMap<String, Checker> newBoard=newState.getBoard();
 		
 		oldNumMorris=state.getNumberOfMorris(player);
-		System.out.println("OLD NUM MORRIS: "+ oldNumMorris);
+	//	System.out.println("OLD NUM MORRIS: "+ oldNumMorris);
 		
 		newState.getBoard().put(action, player);		
 		switch(player){
@@ -156,12 +156,12 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 			newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()+1);
 			break;
 		} 
-		System.out.println(newState.toString());
+	//	System.out.println(newState.toString());
 		newState.setArrayOfMorris();
 			
 		newNumMorris=newState.getNumberOfMorris(player);
 
-		System.out.println("NEW NUM MORRIS: "+ newNumMorris);
+	//	System.out.println("NEW NUM MORRIS: "+ newNumMorris);
 		
 		
 		return newNumMorris-oldNumMorris>0;

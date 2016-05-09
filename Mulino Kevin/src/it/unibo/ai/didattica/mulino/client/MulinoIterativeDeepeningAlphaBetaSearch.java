@@ -12,11 +12,15 @@ import aima.core.search.adversarial.IterativeDeepeningAlphaBetaSearch;
 
 public class MulinoIterativeDeepeningAlphaBetaSearch extends
 		IterativeDeepeningAlphaBetaSearch<State,String,Checker> implements AdversarialSearch<State, String>{
+	
+	List<String> orderedActions;
+	int lastOrdering;
 
 	public MulinoIterativeDeepeningAlphaBetaSearch(
 			Game<State, String, Checker> game, double utilMin, double utilMax,
 			int time) {
 		super(game, utilMin, utilMax, time);
+		lastOrdering=4;
 		super.setLogEnabled(true);
 	}
 	 
@@ -28,8 +32,14 @@ public class MulinoIterativeDeepeningAlphaBetaSearch extends
 	@Override
 	public List<String> orderActions(State state, List<String> actions,
 			Checker player, int depth) {
-		
-		actions.sort(new ActionComparator(state,player));
+		//System.out.println("Numero di azioni:"+actions.size());
+		//actions.sort(new ActionComparator(state,player));
+//		if(depth>lastOrdering){
+//			System.out.println("START SORTING - PLAYER "+player.toString());
+//			actions.sort(new ActionComparator(state, player));
+//			lastOrdering=depth;
+//			System.out.println("ARRAY ORDINATO - DEPTH "+lastOrdering+": "+actions.toString());
+//		}
 		return actions;
 	}
 	

@@ -73,7 +73,7 @@ public class HeuristicEvaluator {
 			double whiteMorris = state.getNumberOfMorris(Checker.WHITE);
 			double blackMorris = state.getNumberOfMorris(Checker.BLACK);
 			
-			System.out.println("[HeuristicEvaluator] White Morris Number = "+whiteMorris+" || Black Morris Number = "+blackMorris);
+	//		System.out.println("[HeuristicEvaluator] White Morris Number = "+whiteMorris+" || Black Morris Number = "+blackMorris);
 			
 		switch (player){
 			case WHITE:
@@ -137,7 +137,7 @@ public class HeuristicEvaluator {
 			}
 			 
 		}
-		System.out.println("[HeuristicEvaluator] Blocked Black Pieces Number = "+blackBlocked+" || Blocked White Pieces Number = "+whiteBlocked);
+		//System.out.println("[HeuristicEvaluator] Blocked Black Pieces Number = "+blackBlocked+" || Blocked White Pieces Number = "+whiteBlocked);
 
 		
 		//faccio la differenza tra i SUOI bloccati e i MIEI bloccati
@@ -159,7 +159,7 @@ public class HeuristicEvaluator {
 		int numWhite = state.getWhiteCheckersOnBoard();
 		int numBlack = state.getBlackCheckersOnBoard();
 		
-		System.out.println("[HeuristicEvaluator] Black Number = "+numBlack+" || White Number = "+numWhite);
+	//	System.out.println("[HeuristicEvaluator] Black Number = "+numBlack+" || White Number = "+numWhite);
 		
 		switch(player){
 			case WHITE:
@@ -225,7 +225,7 @@ public class HeuristicEvaluator {
 
         //a questo punto a secondo che io sia il bianco o il nero
         //faccio la differenza tra i miei tris e i suoi
-        System.out.println("[HeuristicEvaluator] 2 Pieces Conf Black Number = "+twoPieceMorrisBlack+" || 2 Pieces Conf White Number = "+twoPieceMorrisWhite);
+    //    System.out.println("[HeuristicEvaluator] 2 Pieces Conf Black Number = "+twoPieceMorrisBlack+" || 2 Pieces Conf White Number = "+twoPieceMorrisWhite);
  
         switch (player){
         case WHITE:
@@ -337,7 +337,7 @@ public class HeuristicEvaluator {
 
         //a questo punto a secondo che io sia il bianco o il nero
         //faccio la differenza tra i miei tris e i suoi
-        System.out.println("[HeuristicEvaluator] 3 Pieces Conf Black Number = "+threePieceMorrisBlack+" || 3 Pieces Conf White Number = "+threePieceMorrisWhite);
+     //   System.out.println("[HeuristicEvaluator] 3 Pieces Conf Black Number = "+threePieceMorrisBlack+" || 3 Pieces Conf White Number = "+threePieceMorrisWhite);
  
         switch (player){
         case WHITE:
@@ -417,7 +417,7 @@ public class HeuristicEvaluator {
 						
 					}
 				}
-		System.out.println("[HeuristicEvaluator] Double White Morris Number = "+doubleMorrisWhite+" || Double Black Morris Number = "+doubleMorrisBlack);
+	//	System.out.println("[HeuristicEvaluator] Double White Morris Number = "+doubleMorrisWhite+" || Double Black Morris Number = "+doubleMorrisBlack);
 				
  	
 		switch (player){
