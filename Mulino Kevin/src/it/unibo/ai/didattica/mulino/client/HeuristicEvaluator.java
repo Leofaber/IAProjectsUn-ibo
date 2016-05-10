@@ -39,7 +39,7 @@ public class HeuristicEvaluator {
 		// 18 * (1) + 26 * (2) + 1 * (3) + 9 * (4) + 10 * (5) + 7 * (6)
 		case FIRST:
 //			result=18*closedMorris()+26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations();
-			result=26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations();
+			result=26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations()+13*blockMill();
 			break;
 		//14 * (1) + 43 * (2) + 10 * (3) + 11 * (4) + 8 * (7) + 1086 * (8)
 		case SECOND:
@@ -478,6 +478,73 @@ public class HeuristicEvaluator {
 		} 
 	}
 
+	/*
+	 * Ritorna 1 se c'è almeno 1 morris avversario
+	 * 
+	 */
+	private double blockMill(){
+		int[] morrisArrayBlackOrizz = state.getMorrisArray("BLACK","ROW");
+		int[] morrisArrayBlackVert = state.getMorrisArray("BLACK","COLUMN");
+		int[] morrisArrayEmptyOrizz = state.getMorrisArray("EMPTY", "ROW");
+		int[] morrisArrayEmptyVert = state.getMorrisArray("EMPTY", "COLUMN");
+		int[] morrisArrayWhiteOrizz = state.getMorrisArray("WHITE","ROW");
+		int[] morrisArrayWhiteVert = state.getMorrisArray("WHITE","COLUMN");
+		
+		 int twoPieceMorrisBlack = 0;
+	     int twoPieceMorrisWhite = 0;
+	        
+	     switch (player){ 
+	     
+		// se sono il bianco si guardano i neri	
+	     case WHITE:
+				// si guarda tempOrizz e tempVert se hanno indici per i quali il valore è 2.
+		        for (int i=0;i<morrisArrayBlackOrizz.length;i++){
+		            if (morrisArrayBlackOrizz[i] == 2){
+		        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+		            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+		            	if (morrisArrayEmptyOrizz[i] == 1)
+		            		return new Double(1);
+		            }
+		            if (morrisArrayBlackVert[i] == 2){
+		        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+		            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+		            	if (morrisArrayEmptyVert[i] == 1){
+		            		return new Double(1);
+		            		
+		            	}
+		            }
+		        }
+		        
+		       
+		    //Se sono il nero si guardano i bianchi
+			case BLACK:
+				for (int i=0;i<morrisArrayWhiteOrizz.length;i++){
+		            if (morrisArrayWhiteOrizz[i] == 2){
+		        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+		            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+		            	if (morrisArrayEmptyOrizz[i] == 1)
+		            		return new Double(1);
+		            }
+		            if (morrisArrayWhiteVert[i] == 2){
+		        		// se si, si va a controllare che il terzo posto di quella riga o di quella colonna sia libero.
+		            	// utilizzando l'array empty. se l'array empty in quella posizione è == 1 allora c'è un posto libero.
+		            	if (morrisArrayEmptyVert[i] == 1)
+		            		return new Double(1);
+		            }
+		        }
+				 
+				 
+					
+					
+	     
+	     }
+			
+	        
+			
+	     return 0;
+		
+	}
+	
 	public State getState() {
 		return state;
 	}
