@@ -21,7 +21,7 @@ public class MulinoClient {
 	private Socket playerSocket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private static int time=52;
+	private static int time=51;
 	
 	
 	public MulinoClient(State.Checker player) throws UnknownHostException, IOException {
@@ -137,14 +137,14 @@ public class MulinoClient {
 				System.out.println("Your Opponent did his move, and the result is: ");
 				System.out.println(currentState.toString());
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-				//actionString = in.readLine();
-				try{
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -2000, 2000, time);
-					actionString=search.makeDecision(currentState.clone());
-					System.out.println("decision: "+actionString);
-				}catch(Exception e){
-					System.out.println(e);
-				}
+				actionString = in.readLine();
+//				try{
+//					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -2000, 2000, time);
+//					actionString=search.makeDecision(currentState.clone());
+//					System.out.println("decision: "+actionString);
+//				}catch(Exception e){
+//					System.out.println(e);
+//				}
 				action = new Phase1Action();
 				action.setPutPosition(actionString.substring(0, 2));
 				if (actionString.length() == 4)
