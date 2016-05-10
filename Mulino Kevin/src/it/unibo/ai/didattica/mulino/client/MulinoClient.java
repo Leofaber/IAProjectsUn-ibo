@@ -21,7 +21,7 @@ public class MulinoClient {
 	private Socket playerSocket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private static int time=50;
+	private static int time=52;
 	
 	
 	public MulinoClient(State.Checker player) throws UnknownHostException, IOException {

@@ -39,7 +39,7 @@ public class HeuristicEvaluator {
 		// 18 * (1) + 26 * (2) + 1 * (3) + 9 * (4) + 10 * (5) + 7 * (6)
 		case FIRST:
 //			result=18*closedMorris()+26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations();
-			result=26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+10*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations()+13*blockMill();
+			result=26*numberOfMorris()+numberOfBlockedOpponentPieces()+9*numberOfPieces()+20*numberOf2PieceConfigurations()+7*numberOf3PieceConfigurations()+20*blockMill();
 			break;
 		//14 * (1) + 43 * (2) + 10 * (3) + 11 * (4) + 8 * (7) + 1086 * (8)
 		case SECOND:

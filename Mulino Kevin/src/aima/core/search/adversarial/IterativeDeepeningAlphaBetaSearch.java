@@ -7,7 +7,9 @@ import java.util.Map;
 
 import aima.core.search.framework.Metrics;
 import it.unibo.ai.didattica.mulino.client.ActionComparator;
+import it.unibo.ai.didattica.mulino.client.MulinoGame;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
+import it.unibo.ai.didattica.mulino.test.ClosedMillTester;
 
 /**
  * Implements an iterative deepening Minimax search with alpha-beta pruning and
@@ -250,7 +252,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	 */
 	protected double eval(STATE state, PLAYER player) {
 		if (game.isTerminal(state)) {
-			System.out.println("TERMINAL STATE REACHED");
+//			System.out.println("TERMINAL STATE REACHED");
 			return game.getUtility(state, player);
 		} else {
 			maxDepthReached = true;
@@ -272,3 +274,4 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		return actions;
 	}
 }
+
