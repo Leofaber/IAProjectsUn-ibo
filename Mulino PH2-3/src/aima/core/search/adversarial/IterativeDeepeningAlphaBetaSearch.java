@@ -1,5 +1,5 @@
 package aima.core.search.adversarial;
-
+ 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +39,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	private boolean maxDepthReached;
 	private long maxTime;
 	private boolean logEnabled;
+	private int maxDepth;
 
 	private Metrics metrics = new Metrics();
 
@@ -118,7 +119,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			if (!exit && results.size() == 1
 					&& isSignificantlyBetter(resultValue, secondBestValue))
 				break;
-		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue) && currDepthLimit<7);
+		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue) && currDepthLimit<maxDepth);
 		Double max= -10000000.0;
 		ACTION actionMax= null;
 		for(Map.Entry<ACTION, Double> entry : table.entrySet()){
@@ -272,6 +273,14 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	public List<ACTION> orderActions(STATE state, List<ACTION> actions, PLAYER player, int depth) {
 		
 		return actions;
+	}
+
+	public int getMaxDepth() {
+		return maxDepth;
+	}
+
+	public void setMaxDepth(int maxDepth) {
+		this.maxDepth = maxDepth;
 	}
 }
 

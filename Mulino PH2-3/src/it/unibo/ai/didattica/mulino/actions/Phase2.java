@@ -1,5 +1,5 @@
 package it.unibo.ai.didattica.mulino.actions;
-
+ 
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 
@@ -54,16 +54,16 @@ public class Phase2 {
 		// set the phase newPlayer
 		if (result.getWhiteCheckersOnBoard() == 3 || result.getBlackCheckersOnBoard() == 3)
 			result.setCurrentPhase(State.Phase.FINAL);
-		switch (checker) {
-		case WHITE :
-			result.setCurrentPlayer(Checker.BLACK);
-			break;
-		case BLACK :
-			result.setCurrentPlayer(Checker.WHITE);
-			break;
-		default:
-			throw new NullCheckerException();	
-		}
+//		switch (checker) {
+//		case WHITE :
+//			result.setCurrentPlayer(Checker.BLACK);
+//			break;
+//		case BLACK :
+//			result.setCurrentPlayer(Checker.WHITE);
+//			break;
+//		default:
+//			throw new NullCheckerException();	
+//		}
 		return result;
 	}
 	

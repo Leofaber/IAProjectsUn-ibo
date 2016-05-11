@@ -35,12 +35,12 @@ public class Phase1 {
 			case WHITE :
 				result.setWhiteCheckers(result.getWhiteCheckers()-1);
 				result.setWhiteCheckersOnBoard(result.getWhiteCheckersOnBoard()+1);
-				result.setCurrentPlayer(Checker.BLACK);
+//				result.setCurrentPlayer(Checker.BLACK);
 				break;
 			case BLACK :
 				result.setBlackCheckers(result.getBlackCheckers()-1);
 				result.setBlackCheckersOnBoard(result.getBlackCheckersOnBoard()+1);
-				result.setCurrentPlayer(Checker.WHITE);
+//				result.setCurrentPlayer(Checker.WHITE);
 				break;
 			default:
 				throw new NullCheckerException();
@@ -58,7 +58,7 @@ public class Phase1 {
 		return result;
 	}
 	
-	
+	 
 	
 	
 	private static void initialChecks(State currentState, String position, State.Checker checker)

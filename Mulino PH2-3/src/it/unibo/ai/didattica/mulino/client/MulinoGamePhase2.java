@@ -10,7 +10,7 @@ import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import aima.core.search.adversarial.Game;
 
 public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
-	private State currentState;
+	private State currentState; 
 	
 	public MulinoGamePhase2(State state) {
 		currentState=state;
@@ -139,7 +139,8 @@ public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
 		if(newState.getBoard().get(fromAction).equals(player)){
 			newState.getBoard().put(fromAction,Checker.EMPTY);
 			newState.getBoard().put(toAction, player);
-		}
+		}else
+			System.out.println("C'è qualche problema -.-");
 		
 		
 		newState.setArrayOfMorris();			

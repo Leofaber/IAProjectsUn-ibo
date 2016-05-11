@@ -3,6 +3,8 @@ package it.unibo.ai.didattica.mulino.client;
 import java.util.Comparator;
 import java.util.List;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import it.unibo.ai.didattica.mulino.test.ClosedMillTester;
@@ -12,15 +14,17 @@ import aima.core.search.adversarial.IterativeDeepeningAlphaBetaSearch;
 
 public class MulinoIterativeDeepeningAlphaBetaSearch extends
 		IterativeDeepeningAlphaBetaSearch<State,String,Checker> implements AdversarialSearch<State, String>{
-	
-	List<String> orderedActions;
-	int lastOrdering;
+	 
 
 	public MulinoIterativeDeepeningAlphaBetaSearch(
 			Game<State, String, Checker> game, double utilMin, double utilMax,
 			int time) {
 		super(game, utilMin, utilMax, time);
-		lastOrdering=4;
+		if(game instanceof MulinoGame){
+			super.setMaxDepth(7);
+		}else if(game instanceof MulinoGamePhase2){
+			super.setMaxDepth(8);
+		}
 		super.setLogEnabled(true);
 	}
 	 
