@@ -131,6 +131,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 						else
 							result.add(s);
 					}
+				break;
 			case WHITE:
 				for (String s : state.getPositions())
 					if(state.getBoard().get(s)==Checker.EMPTY){
@@ -140,6 +141,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 						else
 							result.add(s);
 					}
+				break;
 			default:
 				break;
 			}

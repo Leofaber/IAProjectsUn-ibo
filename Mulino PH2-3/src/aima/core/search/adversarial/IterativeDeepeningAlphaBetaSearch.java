@@ -118,7 +118,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			if (!exit && results.size() == 1
 					&& isSignificantlyBetter(resultValue, secondBestValue))
 				break;
-		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue));
+		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue) && currDepthLimit<7);
 		Double max= -10000000.0;
 		ACTION actionMax= null;
 		for(Map.Entry<ACTION, Double> entry : table.entrySet()){
