@@ -35,7 +35,7 @@ public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
 	@Override
 	public List<String> getActions(State state) {
 		List<String> result= new ArrayList<String>();
-		state.setArrayOfMorris();
+		state.setArrayOfMorris(); 
 		switch(getPlayer(state)){
 		case WHITE:
 			try{
