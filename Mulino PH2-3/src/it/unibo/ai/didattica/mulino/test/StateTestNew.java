@@ -13,25 +13,25 @@ import it.unibo.ai.didattica.mulino.domain.State.Checker;
 
 
 /*
- *  		 "a1"-------------------"a4"-----------------"a7" 
+ *  		 "a7"-------------------"d7"-----------------"g7" 
 		      |                      |                    |
 		      |    					 |					  |
-		 	  |		"b2"------------"b4"------------b6"   |
+		 	  |		"b7"------------"d6"------------f6"   |
 			  |      |               |              !     |
  			  |		 |		         |              |     |  
-			  |		 |	  "c3"------"c4"-----"c5"   |     |
+			  |		 |	  "c5"------"d5"-----"e5"   |     |
 			  |		 |		|                  |    |     |
 		      | 	 |		|                  |    |     |
-			 "d1"---"d2"--"d3"               "d5"--"d6"--"d7"
+			 "a4"---"b4"--"c4"               "e4"--"f4"--"g4"
 			  |      |		|                  |    |     |
 			  |		 |		|				   |    |     |
-			  |		 |	  "e3"----- "e4"-----"e5"   |     |
+			  |		 |	  "c3"----- "d3"-----"e3"   |     |
 			  |		 |				 |				|     |
 			  |		 |	 			 |	 			|     |
-			  |		"f2"------------"f4"-----------"f6"   |
+			  |		"b2"------------"d2"-----------"f2"   |
 			  |                      |                    |
 			  |						 |					  |
-			"g1"--------------------"g4"-----------------"g7"
+			"a1"--------------------"d1"-----------------"g1"
  * 
  */
 public class StateTestNew {
@@ -43,32 +43,15 @@ public class StateTestNew {
 	
 	@Before
 	public void setUp(){
-		normalState.getBoard().put("d1", Checker.BLACK);
-		normalState.getBoard().put("d2", Checker.BLACK);
-		normalState.getBoard().put("d3", Checker.BLACK);
-		
-		normalState.getBoard().put("d5", Checker.WHITE);
-		normalState.getBoard().put("d6", Checker.WHITE);
-		normalState.getBoard().put("d7", Checker.WHITE);
+
 		
 		normalState.getBoard().put("e4", Checker.BLACK);
 		normalState.getBoard().put("f4", Checker.BLACK);
 		normalState.getBoard().put("g4", Checker.BLACK);
 		
-		normalState.getBoard().put("a1", Checker.WHITE);
-		normalState.getBoard().put("g1", Checker.WHITE);
-		normalState.getBoard().put("f2", Checker.WHITE);
-		
-		normalState.getBoard().put("b4", Checker.BLACK);
-		normalState.getBoard().put("c3", Checker.BLACK);
-		normalState.getBoard().put("c5", Checker.BLACK);
-		
-		normalState.getBoard().put("b6", Checker.WHITE);
-		normalState.getBoard().put("b2", Checker.WHITE);
-		normalState.getBoard().put("c4", Checker.WHITE);
-		
-		
-		
+		normalState.getBoard().put("a1", Checker.BLACK);
+
+				
 		normalState.setArrayOfMorris();
 	}
 	
@@ -103,29 +86,35 @@ public class StateTestNew {
 //		assertEquals("Tris trovato nella colonna d5d6d7",true,normalState.isOppCheckerInTris(Checker.WHITE, "d7"));
 //	}
 
+//	@Test
+//	public void testFindMorrisInOppCheck1(){ 
+//		System.out.println(normalState.toString());
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d7"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d6"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d5"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d3"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d2"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d1"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "e4"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "f4"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "g4"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "b6"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, "c5"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, "b4"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "c4"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "b2"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "a1"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "f2"));
+//		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "g1"));
+//		
+//	}
+
 	@Test
-	public void testFindMorrisInOppCheck1(){ 
+	public void testIsDeletable() {
 		System.out.println(normalState.toString());
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d7"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d6"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d5"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d3"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d2"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d1"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "e4"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "f4"));
-		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "g4"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "b6"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, "c5"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, "b4"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "c4"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "b2"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "a1"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "f2"));
-		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "g1"));
 		
+		assertEquals("Stocastico",true,normalState.isDeletableChecker(Checker.BLACK, "a1"));
 	}
-//	
 
 //	
 //	@Test

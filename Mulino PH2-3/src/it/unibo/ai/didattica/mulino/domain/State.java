@@ -522,51 +522,21 @@ public void setArrayOfMorris() {
 	
 	public boolean isOppCheckerInTris(Checker opponent, String checkerPos){
 		
-		//esempio posizione di pedina: a1
-		
-		// INIZIALIZZAZIONE ARRAY OF MORRIS ********************
-	
-		
-		// FINE INIZIALIZZAZIONE ARRAY OF MORRIS ********************
-		
 		// RIGA APPARTENENTE ALLA MOSSA
 		int actionRow = getRowIndexFromLetter(checkerPos.charAt(1), checkerPos.charAt(0)); // c'è un numero 
 		// COLONNA APPARTIENENTE ALLA MOSSA
 		int actionCol = getColumnIndexFromLetter(checkerPos.charAt(0), checkerPos.charAt(1)); // c'è una lettera
-	
-//		System.out.println(this.toString());
-//		
-//		System.out.println("\n\nPosition: "+checkerPos+" riga: "+actionRow+ " , colonna "+actionCol);
-//		 
-// 		System.out.println("ROW ARRAY");
-//		for(int i=0;i<rowArray.length;i++){
-//			System.out.println("Indice: "+i+" Valore: "+rowArray[i]);
-//		}
-//		System.out.println("COL ARRAY");
-//		for(int i=0;i<colArray.length;i++){
-//			System.out.println("Indice: "+i+" Valore: "+colArray[i]);
-//		}
 		
- 		// se la riga contiene un tris e la mossa appartiene alla riga
 		if(opponent == Checker.BLACK && rowMorrisBlack[actionRow] == 3 ){
-	//		System.out.println("Trovato un tris nella riga %"+actionRow+"% *true");
  			return true;
 		}
- 		// se la colonna contiene un tris e la mossa appartiene alla colonna
 		if(opponent == Checker.BLACK && columnMorrisBlack[actionCol] == 3){
-	//		System.out.println("Trovato un tris nella colonna %"+actionCol+"% *true");
 			return true;
 		}
-		
-
- 		// se la riga contiene un tris e la mossa appartiene alla riga
 		if(opponent == Checker.WHITE && rowMorrisWhite[actionRow] == 3 ){
-	//		System.out.println("Trovato un tris nella riga %"+actionRow+"% *true");
  			return true;
 		}
- 		// se la colonna contiene un tris e la mossa appartiene alla colonna
 		if(opponent == Checker.WHITE && columnMorrisWhite[actionCol] == 3){
-	//		System.out.println("Trovato un tris nella colonna %"+actionCol+"% *true");
 			return true;
 		}
  		return false;
@@ -620,25 +590,50 @@ public void setArrayOfMorris() {
 	}
 	
 	// ELENCO DI POSIZIONI DI PEDINE AVVERSARIE CHE POSSO TOGLIERE
-	// se non ci sono tris posso toglierle tutte
-	// se ci sono tris, ma ci sono pedine fuori dal tris, posso togliere solo quelle fuori dal tris
-	// se ci sono solo tris, e nessuna pedina fuori, posso togliere quelle in tris
-	/*public boolean getDeletableChecker(Checker checky, String checkyPos) {
-		// controllo se ci sono tris, se non ci sono restituisco true
-		if (getNumberOfMorris(checky) == 0)
+		// se non ci sono tris posso toglierle tutte
+		// se ci sono tris, ma ci sono pedine fuori dal tris, posso togliere solo quelle fuori dal tris
+		// se ci sono solo tris, e nessuna pedina fuori, posso togliere quelle in tris
+		public boolean isDeletableChecker(Checker checky, String checkyPos) {
+			// controllo se ci sono tris, se non ci sono restituisco true
+			if (getNumberOfMorris(checky) == 0)
+				return true;
+			
+			char first = checkyPos.charAt(0);
+			char second = checkyPos.charAt(1);
+			switch (checky) {
+				case BLACK: 
+					if (rowMorrisBlack[getRowIndexFromLetter(second, first)] == 3
+					|| columnMorrisBlack[getColumnIndexFromLetter(first, second)] == 3) {
+						for (String s : this.positions) {
+							if (getBoard().get(s) == checky)
+								if (!isOppCheckerInTris(checky,s))
+									return false;
+						}
+					}
+					else 
+						return true;
+					break;
+				case WHITE: 
+					if (rowMorrisWhite[getRowIndexFromLetter(second, first)] == 3
+					|| columnMorrisWhite[getColumnIndexFromLetter(first, second)] == 3){
+						for (String s : this.positions) {
+							if (getBoard().get(s) == checky)
+								if (!isOppCheckerInTris(checky,s))
+									return false;
+						}
+					}
+					else 
+						return true;		
+					break;
+				default:
+					System.out.println("ERRORE NEL SWITCH GetDeletableChecker");
+					break;
+			}
+			
+			// se non ho già restituito prima un true/false
+			// allora ci sono solo dei tris e quindi posso togliere la pedina anche se è in un tris
+			
 			return true;
-		
-		// controllo se ci sono tris E pedine fuori dai tris
-		char first = checkyPos.charAt(0);
-		char second = checkyPos.charAt(1);
-		switch (checky) {
-		case BLACK: if (rowMorrisBlack;
-		columnMorrisBlack;
-		case WHITE: rowMorrisWhite;
-		columnMorrisWhite;
-		
-	
-		return false;
-	}*/
+		}
 	
 }
