@@ -105,11 +105,25 @@ public class StateTestNew {
 
 	@Test
 	public void testFindMorrisInOppCheck1(){ 
-		normalState.toString();
-		for (String pos : normalState.positions) {
-			System.out.print("YO ;) ");
-			assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, pos));
-		}
+		System.out.println(normalState.toString());
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d7"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d6"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.WHITE, "d5"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d3"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d2"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "d1"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "e4"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "f4"));
+		assertEquals("Tris trovato nella colonna d1d2d3",true,normalState.isOppCheckerInTris(Checker.BLACK, "g4"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "b6"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, "c5"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, "b4"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "c4"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "b2"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "a1"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "f2"));
+		assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.WHITE, "g1"));
+		
 	}
 //	
 

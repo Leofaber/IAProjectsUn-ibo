@@ -135,10 +135,10 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 								if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
 								
 									result.add(s+oppCheck);
-								else{
-									//System.out.println("POSIZIONE IN TRIS");
-									result.add(s);
-								}
+//								else{
+//									//System.out.println("POSIZIONE IN TRIS");
+//									result.add(s);
+//								}
 						}else
 							result.add(s);
 					}
@@ -152,8 +152,8 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 								if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
 									result.add(s+oppCheck);
 								 
-								else
-									result.add(s);
+//								else
+//									result.add(s);
 						}else
 							result.add(s);
 					}

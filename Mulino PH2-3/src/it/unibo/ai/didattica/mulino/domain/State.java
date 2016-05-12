@@ -627,7 +627,7 @@ public void setArrayOfMorris() {
 	// se non ci sono tris posso toglierle tutte
 	// se ci sono tris, ma ci sono pedine fuori dal tris, posso togliere solo quelle fuori dal tris
 	// se ci sono solo tris, e nessuna pedina fuori, posso togliere quelle in tris
-	public boolean getDeletableChecker(Checker checky, String checkyPos) {
+	/*public boolean getDeletableChecker(Checker checky, String checkyPos) {
 		// controllo se ci sono tris, se non ci sono restituisco true
 		if (getNumberOfMorris(checky) == 0)
 			return true;
@@ -643,6 +643,6 @@ public void setArrayOfMorris() {
 		
 	
 		return false;
-	}
+	}*/
 	
 }
