@@ -77,7 +77,17 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		long startTime = System.currentTimeMillis();
 		boolean exit = false;
 		HashMap<ACTION, Double> table;
+		
+		HashMap<ACTION, Double> previousDepthTable = new HashMap<>();
+		HashMap<ACTION, Double> currentDepthTable = new HashMap<>();
+		//table old
+		//table current
 		do {
+			previousDepthTable = currentDepthTable;
+			currentDepthTable =new HashMap<>();
+//			table old = table current
+//			table current = new hashMap()
+			
 			table= new HashMap<>();
 			incrementDepthLimit();
 			maxDepthReached = false;
@@ -95,6 +105,8 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				double value = minValue(game.getResult(state, action), player,
 						Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, 1);
 				table.put(action, value);
+				// LOLOL
+				currentDepthTable.put(action, value);
 				if (logEnabled)
 					logText.append(action + "->" + value + " ");
 				if (value >= newResultValue) {
@@ -116,20 +128,50 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				results = newResults;
 				resultValue = newResultValue;
 			}
-			if (!exit && results.size() == 1
-					&& isSignificantlyBetter(resultValue, secondBestValue))
-				break;
+//			if (!exit && results.size() == 1 && isSignificantlyBetter(resultValue, secondBestValue))
+//				break;
 		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue) && currDepthLimit<maxDepth);
 		Double max= -10000000.0;
 		ACTION actionMax= null;
+		
+		
 		for(Map.Entry<ACTION, Double> entry : table.entrySet()){
 			if(entry.getValue()>max){
 				max=entry.getValue();
 				actionMax=entry.getKey();
 			}
 		}
-//		return results.get(0);
-		return actionMax;
+		// cerca il massimo tra la old e la current
+		ACTION previousActionMax = null;
+		double previousMaxValue = Double.NEGATIVE_INFINITY;
+		for(Map.Entry<ACTION, Double> entry : previousDepthTable.entrySet()){
+			if(entry.getValue()>previousMaxValue){
+				previousMaxValue=entry.getValue();
+				previousActionMax=entry.getKey();
+			}
+		}
+		
+		ACTION currentActionMax = null;
+		double currentMaxValue = Double.NEGATIVE_INFINITY;
+		for(Map.Entry<ACTION, Double> entry : currentDepthTable.entrySet()){
+			if(entry.getValue()>currentMaxValue){
+				currentMaxValue=entry.getValue();
+				currentActionMax=entry.getKey();
+			}
+		}
+		System.out.println("Miglior azione depth precedente: "+previousActionMax+" con valore: "+previousMaxValue);
+		System.out.println("Miglior azione depth corrente: "+currentActionMax+" con valore: "+currentMaxValue);
+		if(previousMaxValue > currentMaxValue){
+			 System.out.println("Azione migliore: "+previousActionMax+" con valore: "+previousMaxValue);
+			 return previousActionMax;
+		}else{
+			 System.out.println("Azione migliore: "+currentActionMax+" con valore: "+currentMaxValue);
+			 return currentActionMax;
+		}
+		
+		// SI PUò PENSARE DI RANDOMIZZARE LE MOSSE A PARI VALORE, TANTO PER RENDERE FRIZZANTEIL GIOCO
+		//		return results.get(0);
+		//return actionMax;
 	}
 
 	public double maxValue(STATE state, PLAYER player, double alpha,
