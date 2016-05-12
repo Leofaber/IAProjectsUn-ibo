@@ -589,18 +589,18 @@ public void setArrayOfMorris() {
 		// LA MOSSA APPARTIENE ALLA COLONNA
 		int actionCol = getColumnIndexFromLetter(checkerPos.charAt(0)); // c'è una lettera
 	
-		System.out.println(this.toString());
-		
-		System.out.println("\n\nPosition: "+checkerPos+" riga: "+actionRow+ " , colonna "+actionCol);
-		 
- 		System.out.println("ROW ARRAY");
-		for(int i=0;i<rowArray.length;i++){
-			System.out.println("Indice: "+i+" Valore: "+rowArray[i]);
-		}
-		System.out.println("COL ARRAY");
-		for(int i=0;i<colArray.length;i++){
-			System.out.println("Indice: "+i+" Valore: "+colArray[i]);
-		}
+//		System.out.println(this.toString());
+//		
+//		System.out.println("\n\nPosition: "+checkerPos+" riga: "+actionRow+ " , colonna "+actionCol);
+//		 
+// 		System.out.println("ROW ARRAY");
+//		for(int i=0;i<rowArray.length;i++){
+//			System.out.println("Indice: "+i+" Valore: "+rowArray[i]);
+//		}
+//		System.out.println("COL ARRAY");
+//		for(int i=0;i<colArray.length;i++){
+//			System.out.println("Indice: "+i+" Valore: "+colArray[i]);
+//		}
 		
  		// se la riga contiene un tris e la mossa appartiene alla riga
 		if(rowArray[actionRow] == 3 ){
