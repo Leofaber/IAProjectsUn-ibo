@@ -132,7 +132,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 						if(closedMill(state, s, Checker.BLACK)){
 							for (String oppCheck : opponentCheckers(state, Checker.WHITE))
 								//se opcheck è in un tris (avversario) non può essere rimossa
-								if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
+								if(state.isDeletableChecker(Checker.WHITE,oppCheck))
 								
 									result.add(s+oppCheck);
 //								else{
@@ -149,7 +149,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 						if(closedMill(state, s, Checker.WHITE)){
 							for (String oppCheck : opponentCheckers(state, Checker.BLACK))
 								//se opcheck è in un tris (avversario) non può essere rimossa
-								if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
+								if(state.isDeletableChecker(Checker.BLACK,oppCheck))
 									result.add(s+oppCheck);
 								 
 //								else

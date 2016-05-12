@@ -45,7 +45,7 @@ public class MulinoGamePhase3 implements Game<State, String, State.Checker>{
 							if(state.getBoard().get(adjacentPosition)==Checker.EMPTY)
 								if(closedMill(state,myChecker+adjacentPosition,Checker.WHITE)){
 									for(String oppCheck: playerCheckers(state,Checker.BLACK))
-										if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
+										if(state.isDeletableChecker(Checker.BLACK,oppCheck))
 											result.add(myChecker+adjacentPosition+oppCheck);								
 								}else
 									result.add(myChecker+adjacentPosition);	
@@ -56,7 +56,7 @@ public class MulinoGamePhase3 implements Game<State, String, State.Checker>{
 							if(state.getBoard().get(position)==Checker.EMPTY)
 								if(closedMill(state,myChecker+position,Checker.WHITE)){
 									for(String oppCheck: playerCheckers(state,Checker.BLACK))
-										if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
+										if(state.isDeletableChecker(Checker.BLACK,oppCheck))
 											result.add(myChecker+position+oppCheck);								
 								}else
 									result.add(myChecker+position);
@@ -78,7 +78,7 @@ public class MulinoGamePhase3 implements Game<State, String, State.Checker>{
 							if(state.getBoard().get(adjacentPosition)==Checker.EMPTY)
 								if(closedMill(state,myChecker+adjacentPosition,Checker.BLACK)){
 									for(String oppCheck: playerCheckers(state,Checker.WHITE))
-										if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
+										if(state.isDeletableChecker(Checker.WHITE,oppCheck))
 											result.add(myChecker+adjacentPosition+oppCheck);
 								}else
 									result.add(myChecker+adjacentPosition);
@@ -89,7 +89,7 @@ public class MulinoGamePhase3 implements Game<State, String, State.Checker>{
 							if(state.getBoard().get(position)==Checker.EMPTY)
 								if(closedMill(state,myChecker+position,Checker.BLACK)){
 									for(String oppCheck: playerCheckers(state,Checker.WHITE))
-										if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
+										if(state.isDeletableChecker(Checker.WHITE,oppCheck))
 											result.add(myChecker+position+oppCheck);								
 								}else
 									result.add(myChecker+position);
