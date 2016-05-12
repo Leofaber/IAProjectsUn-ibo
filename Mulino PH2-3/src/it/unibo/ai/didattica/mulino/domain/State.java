@@ -2,6 +2,7 @@ package it.unibo.ai.didattica.mulino.domain;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import it.unibo.ai.didattica.mulino.customExceptions.InvalidPositionException;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
@@ -485,6 +486,47 @@ public void setArrayOfMorris() {
 			return new int[] {};
 		}
 	}
+	
+	public int getColumnIndexFromLetter(char letter){
+		switch(letter){
+			case 'a':
+				return 1;
+			case 'b':
+				return 2;
+			case 'c':
+				return 3;
+			case 'd':
+				return 4;
+			case 'e':
+				return 5;
+			case 'f':
+				return 6;
+			case 'g':
+				return 7;
+		 
+		}
+		return 0;
+	}
+	public int getRowIndexFromLetter(char letter){
+		switch(letter){
+			case '1':
+				return 0;
+			case '2':
+				return 1;
+			case '3':
+				return 2;
+			case '4':
+				return 3;
+			case '5':
+				return 4;
+			case '6':
+				return 5;
+			case '7':
+				return 6;
+		 
+		}
+		return 0;
+	}
 /*
  *  public int[] rowMorrisBlack = new int[8];
 	public int[] columnMorrisBlack = new int[8];
@@ -517,4 +559,58 @@ public void setArrayOfMorris() {
 			
 	    }
 	}
+	
+	public boolean isOppCheckerInTris(Checker opponent, String checkerPos){
+		
+		//esempio posizione di pedina: a1
+		
+		// INIZIALIZZAZIONE ARRAY OF MORRIS ********************
+		int[] rowArray;
+		int[] colArray;
+		switch(opponent){
+			case BLACK:
+				rowArray = getMorrisArray("BLACK", "ROW");
+				colArray =  getMorrisArray("BLACK", "COL");
+				break;
+			 
+			case WHITE:
+				rowArray = getMorrisArray("WHITE", "ROW");
+				colArray =  getMorrisArray("WHITE", "COL");
+				break;
+			default:
+				rowArray = new int[0];
+				colArray = new int[0];
+				break;
+		}
+		// FINE INIZIALIZZAZIONE ARRAY OF MORRIS ********************
+		
+		// LA MOSSA APPARTIENE ALLA RIGA
+		int actionRow = getRowIndexFromLetter(checkerPos.charAt(1)); // c'è un numero 
+		// LA MOSSA APPARTIENE ALLA COLONNA
+		int actionCol = getColumnIndexFromLetter(checkerPos.charAt(0)); // c'è una lettera
+	
+		System.out.println(this.toString());
+		
+		System.out.println("\n\nPosition: "+checkerPos+" riga: "+actionRow+ " , colonna "+actionCol);
+		 
+ 		System.out.println("ROW ARRAY");
+		for(int i=0;i<rowArray.length;i++){
+			System.out.println("Indice: "+i+" Valore: "+rowArray[i]);
+		}
+		System.out.println("COL ARRAY");
+		for(int i=0;i<colArray.length;i++){
+			System.out.println("Indice: "+i+" Valore: "+colArray[i]);
+		}
+		
+ 		// se la riga contiene un tris e la mossa appartiene alla riga
+		if(rowArray[actionRow] == 3 ){
+ 			 return true;
+		}
+ 		// se la colonna contiene un tris e la mossa appartiene alla colonna
+		if(colArray[actionCol] == 3){
+			 return true;
+		}
+ 		return false;
+	}
+	
 }

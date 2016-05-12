@@ -121,24 +121,40 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 	@Override
 	public List<String> getActions(State state) {
 		List<String> result= new ArrayList<String>();
-			switch (getPlayer(state)){
+  		
+		state.setArrayOfMorris();
+	 
+		
+		switch (getPlayer(state)){
 			case BLACK:
 				for (String s : state.getPositions())
 					if(state.getBoard().get(s)==Checker.EMPTY){
-						if(closedMill(state, s, Checker.BLACK))
+						if(closedMill(state, s, Checker.BLACK)){
 							for (String oppCheck : opponentCheckers(state, Checker.WHITE))
-								result.add(s+oppCheck);
-						else
+								//se opcheck è in un tris (avversario) non può essere rimossa
+								if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
+								
+									result.add(s+oppCheck);
+								else{
+									System.out.println("POSIZIONE IN TRIS");
+									result.add(s);
+								}
+						}else
 							result.add(s);
 					}
 				break;
 			case WHITE:
 				for (String s : state.getPositions())
 					if(state.getBoard().get(s)==Checker.EMPTY){
-						if(closedMill(state, s, Checker.WHITE))
+						if(closedMill(state, s, Checker.WHITE)){
 							for (String oppCheck : opponentCheckers(state, Checker.BLACK))
-								result.add(s+oppCheck);
-						else
+								//se opcheck è in un tris (avversario) non può essere rimossa
+								if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
+									result.add(s+oppCheck);
+								 
+								else
+									result.add(s);
+						}else
 							result.add(s);
 					}
 				break;
@@ -194,7 +210,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 
 	//	System.out.println("NEW NUM MORRIS: "+ newNumMorris);
 		
-		
+ 		
 		return newNumMorris-oldNumMorris>0;
 	}
 	
