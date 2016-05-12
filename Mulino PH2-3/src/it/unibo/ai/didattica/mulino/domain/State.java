@@ -487,52 +487,6 @@ public void setArrayOfMorris() {
 		}
 	}
 	
-	public int getColumnIndexFromLetter(char letter, char number){
-		switch(letter){
-			case 'a':
-				return 0;
-			case 'b':
-				return 1;
-			case 'c':
-				return 2;
-			case 'd':
-				if (number < 4)
-					return 3;
-				else 
-					return 4;
-			case 'e':
-				return 5;
-			case 'f':
-				return 6;
-			case 'g':
-				return 7;
-		 
-		}
-		return 0;
-	}
-	public int getRowIndexFromLetter(char number, char letter){
-		switch(number){
-			case '1':
-				return 0;
-			case '2':
-				return 1;
-			case '3':
-				return 2;
-			case '4':
-				if (letter < 'd')
-					return 3;
-				else
-					return 4;
-			case '5':
-				return 5;
-			case '6':
-				return 6;
-			case '7':
-				return 7;
-		 
-		}
-		return 0;
-	}
 /*
  *  public int[] rowMorrisBlack = new int[8];
 	public int[] columnMorrisBlack = new int[8];
@@ -577,11 +531,12 @@ public void setArrayOfMorris() {
 			case BLACK:
 				rowArray = getMorrisArray("BLACK", "ROW");
 				colArray =  getMorrisArray("BLACK", "COL");
+		//		System.out.println("Passati array black");
 				break;
-			 
 			case WHITE:
 				rowArray = getMorrisArray("WHITE", "ROW");
 				colArray =  getMorrisArray("WHITE", "COL");
+		//		System.out.println("Passati array white");
 				break;
 			default:
 				rowArray = new int[0];
@@ -610,13 +565,84 @@ public void setArrayOfMorris() {
 		
  		// se la riga contiene un tris e la mossa appartiene alla riga
 		if(rowArray[actionRow] == 3 ){
- 			 return true;
+	//		System.out.println("Trovato un tris nella riga %"+actionRow+"% *true");
+ 			return true;
 		}
  		// se la colonna contiene un tris e la mossa appartiene alla colonna
 		if(colArray[actionCol] == 3){
-			 return true;
+	//		System.out.println("Trovato un tris nella colonna %"+actionCol+"% *true");
+			return true;
 		}
  		return false;
+	}
+	
+	public int getColumnIndexFromLetter(char letter, char number){
+		switch(letter){
+			case 'a':
+				return 0;
+			case 'b':
+				return 1;
+			case 'c':
+				return 2;
+			case 'd':
+				if (number < '4')
+					return 3;
+				else 
+					return 4;
+			case 'e':
+				return 5;
+			case 'f':
+				return 6;
+			case 'g':
+				return 7;
+		 
+		}
+		return 0;
+	}
+	
+	public int getRowIndexFromLetter(char number, char letter){
+		switch(number){
+			case '1':
+				return 0;
+			case '2':
+				return 1;
+			case '3':
+				return 2;
+			case '4':
+				if (letter < 'd')
+					return 3;
+				else
+					return 4;
+			case '5':
+				return 5;
+			case '6':
+				return 6;
+			case '7':
+				return 7;
+		}
+		return 0;
+	}
+	
+	// ELENCO DI POSIZIONI DI PEDINE AVVERSARIE CHE POSSO TOGLIERE
+	// se non ci sono tris posso toglierle tutte
+	// se ci sono tris, ma ci sono pedine fuori dal tris, posso togliere solo quelle fuori dal tris
+	// se ci sono solo tris, e nessuna pedina fuori, posso togliere quelle in tris
+	public boolean getDeletableChecker(Checker checky, String checkyPos) {
+		// controllo se ci sono tris, se non ci sono restituisco true
+		if (getNumberOfMorris(checky) == 0)
+			return true;
+		
+		// controllo se ci sono tris E pedine fuori dai tris
+		char first = checkyPos.charAt(0);
+		char second = checkyPos.charAt(1);
+		switch (checky) {
+		case BLACK: if (rowMorrisBlack;
+		columnMorrisBlack;
+		case WHITE: rowMorrisWhite;
+		columnMorrisWhite;
+		
+	
+		return false;
 	}
 	
 }
