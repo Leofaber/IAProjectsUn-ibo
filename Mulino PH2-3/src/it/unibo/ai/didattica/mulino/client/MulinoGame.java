@@ -136,7 +136,7 @@ public class MulinoGame implements Game<State, String, State.Checker> {
 								
 									result.add(s+oppCheck);
 								else{
-									System.out.println("POSIZIONE IN TRIS");
+									//System.out.println("POSIZIONE IN TRIS");
 									result.add(s);
 								}
 						}else
