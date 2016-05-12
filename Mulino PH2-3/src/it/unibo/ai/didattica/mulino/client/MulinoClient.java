@@ -17,6 +17,7 @@ import aima.core.search.adversarial.IterativeDeepeningAlphaBetaSearch;
 import it.unibo.ai.didattica.mulino.actions.Action;
 import it.unibo.ai.didattica.mulino.actions.Phase1Action;
 import it.unibo.ai.didattica.mulino.actions.Phase2Action;
+import it.unibo.ai.didattica.mulino.actions.PhaseFinalAction;
 import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import it.unibo.ai.didattica.mulino.domain.State.Phase;
@@ -87,6 +88,7 @@ public class MulinoClient {
 		String actionString = "";
 		Phase1Action action;
 		Phase2Action action2;
+		PhaseFinalAction action3;
 		State currentState = null;
 		
 		if (player == State.Checker.WHITE) {
@@ -153,6 +155,36 @@ public class MulinoClient {
 				System.out.println(currentState.toString());
 			}
 			System.out.println("CLIENT W --> FASE 2 TERMINATA");
+			while(currentState.getCurrentPhase()==Phase.FINAL) {
+				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
+				
+				try{	
+					currentState.setCurrentPlayer(Checker.WHITE);
+					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(currentState), -2000, 2000, time);
+					actionString=search.makeDecision(currentState.clone());
+					System.out.println("decision: "+actionString);
+				}catch(Exception e){
+					System.out.println(e);
+				}
+//				actionString = in.readLine();
+				
+				action3=new PhaseFinalAction();
+				action3.setFrom(actionString.substring(0, 2));
+				action3.setTo(actionString.substring(2, 4));
+				if(actionString.length()==6)
+					action3.setRemoveOpponentChecker(actionString.substring(4, 6));
+				else
+					action3.setRemoveOpponentChecker(null);		
+				client.write(action3);
+				currentState = client.read();
+				System.out.println("Effect of your move: ");
+				System.out.println(currentState.toString());
+				System.out.println("Waiting for your opponent move... ");
+				currentState = client.read();
+				System.out.println("Your Opponent did his move, and the result is: ");
+				System.out.println(currentState.toString());
+				
+			}
 		}
 		else { 
 			MulinoClient client = new MulinoClient(State.Checker.BLACK);
@@ -226,6 +258,33 @@ public class MulinoClient {
 				System.out.println(currentState.toString());	
 			}
 			System.out.println("CLIENT B --> FASE 2 TERMINATA");
+			while(currentState.getCurrentPhase()==Phase.FINAL){
+				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
+//				actionString = in.readLine();
+				try{
+					currentState.setCurrentPlayer(Checker.BLACK);
+					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(currentState), -2000, 2000, time);
+					actionString=search.makeDecision(currentState.clone());
+					System.out.println("decision: "+actionString);
+				}catch(Exception e){
+					System.out.println(e);
+				}
+				
+				action3=new PhaseFinalAction();
+				action3.setFrom(actionString.substring(0, 2));
+				action3.setTo(actionString.substring(2, 4));
+				if(actionString.length()==6)
+					action3.setRemoveOpponentChecker(actionString.substring(4, 6));
+				else
+					action3.setRemoveOpponentChecker(null);	
+				
+				
+				client.write(action3);
+				currentState = client.read();
+				System.out.println("Effect of your move: ");
+				System.out.println(currentState.toString());
+				
+			}
 		}
 		
 	}

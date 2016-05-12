@@ -137,12 +137,4 @@ public class Engine {
 		}
 	}
 	
-	private List<String> opponentCheckers(State state, Checker player){
-		List<String> result = new ArrayList<String>();
-		for(Entry<String,Checker> e: state.getBoard().entrySet())
-			if(e.getValue()==player)
-				result.add(e.getKey());
-		return result;
-	}
-	
 }
