@@ -43,7 +43,10 @@ public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
 						if(state.getBoard().get(adjacentPosition)==Checker.EMPTY)
 							if(closedMill(state,myChecker+adjacentPosition,Checker.WHITE))
 								for(String oppCheck: playerCheckers(state,Checker.BLACK))
-									result.add(myChecker+adjacentPosition+oppCheck);
+									if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
+										result.add(myChecker+adjacentPosition+oppCheck);
+									else
+										result.add(myChecker+adjacentPosition);
 							else
 								result.add(myChecker+adjacentPosition);
 			}catch(InvalidPositionException ex){
@@ -57,7 +60,10 @@ public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
 						if(state.getBoard().get(adjacentPosition)==Checker.EMPTY)
 							if(closedMill(state,myChecker+adjacentPosition,Checker.BLACK))
 								for(String oppCheck: playerCheckers(state,Checker.WHITE))
-									result.add(myChecker+adjacentPosition+oppCheck);
+									if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
+										result.add(myChecker+adjacentPosition+oppCheck);
+									else
+										result.add(myChecker+adjacentPosition);
 							else
 								result.add(myChecker+adjacentPosition);
 								

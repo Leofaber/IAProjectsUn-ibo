@@ -325,33 +325,33 @@ public void setArrayOfMorris() {
 						else
 							return columnEmpty;
 		default:
+						//non dovrei mai arrivarci
 						System.out.println("[getMorrisArray] ERRORE");
+						return null;
 		}
-		//non dovrei mai arrivarci
-		return null;
 	}
 	
 	
 	/*
-	 *  		 "a1"-------------------"a4"-----------------"a7" 
+	 *  		 "a7"-------------------"d7"-----------------"g7" 
 			      |                      |                    |
 			      |    					 |					  |
-			 	  |		"b2"------------"b4"------------b6"   |
+			 	  |		"b7"------------"d6"------------f6"   |
 				  |      |               |              !     |
 	 			  |		 |		         |              |     |  
-				  |		 |	  "c3"------"c4"-----"c5"   |     |
+				  |		 |	  "c5"------"d5"-----"e5"   |     |
 				  |		 |		|                  |    |     |
 			      | 	 |		|                  |    |     |
-				 "d1"---"d2"--"d3"               "d5"--"d6"--"d7"
+				 "a4"---"b4"--"c4"               "e4"--"f4"--"g4"
 				  |      |		|                  |    |     |
 				  |		 |		|				   |    |     |
-				  |		 |	  "e3"----- "e4"-----"e5"   |     |
+				  |		 |	  "c3"----- "d3"-----"e3"   |     |
 				  |		 |				 |				|     |
 				  |		 |	 			 |	 			|     |
-				  |		"f2"------------"f4"-----------"f6"   |
+				  |		"b2"------------"d2"-----------"f2"   |
 				  |                      |                    |
 				  |						 |					  |
-				"g1"--------------------"g4"-----------------"g7"
+				"a1"--------------------"d1"-----------------"g1"
 	 * 
 	 */
 	
@@ -487,16 +487,19 @@ public void setArrayOfMorris() {
 		}
 	}
 	
-	public int getColumnIndexFromLetter(char letter){
+	public int getColumnIndexFromLetter(char letter, char number){
 		switch(letter){
 			case 'a':
-				return 1;
+				return 0;
 			case 'b':
-				return 2;
+				return 1;
 			case 'c':
-				return 3;
+				return 2;
 			case 'd':
-				return 4;
+				if (number < 4)
+					return 3;
+				else 
+					return 4;
 			case 'e':
 				return 5;
 			case 'f':
@@ -507,8 +510,8 @@ public void setArrayOfMorris() {
 		}
 		return 0;
 	}
-	public int getRowIndexFromLetter(char letter){
-		switch(letter){
+	public int getRowIndexFromLetter(char number, char letter){
+		switch(number){
 			case '1':
 				return 0;
 			case '2':
@@ -516,13 +519,16 @@ public void setArrayOfMorris() {
 			case '3':
 				return 2;
 			case '4':
-				return 3;
+				if (letter < 'd')
+					return 3;
+				else
+					return 4;
 			case '5':
-				return 4;
-			case '6':
 				return 5;
-			case '7':
+			case '6':
 				return 6;
+			case '7':
+				return 7;
 		 
 		}
 		return 0;
@@ -584,10 +590,10 @@ public void setArrayOfMorris() {
 		}
 		// FINE INIZIALIZZAZIONE ARRAY OF MORRIS ********************
 		
-		// LA MOSSA APPARTIENE ALLA RIGA
-		int actionRow = getRowIndexFromLetter(checkerPos.charAt(1)); // c'è un numero 
-		// LA MOSSA APPARTIENE ALLA COLONNA
-		int actionCol = getColumnIndexFromLetter(checkerPos.charAt(0)); // c'è una lettera
+		// RIGA APPARTENENTE ALLA MOSSA
+		int actionRow = getRowIndexFromLetter(checkerPos.charAt(1), checkerPos.charAt(0)); // c'è un numero 
+		// COLONNA APPARTIENENTE ALLA MOSSA
+		int actionCol = getColumnIndexFromLetter(checkerPos.charAt(0), checkerPos.charAt(1)); // c'è una lettera
 	
 //		System.out.println(this.toString());
 //		
