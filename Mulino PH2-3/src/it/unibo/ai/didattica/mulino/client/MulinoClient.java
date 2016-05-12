@@ -29,7 +29,7 @@ public class MulinoClient {
 	private Socket playerSocket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private static int time=52;
+	private static int time=45;
 	
 	
 	public MulinoClient(State.Checker player) throws UnknownHostException, IOException {
@@ -98,15 +98,15 @@ public class MulinoClient {
 			BufferedReader in = new BufferedReader( new InputStreamReader(System.in));
 			while (currentState.getCurrentPhase()==Phase.FIRST) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-				try{				
-					currentState.setCurrentPlayer(Checker.WHITE); 
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -2000, 2000, time);
-					actionString=search.makeDecision(currentState.clone());
-					System.out.println("decision: "+actionString);
-				}catch(Exception e){
-					System.out.println(e);
-				}
-//				actionString = in.readLine();
+//				try{				
+//					currentState.setCurrentPlayer(Checker.WHITE); 
+//					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -2000, 2000, time);
+//					actionString=search.makeDecision(currentState.clone());
+//					System.out.println("decision: "+actionString);
+//				}catch(Exception e){
+//					System.out.println(e);
+//				}
+				actionString = in.readLine();
 				
 				action = new Phase1Action();
 				action.setPutPosition(actionString.substring(0, 2));
@@ -127,15 +127,15 @@ public class MulinoClient {
 			while(currentState.getCurrentPhase()==Phase.SECOND) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
 				
-				try{	
-					currentState.setCurrentPlayer(Checker.WHITE);
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(currentState), -2000, 2000, time);
-					actionString=search.makeDecision(currentState.clone());
-					System.out.println("decision: "+actionString);
-				}catch(Exception e){
-					System.out.println(e);
-				}
-				
+//				try{	
+//					currentState.setCurrentPlayer(Checker.WHITE);
+//					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(currentState), -2000, 2000, time);
+//					actionString=search.makeDecision(currentState.clone());
+//					System.out.println("decision: "+actionString);
+//				}catch(Exception e){
+//					System.out.println(e);
+//				}
+				actionString = in.readLine();
 				action2=new Phase2Action();
 				action2.setFrom(actionString.substring(0, 2));
 				action2.setTo(actionString.substring(2, 4));

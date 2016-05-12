@@ -41,13 +41,12 @@ public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
 				for (String myChecker : playerCheckers(state, Checker.WHITE))
 					for(String adjacentPosition : state.getAdjacentPositions(myChecker))
 						if(state.getBoard().get(adjacentPosition)==Checker.EMPTY)
-							if(closedMill(state,myChecker+adjacentPosition,Checker.WHITE))
+							if(closedMill(state,myChecker+adjacentPosition,Checker.WHITE)){
 								for(String oppCheck: playerCheckers(state,Checker.BLACK))
 									if(!state.isOppCheckerInTris(Checker.BLACK,oppCheck))
 										result.add(myChecker+adjacentPosition+oppCheck);
-									else
-										result.add(myChecker+adjacentPosition);
-							else
+							
+							}else
 								result.add(myChecker+adjacentPosition);
 			}catch(InvalidPositionException ex){
 				System.out.println("Eccezione di Leo: "+ex);
@@ -58,13 +57,11 @@ public class MulinoGamePhase2 implements Game<State, String, State.Checker>{
 				for (String myChecker : playerCheckers(state, Checker.BLACK))
 					for(String adjacentPosition : state.getAdjacentPositions(myChecker))
 						if(state.getBoard().get(adjacentPosition)==Checker.EMPTY)
-							if(closedMill(state,myChecker+adjacentPosition,Checker.BLACK))
+							if(closedMill(state,myChecker+adjacentPosition,Checker.BLACK)){
 								for(String oppCheck: playerCheckers(state,Checker.WHITE))
 									if(!state.isOppCheckerInTris(Checker.WHITE,oppCheck))
 										result.add(myChecker+adjacentPosition+oppCheck);
-									else
-										result.add(myChecker+adjacentPosition);
-							else
+							}else
 								result.add(myChecker+adjacentPosition);
 								
 			}catch(InvalidPositionException ex){
