@@ -525,24 +525,8 @@ public void setArrayOfMorris() {
 		//esempio posizione di pedina: a1
 		
 		// INIZIALIZZAZIONE ARRAY OF MORRIS ********************
-		int[] rowArray;
-		int[] colArray;
-		switch(opponent){
-			case BLACK:
-				rowArray = getMorrisArray("BLACK", "ROW");
-				colArray =  getMorrisArray("BLACK", "COL");
-		//		System.out.println("Passati array black");
-				break;
-			case WHITE:
-				rowArray = getMorrisArray("WHITE", "ROW");
-				colArray =  getMorrisArray("WHITE", "COL");
-		//		System.out.println("Passati array white");
-				break;
-			default:
-				rowArray = new int[0];
-				colArray = new int[0];
-				break;
-		}
+	
+		
 		// FINE INIZIALIZZAZIONE ARRAY OF MORRIS ********************
 		
 		// RIGA APPARTENENTE ALLA MOSSA
@@ -564,12 +548,24 @@ public void setArrayOfMorris() {
 //		}
 		
  		// se la riga contiene un tris e la mossa appartiene alla riga
-		if(rowArray[actionRow] == 3 ){
+		if(opponent == Checker.BLACK && rowMorrisBlack[actionRow] == 3 ){
 	//		System.out.println("Trovato un tris nella riga %"+actionRow+"% *true");
  			return true;
 		}
  		// se la colonna contiene un tris e la mossa appartiene alla colonna
-		if(colArray[actionCol] == 3){
+		if(opponent == Checker.BLACK && columnMorrisBlack[actionCol] == 3){
+	//		System.out.println("Trovato un tris nella colonna %"+actionCol+"% *true");
+			return true;
+		}
+		
+
+ 		// se la riga contiene un tris e la mossa appartiene alla riga
+		if(opponent == Checker.WHITE && rowMorrisWhite[actionRow] == 3 ){
+	//		System.out.println("Trovato un tris nella riga %"+actionRow+"% *true");
+ 			return true;
+		}
+ 		// se la colonna contiene un tris e la mossa appartiene alla colonna
+		if(opponent == Checker.WHITE && columnMorrisWhite[actionCol] == 3){
 	//		System.out.println("Trovato un tris nella colonna %"+actionCol+"% *true");
 			return true;
 		}
