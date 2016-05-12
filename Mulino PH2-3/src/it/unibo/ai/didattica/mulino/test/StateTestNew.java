@@ -43,13 +43,33 @@ public class StateTestNew {
 	
 	@Before
 	public void setUp(){
-		normalState.getBoard().put("a1", Checker.WHITE);
-		normalState.getBoard().put("d1", Checker.WHITE);
-		normalState.getBoard().put("g1", Checker.WHITE);
+		normalState.getBoard().put("d1", Checker.BLACK);
+		normalState.getBoard().put("d2", Checker.BLACK);
+		normalState.getBoard().put("d3", Checker.BLACK);
 		
 		normalState.getBoard().put("d5", Checker.WHITE);
 		normalState.getBoard().put("d6", Checker.WHITE);
 		normalState.getBoard().put("d7", Checker.WHITE);
+		
+		normalState.getBoard().put("e4", Checker.BLACK);
+		normalState.getBoard().put("f4", Checker.BLACK);
+		normalState.getBoard().put("g4", Checker.BLACK);
+		
+		normalState.getBoard().put("a1", Checker.WHITE);
+		normalState.getBoard().put("g1", Checker.WHITE);
+		normalState.getBoard().put("f2", Checker.WHITE);
+		
+		normalState.getBoard().put("b4", Checker.BLACK);
+		normalState.getBoard().put("c3", Checker.BLACK);
+		normalState.getBoard().put("c5", Checker.BLACK);
+		
+		normalState.getBoard().put("b6", Checker.WHITE);
+		normalState.getBoard().put("b2", Checker.WHITE);
+		normalState.getBoard().put("c4", Checker.WHITE);
+		
+		
+		
+		normalState.setArrayOfMorris();
 	}
 	
 //	@Test
@@ -78,12 +98,30 @@ public class StateTestNew {
 //		}
 //	}
 	
-	@Test
-	public void testFindMorrisInOppCheck(){ 
-		assertEquals("Tris trovato nella colonna d5d6d7",true,normalState.isOppCheckerInTris(Checker.WHITE, "d6"));
-		assertEquals("Tris trovato nella riga a1d1g1",true,normalState.isOppCheckerInTris(Checker.WHITE, "a1"));
+//	@Test
+//	public void testFindMorrisInOppCheck2(){ 
+//		assertEquals("Tris trovato nella colonna d5d6d7",true,normalState.isOppCheckerInTris(Checker.WHITE, "d7"));
+//	}
 
+	@Test
+	public void testFindMorrisInOppCheck1(){ 
+		normalState.toString();
+		for (String pos : normalState.positions) {
+			System.out.print("YO ;) ");
+			assertEquals("Tris trovato nella colonna d1d2d3",false,normalState.isOppCheckerInTris(Checker.BLACK, pos));
+		}
 	}
-	
+//	
+
+//	
+//	@Test
+//	public void testFindMorrisInOppCheck3(){ 
+//		assertEquals("Tris trovato nella riga e4f4g4",true,normalState.isOppCheckerInTris(Checker.BLACK, "g4"));
+//	}
+//	
+//	@Test
+//	public void testFindMorrisInOppCheck4(){ 
+//		assertEquals("Tris trovato nella riga a7d7g7",true,normalState.isOppCheckerInTris(Checker.WHITE, "g7"));
+//	}
 	
 }
