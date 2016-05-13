@@ -30,7 +30,10 @@ public class MulinoClient {
 	private Socket playerSocket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private static int time=45;
+	private static int time=20;
+	private static boolean whiteIA = true;
+	private static boolean blackIA = false;
+	
 	
 	
 	public MulinoClient(State.Checker player) throws UnknownHostException, IOException {
@@ -100,20 +103,21 @@ public class MulinoClient {
 			BufferedReader in = new BufferedReader( new InputStreamReader(System.in));
 			while (currentState.getCurrentPhase()==Phase.FIRST) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-/* COMMENTARE DA QUI*/
-//				try{				
-//					currentState.setCurrentPlayer(Checker.WHITE); 
-//					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -2000, 2000, time);
-//					actionString=search.makeDecision(currentState.clone());
-//					System.out.println("decision: "+actionString);
-//				}catch(Exception e){
-//					System.out.println(e);
-//				}
-/* A QUI, PER GIOCARE PERSONALMENTE CON IOTHINCOOK*/
+
+				if(whiteIA){
+					try{				
+						currentState.setCurrentPlayer(Checker.WHITE); 
+						IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -1100, 1100, time);
+						actionString=search.makeDecision(currentState.clone());
+						System.out.println("decision: "+actionString);
+					}catch(Exception e){
+						System.out.println(e);
+					}
+				}else{
+					actionString = in.readLine();					
+				}
 				
-// COMMENTARE LA PROSSIMA RIGA PER FAR GIOCARE IOTHINCOOK CONTRO IOTHINCOOK
-				actionString = in.readLine();
-				
+
 				action = new Phase1Action();
 				action.setPutPosition(actionString.substring(0, 2));
 				if (actionString.length() == 4)
@@ -132,20 +136,19 @@ public class MulinoClient {
 			System.out.println("CLIENT W --> FASE 1 TERMINATA");
 			while(currentState.getCurrentPhase()==Phase.SECOND) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-/* COMMENTARE DA QUI*/	
-//				try{	
-//					currentState.setCurrentPlayer(Checker.WHITE);
-//					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(currentState), -2000, 2000, time);
-//					actionString=search.makeDecision(currentState.clone());
-//					System.out.println("decision: "+actionString);
-//				}catch(Exception e){
-//					System.out.println(e);
-//				}
-/* A QUI, PER GIOCARE PERSONALMENTE CON IOTHINCOOK*/
-				
-// COMMENTARE LA PROSSIMA RIGA PER FAR GIOCARE IOTHINCOOK CONTRO IOTHINCOOK
-				actionString = in.readLine();
-				
+				if(whiteIA){	
+					try{	
+						currentState.setCurrentPlayer(Checker.WHITE);
+						IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(currentState), -1100, 1100, time);
+						actionString=search.makeDecision(currentState.clone());
+						System.out.println("decision: "+actionString);
+					}catch(Exception e){
+						System.out.println(e);
+					}
+				}else{
+					actionString = in.readLine();
+				}
+
 				action2=new Phase2Action();
 				action2.setFrom(actionString.substring(0, 2));
 				action2.setTo(actionString.substring(2, 4));
@@ -165,20 +168,18 @@ public class MulinoClient {
 			System.out.println("CLIENT W --> FASE 2 TERMINATA");
 			while(currentState.getCurrentPhase()==Phase.FINAL) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-/* COMMENTARE DA QUI*/	
-//				try{	
-//					currentState.setCurrentPlayer(Checker.WHITE);
-//					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(currentState), -2000, 2000, time);
-//					actionString=search.makeDecision(currentState.clone());
-//					System.out.println("decision: "+actionString);
-//				}catch(Exception e){
-//					System.out.println(e);
-//				}
-/* A QUI, PER GIOCARE PERSONALMENTE CON IOTHINCOOK*/
-				
-// COMMENTARE LA PROSSIMA RIGA PER FAR GIOCARE IOTHINCOOK CONTRO IOTHINCOOK
-				actionString = in.readLine();
-				
+				if(whiteIA){
+					try{	
+						currentState.setCurrentPlayer(Checker.WHITE);
+						IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(currentState), -1100, 1100, time);
+						actionString=search.makeDecision(currentState.clone());
+						System.out.println("decision: "+actionString);
+					}catch(Exception e){
+						System.out.println(e);
+					}
+				}else{
+					actionString = in.readLine();
+				}
 				action3=new PhaseFinalAction();
 				action3.setFrom(actionString.substring(0, 2));
 				action3.setTo(actionString.substring(2, 4));
@@ -210,18 +211,19 @@ public class MulinoClient {
 				System.out.println("Your Opponent did his move, and the result is: ");
 				System.out.println(currentState.toString());
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-// COMMENTARE LA PROSSIMA RIGA PER FAR GIOCARE IOTHINCOOK CONTRO IOTHINCOOK
-//				actionString = in.readLine();
-/* COMMENTARE DA QUI*/
-				try{
-					currentState.setCurrentPlayer(Checker.BLACK);
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -2000, 2000, time);
-					actionString=search.makeDecision(currentState.clone());
-					System.out.println("decision: "+actionString);
-				}catch(Exception e){
-					System.out.println(e);
+
+				if(blackIA){
+					try{
+						currentState.setCurrentPlayer(Checker.BLACK);
+						IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(currentState), -1100, 1100, time);
+						actionString=search.makeDecision(currentState.clone());
+						System.out.println("decision: "+actionString);
+					}catch(Exception e){
+						System.out.println(e);
+					}
+				}else{
+					actionString=in.readLine();
 				}
-/* A QUI, PER GIOCARE PERSONALMENTE CON IOTHINCOOK*/
 				action = new Phase1Action();
 				action.setPutPosition(actionString.substring(0, 2));
 				if (actionString.length() == 4)
@@ -242,18 +244,19 @@ public class MulinoClient {
 			
 			while(currentState.getCurrentPhase()==Phase.SECOND){
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-// COMMENTARE LA PROSSIMA RIGA PER FAR GIOCARE IOTHINCOOK CONTRO IOTHINCOOK
-//				actionString = in.readLine();
-/* COMMENTARE DA QUI*/
-				try{
-					currentState.setCurrentPlayer(Checker.BLACK);
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(currentState), -2000, 2000, time);
-					actionString=search.makeDecision(currentState.clone());
-					System.out.println("decision: "+actionString);
-				}catch(Exception e){
-					System.out.println(e);
+				if(blackIA){
+					try{
+						currentState.setCurrentPlayer(Checker.BLACK);
+						IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(currentState), -1100, 1100, time);
+						actionString=search.makeDecision(currentState.clone());
+						System.out.println("decision: "+actionString);
+					}catch(Exception e){
+						System.out.println(e);
+					}
+				}else{
+					actionString=in.readLine();
 				}
-/* A QUI, PER GIOCARE PERSONALMENTE CON IOTHINCOOK*/
+				
 				action2=new Phase2Action();
 				action2.setFrom(actionString.substring(0, 2));
 				action2.setTo(actionString.substring(2, 4));
@@ -274,20 +277,21 @@ public class MulinoClient {
 				System.out.println(currentState.toString());	
 			}
 			System.out.println("CLIENT B --> FASE 2 TERMINATA");
+			
 			while(currentState.getCurrentPhase()==Phase.FINAL){
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
-// COMMENTARE LA PROSSIMA RIGA PER FAR GIOCARE IOTHINCOOK CONTRO IOTHINCOOK
-//				actionString = in.readLine();
-/* COMMENTARE DA QUI*/
-				try{
-					currentState.setCurrentPlayer(Checker.BLACK);
-					IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(currentState), -2000, 2000, time);
-					actionString=search.makeDecision(currentState.clone());
-					System.out.println("decision: "+actionString);
-				}catch(Exception e){
-					System.out.println(e);
+				if(blackIA){
+					try{
+						currentState.setCurrentPlayer(Checker.BLACK);
+						IterativeDeepeningAlphaBetaSearch<State, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(currentState), -1100, 1100, time);
+						actionString=search.makeDecision(currentState.clone());
+						System.out.println("decision: "+actionString);
+					}catch(Exception e){
+						System.out.println(e);
+					}
+				}else{
+					actionString=in.readLine();
 				}
-/* A QUI, PER GIOCARE PERSONALMENTE CON IOTHINCOOK*/
 				action3=new PhaseFinalAction();
 				action3.setFrom(actionString.substring(0, 2));
 				action3.setTo(actionString.substring(2, 4));
@@ -301,6 +305,11 @@ public class MulinoClient {
 				currentState = client.read();
 				System.out.println("Effect of your move: ");
 				System.out.println(currentState.toString());
+				
+				System.out.println("Waiting for your opponent move...");
+				currentState = client.read();
+				System.out.println("Your Opponent did his move, and the result is: ");
+				System.out.println(currentState.toString());	
 				
 			}
 		}
