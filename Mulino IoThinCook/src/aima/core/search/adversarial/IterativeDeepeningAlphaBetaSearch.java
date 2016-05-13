@@ -101,7 +101,6 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				double value = minValue(game.getResult(state, action), player,
 						Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, 1);
 				table.put(action, value);
-				// LOLOL
 				currentDepthTable.put(action, value);
 				if (logEnabled)
 					logText.append(action + "->" + value + " ");
@@ -116,10 +115,10 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 					secondBestValue = value;
 				}
 			}
-			if (logEnabled)
+			if (logEnabled){
 				System.out.println("\n"+logText);
 				System.out.println("Tempo:"+(System.currentTimeMillis()-startTime));
-			//	System.out.println("NEW RESULTS:\n"+newResults);
+			}
 			if (!exit || isSignificantlyBetter(newResultValue, resultValue)) {
 				results = newResults;
 				resultValue = newResultValue;

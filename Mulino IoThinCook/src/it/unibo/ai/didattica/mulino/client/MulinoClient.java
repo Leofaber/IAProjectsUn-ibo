@@ -1,8 +1,3 @@
-/*
- * PARTI DA QUESTO MULINO PER IMPLEMENTARE ANCHE LA FASE DUE E LA FASE TRE
- * CREA DUE DIVERSI MULINOGAME - MULINOGAME2 E MULINOGAME3
- * IN MULINO CLIENT FAI TRE DIVERSI WHILE(PHASE=PHASE1), WHILE(PHASE=PHASE2)....
- */
 package it.unibo.ai.didattica.mulino.client;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -40,6 +35,7 @@ public class MulinoClient {
 	private static int time=40;
 	private static boolean whiteIA = true;
 	private static boolean blackIA = true;
+	private static boolean debug=false;
 	
 	
 	
@@ -49,11 +45,9 @@ public class MulinoClient {
 		switch (player) {
 			case WHITE:
 				port = TCPMulino.whiteSocket;
-				System.out.println(port);
 				break;
 			case BLACK:
 				port = TCPMulino.blackSocket;
-				System.out.println(port);
 				break;
 			default:
 				System.exit(5);
@@ -82,41 +76,74 @@ public class MulinoClient {
 	
 	
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-		State.Checker player;
+		State.Checker player=null;
 		
-		if (args.length==0) {
-			System.out.println("You must specify which player you are (Wthie or Black)!");
-			System.exit(-1);
+		if (args.length == 0) {
+            System.out.println("Usage:");
+            System.out.println("-w --white     Set the player to White");
+            System.out.println("-b --black     Set the player to Black");
+            System.out.println("-h --human     Set the player as Human (default is IA)");
+            System.out.println("-t <time>      Search w/ iterative deepening for <time> seconds");
+            System.out.println("-d --debug     Print the debug output to standard output");
+            System.exit(-1);
+        }
+			
+		for (int i = 0; i < args.length; i++) {
+			switch(args[i].toLowerCase()){
+			case "-w":
+            case "--white":
+            	player= State.Checker.WHITE;
+            	break;
+            case "-b":
+            case "--black":
+            	player = State.Checker.BLACK;
+            	break;
+            case "-h":
+            case "--human":
+            	if(player == Checker.WHITE)
+            		whiteIA=false;
+            	else if(player == Checker.BLACK)
+            		blackIA=false;
+            	break;
+            case "-t":
+                time = Integer.parseInt(args[++i]);
+                break;
+            case "-d":
+            case "--debug":
+                debug = true;
+                break;	
+			}
 		}
-		System.out.println("Selected client: " + args[0]);
 		
+		System.out.println("You are player "+player+"!");
+		if(player == Checker.WHITE){
+			if(whiteIA)
+				System.out.println("You are AI!");
+			else 
+				System.out.println("You are Human!");	
+		}else{
+			if(blackIA)
+				System.out.println("You are AI!");
+			else 
+				System.out.println("You are Human!");	
+		}
 		
-		if ("White".equals(args[0]))
-			player = State.Checker.WHITE;
-		else
-			player = State.Checker.BLACK;
 		String actionString = "";
 		Phase1Action action;
 		Phase2Action action2;
 		PhaseFinalAction action3;
 		State currentState = null;
-		
 		MulinoState mulinoCurrentState = null;
-		
 		
 		if (player == State.Checker.WHITE) {
 			MulinoClient client = new MulinoClient(State.Checker.WHITE);
-			System.out.println("You are player " + client.getPlayer().toString() + "!");
-			System.out.println("Current state:");
-			
-			
+//			System.out.println("You are player " + client.getPlayer().toString() + "!");
+			System.out.println("Current state:");			
 			currentState = client.read();
-			
-			
-			
-			
 			System.out.println(currentState.toString());
+			
 			BufferedReader in = new BufferedReader( new InputStreamReader(System.in));
+			
 			while (currentState.getCurrentPhase()==Phase.FIRST) {
 				System.out.println("Player " + client.getPlayer().toString() + ", do your move: ");
 
@@ -125,6 +152,7 @@ public class MulinoClient {
 						mulinoCurrentState = MulinoState.convertStateToMulinoState(currentState);
 						mulinoCurrentState.setCurrentPlayer(Checker.WHITE); 
 						IterativeDeepeningAlphaBetaSearch<MulinoState, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(mulinoCurrentState), -1100, 1100, time);
+						search.setLogEnabled(debug);
 						actionString=search.makeDecision(mulinoCurrentState.clone());
 						System.out.println("decision: "+actionString);
 					}catch(Exception e){
@@ -158,6 +186,7 @@ public class MulinoClient {
 						mulinoCurrentState = MulinoState.convertStateToMulinoState(currentState);
 						mulinoCurrentState.setCurrentPlayer(Checker.WHITE);
 						IterativeDeepeningAlphaBetaSearch<MulinoState, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(mulinoCurrentState), -1100, 1100, time);
+						search.setLogEnabled(debug);
 						actionString=search.makeDecision(mulinoCurrentState.clone());
 						System.out.println("decision: "+actionString);
 					}catch(Exception e){
@@ -191,6 +220,7 @@ public class MulinoClient {
 						mulinoCurrentState = MulinoState.convertStateToMulinoState(currentState);
 						mulinoCurrentState.setCurrentPlayer(Checker.WHITE);
 						IterativeDeepeningAlphaBetaSearch<MulinoState, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(mulinoCurrentState), -1100, 1100, time);
+						search.setLogEnabled(debug);
 						actionString=search.makeDecision(mulinoCurrentState.clone());
 						System.out.println("decision: "+actionString);
 					}catch(Exception e){
@@ -229,7 +259,7 @@ public class MulinoClient {
 			MulinoClient client = new MulinoClient(State.Checker.BLACK);
 			BufferedReader in = new BufferedReader( new InputStreamReader(System.in));
 			currentState = client.read();
-			System.out.println("You are player " + client.getPlayer().toString() + "!");
+//			System.out.println("You are player " + client.getPlayer().toString() + "!");
 			System.out.println("Current state:");
 			System.out.println(currentState.toString());
 			while (currentState.getCurrentPhase()==Phase.FIRST) {
@@ -244,6 +274,7 @@ public class MulinoClient {
 						mulinoCurrentState = MulinoState.convertStateToMulinoState(currentState);
 						mulinoCurrentState.setCurrentPlayer(Checker.BLACK);
 						IterativeDeepeningAlphaBetaSearch<MulinoState, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGame(mulinoCurrentState), -1100, 1100, time);
+						search.setLogEnabled(debug);
 						actionString=search.makeDecision(mulinoCurrentState.clone());
 						System.out.println("decision: "+actionString);
 					}catch(Exception e){
@@ -277,6 +308,7 @@ public class MulinoClient {
 						mulinoCurrentState = MulinoState.convertStateToMulinoState(currentState);
 						mulinoCurrentState.setCurrentPlayer(Checker.BLACK);
 						IterativeDeepeningAlphaBetaSearch<MulinoState, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase2(mulinoCurrentState), -1100, 1100, time);
+						search.setLogEnabled(debug);
 						actionString=search.makeDecision(mulinoCurrentState.clone());
 						System.out.println("decision: "+actionString);
 					}catch(Exception e){
@@ -314,6 +346,7 @@ public class MulinoClient {
 						mulinoCurrentState = MulinoState.convertStateToMulinoState(currentState);
 						mulinoCurrentState.setCurrentPlayer(Checker.BLACK);
 						IterativeDeepeningAlphaBetaSearch<MulinoState, String, State.Checker> search=new MulinoIterativeDeepeningAlphaBetaSearch(new MulinoGamePhase3(mulinoCurrentState), -1100, 1100, time);
+						search.setLogEnabled(debug);
 						actionString=search.makeDecision(mulinoCurrentState.clone());
 						System.out.println("decision: "+actionString);
 					}catch(Exception e){
