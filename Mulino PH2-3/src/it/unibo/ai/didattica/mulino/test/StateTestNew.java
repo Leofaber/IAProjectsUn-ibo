@@ -45,11 +45,11 @@ public class StateTestNew {
 	public void setUp(){
 
 		
-		normalState.getBoard().put("e4", Checker.BLACK);
-		normalState.getBoard().put("f4", Checker.BLACK);
-		normalState.getBoard().put("g4", Checker.BLACK);
+		normalState.getBoard().put("a7", Checker.WHITE);
+		normalState.getBoard().put("d7", Checker.WHITE);
+		normalState.getBoard().put("g7", Checker.WHITE);
 		
-		normalState.getBoard().put("a1", Checker.BLACK);
+//		normalState.getBoard().put("a1", Checker.WHITE);
 
 				
 		normalState.setArrayOfMorris();
@@ -113,7 +113,10 @@ public class StateTestNew {
 	public void testIsDeletable() {
 		System.out.println(normalState.toString());
 		
-		assertEquals("Stocastico",true,normalState.isDeletableChecker(Checker.BLACK, "a1"));
+//		assertEquals("Stocastico",true,normalState.isDeletableChecker(Checker.WHITE, "a1"));
+		assertEquals("Stocastico",true,normalState.isDeletableChecker(Checker.WHITE, "a7"));
+		assertEquals("Stocastico",true,normalState.isDeletableChecker(Checker.WHITE, "d7"));
+		assertEquals("Stocastico",true,normalState.isDeletableChecker(Checker.WHITE, "g7"));
 	}
 
 //	

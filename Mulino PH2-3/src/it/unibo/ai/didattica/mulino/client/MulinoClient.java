@@ -195,8 +195,16 @@ public class MulinoClient {
 				currentState = client.read();
 				System.out.println("Your Opponent did his move, and the result is: ");
 				System.out.println(currentState.toString());
-				
+				if(currentState.getBlackCheckersOnBoard()<3){
+					System.out.println("PLAYER W HAS WON!");
+					break;
+				}else if(currentState.getWhiteCheckersOnBoard()<3){
+					System.out.println("PLAYER B HAS WON!");
+					break;
+				}		
 			}
+			System.out.println("MATCH IS FINISHED!");
+			
 		}
 		else { 
 			MulinoClient client = new MulinoClient(State.Checker.BLACK);
@@ -309,9 +317,16 @@ public class MulinoClient {
 				System.out.println("Waiting for your opponent move...");
 				currentState = client.read();
 				System.out.println("Your Opponent did his move, and the result is: ");
-				System.out.println(currentState.toString());	
-				
+				System.out.println(currentState.toString());
+				if(currentState.getBlackCheckersOnBoard()<3){
+					System.out.println("PLAYER W HAS WON!");
+					break;
+				}else if(currentState.getWhiteCheckersOnBoard()<3){
+					System.out.println("PLAYER B HAS WON!");
+					break;
+				}
 			}
+			System.out.println("MATCH IS FINISHED!");
 		}
 		
 	}
