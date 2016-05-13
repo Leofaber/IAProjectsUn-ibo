@@ -179,6 +179,9 @@ public class MulinoGamePhase3 implements Game<State, String, State.Checker>{
 		
 		newState.setArrayOfMorris();			
 		newNumMorris=newState.getNumberOfMorris(player);
+		
+		if (newState.isCheckerInTris(player,fromAction))
+			return newNumMorris == oldNumMorris;
 
 		return newNumMorris-oldNumMorris>0;
 	}

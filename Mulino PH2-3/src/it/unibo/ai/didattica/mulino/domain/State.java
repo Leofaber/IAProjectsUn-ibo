@@ -520,7 +520,7 @@ public void setArrayOfMorris() {
 	    }
 	}
 	
-	public boolean isOppCheckerInTris(Checker opponent, String checkerPos){
+	public boolean isCheckerInTris(Checker opponent, String checkerPos){
 		
 		// RIGA APPARTENENTE ALLA MOSSA
 		int actionRow = getRowIndexFromLetter(checkerPos.charAt(1), checkerPos.charAt(0)); // c'è un numero 
@@ -606,7 +606,7 @@ public void setArrayOfMorris() {
 					|| columnMorrisBlack[getColumnIndexFromLetter(first, second)] == 3) {
 						for (String s : this.positions) {
 							if (getBoard().get(s) == checky)
-								if (!isOppCheckerInTris(checky,s))
+								if (!isCheckerInTris(checky,s))
 									return false;
 						}
 					}
@@ -618,7 +618,7 @@ public void setArrayOfMorris() {
 					|| columnMorrisWhite[getColumnIndexFromLetter(first, second)] == 3){
 						for (String s : this.positions) {
 							if (getBoard().get(s) == checky)
-								if (!isOppCheckerInTris(checky,s))
+								if (!isCheckerInTris(checky,s))
 									return false;
 						}
 					}
