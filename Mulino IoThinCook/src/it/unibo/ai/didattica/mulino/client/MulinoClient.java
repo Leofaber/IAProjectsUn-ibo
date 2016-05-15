@@ -32,10 +32,10 @@ public class MulinoClient {
 	private Socket playerSocket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private static int time=40;
+	private static int time=50;
 	private static boolean whiteIA = true;
 	private static boolean blackIA = true;
-	private static boolean debug=false;
+	private static boolean debug = false;
 	
 	
 	

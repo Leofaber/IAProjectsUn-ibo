@@ -90,7 +90,7 @@ public class MulinoGamePhase2 implements Game<MulinoState, String, Checker>{
 			newState.setCurrentPlayer(Checker.BLACK);
 			if(action.length()==6){
 				removeAction=action.substring(4, 6);
-				newState.getBoard().replace(removeAction, Checker.EMPTY);
+				newState.getBoard().put(removeAction, Checker.EMPTY);
 				newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()-1);
 			}
 			break;
@@ -100,7 +100,7 @@ public class MulinoGamePhase2 implements Game<MulinoState, String, Checker>{
 			newState.setCurrentPlayer(Checker.WHITE);
 			if(action.length()==6){
 				removeAction=action.substring(4, 6);
-				newState.getBoard().replace(removeAction, Checker.EMPTY);
+				newState.getBoard().put(removeAction, Checker.EMPTY);
 				newState.setWhiteCheckersOnBoard(newState.getWhiteCheckersOnBoard()-1);
 			}
 			break;

@@ -83,24 +83,24 @@ public class MulinoGame implements Game<MulinoState, String, Checker> {
 			String removeAction;
 			switch (getPlayer(state)){
 			case BLACK:
-				newState.getBoard().replace(putAction, Checker.BLACK);
+				newState.getBoard().put(putAction, Checker.BLACK);
 				newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()+1);
 				newState.setBlackCheckers(newState.getBlackCheckers()-1);
 				newState.setCurrentPlayer(Checker.WHITE);
 				if(action.length()==4){
 					removeAction=action.substring(2,4);
-					newState.getBoard().replace(removeAction, Checker.EMPTY);
+					newState.getBoard().put(removeAction, Checker.EMPTY);
 					newState.setWhiteCheckersOnBoard(newState.getWhiteCheckersOnBoard()-1);
 				}
 				break;
 			case WHITE:
-				newState.getBoard().replace(putAction, Checker.WHITE);
+				newState.getBoard().put(putAction, Checker.WHITE);
 				newState.setWhiteCheckersOnBoard(newState.getWhiteCheckersOnBoard()+1);
 				newState.setWhiteCheckers(newState.getWhiteCheckers()-1);
 				newState.setCurrentPlayer(Checker.BLACK);
 				if(action.length()==4){
 					removeAction=action.substring(2,4);
-					newState.getBoard().replace(removeAction, Checker.EMPTY);
+					newState.getBoard().put(removeAction, Checker.EMPTY);
 					newState.setBlackCheckersOnBoard(newState.getBlackCheckersOnBoard()-1);
 				}
 				break;

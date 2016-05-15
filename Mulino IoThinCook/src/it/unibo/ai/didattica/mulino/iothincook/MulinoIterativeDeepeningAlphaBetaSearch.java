@@ -20,9 +20,9 @@ public class MulinoIterativeDeepeningAlphaBetaSearch extends
 		if(game instanceof MulinoGame){
 			super.setMaxDepth(7);
 		}else if(game instanceof MulinoGamePhase2){
-			super.setMaxDepth(9);
+			super.setMaxDepth(10);
 		}else if(game instanceof MulinoGamePhase3){
-			super.setMaxDepth(7);
+			super.setMaxDepth(9);
 		}
 	}
 	 
@@ -34,14 +34,6 @@ public class MulinoIterativeDeepeningAlphaBetaSearch extends
 	@Override
 	public List<String> orderActions(MulinoState state, List<String> actions,
 			Checker player, int depth) {
-		//System.out.println("Numero di azioni:"+actions.size());
-		//actions.sort(new ActionComparator(state,player));
-//		if(depth>lastOrdering){
-//			System.out.println("START SORTING - PLAYER "+player.toString());
-//			actions.sort(new ActionComparator(state, player));
-//			lastOrdering=depth;
-//			System.out.println("ARRAY ORDINATO - DEPTH "+lastOrdering+": "+actions.toString());
-//		}
 		return actions;
 	}
 	

@@ -157,17 +157,17 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			System.out.println("Miglior azione depth precedente: "+previousActionMax+" con valore: "+previousMaxValue);
 			System.out.println("Miglior azione depth corrente: "+currentActionMax+" con valore: "+currentMaxValue);
 		}
-		if(previousMaxValue > currentMaxValue){
+		if(previousMaxValue > currentMaxValue && (!currentDepthTable.containsKey(previousActionMax) || currentMaxValue==Double.NEGATIVE_INFINITY)){
 			if(logEnabled)
-				System.out.println("Azione migliore: "+previousActionMax+" con valore: "+previousMaxValue);
+				System.out.println("Azione migliore (prec): "+previousActionMax+" con valore: "+previousMaxValue);
 			 return previousActionMax;
 		}else{
 			if(logEnabled)
-				System.out.println("Azione migliore: "+currentActionMax+" con valore: "+currentMaxValue);
+				System.out.println("Azione migliore (curr): "+currentActionMax+" con valore: "+currentMaxValue);
 			 return currentActionMax;
 		}
 		
-		// SI PUò PENSARE DI RANDOMIZZARE LE MOSSE A PARI VALORE, TANTO PER RENDERE FRIZZANTEIL GIOCO
+		// SI PUò PENSARE DI RANDOMIZZARE LE MOSSE A PARI VALORE, TANTO PER RENDERE FRIZZANTE IL GIOCO
 		//		return results.get(0);
 		//return actionMax;
 	}
@@ -177,22 +177,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		
 		updateMetrics(depth);
 		if (game.isTerminal(state) || depth >= currDepthLimit) {
-			
-			/*
-			 * 	DEBUG **********************************
-			 * 
-			 
-			double evalDebug = eval(state, player);
-			if(game.isTerminal(state)){
-				System.out.println("\n[MAX] Questo stato è terminale:\n"+state.toString()+"\n ed ha valore: "+evalDebug);
-			}
-			if(depth >= currDepthLimit){
-				System.out.println("\n[MAX] Profondità: "+depth+"    \n"+state.toString()+"\n ed ha valore: "+evalDebug);
-							
-			}
-			return evalDebug;
-			 fine debug 
-			*/return eval(state, player);
+			return eval(state, player);
 		} else {
 			double value = Double.NEGATIVE_INFINITY;
 			for (ACTION action : orderActions(state, game.getActions(state),
@@ -212,26 +197,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		
 		updateMetrics(depth);
 		if (game.isTerminal(state) || depth >= currDepthLimit) {
-			
-			
-			/*
-			 * 	DEBUG **********************************
-			 * 
-			 
-			
-			
-			double evalDebug = eval(state, player);
-			if(game.isTerminal(state)){
-				System.out.println("\n[MIN] Questo stato è terminale:\n"+state.toString()+"\n ed ha valore: "+evalDebug);
-			}
-			if(depth >= currDepthLimit){
-				System.out.println("\n[MIN] Profondità: "+depth+"    \n"+state.toString()+"\n ed ha valore: "+evalDebug);
-					
-			}
-			return evalDebug;
-			fine debug 
-			
-			*/return eval(state, player);
+			return eval(state, player);
 		} else {
 			double value = Double.POSITIVE_INFINITY;
 			for (ACTION action : orderActions(state, game.getActions(state),
@@ -293,7 +259,6 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	 */
 	protected double eval(STATE state, PLAYER player) {
 		if (game.isTerminal(state)) {
-//			System.out.println("TERMINAL STATE REACHED");
 			return game.getUtility(state, player);
 		} else {
 			maxDepthReached = true;
@@ -301,8 +266,6 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				return game.getUtility(state, player);
 			}
 			return (utilMin + utilMax) / 2;
-			
-			//return (utilMin + utilMax) / 2;
 		}
 	}
 
