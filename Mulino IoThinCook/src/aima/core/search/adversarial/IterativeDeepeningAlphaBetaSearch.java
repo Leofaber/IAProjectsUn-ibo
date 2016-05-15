@@ -36,6 +36,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	private long maxTime;
 	private boolean logEnabled;
 	private int maxDepth;
+	private int initialDepth;
 
 	private Metrics metrics = new Metrics();
 
@@ -262,7 +263,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			return game.getUtility(state, player);
 		} else {
 			maxDepthReached = true;
-			if(currDepthLimit>5){
+			if(currDepthLimit>initialDepth){
 				return game.getUtility(state, player);
 			}
 			return (utilMin + utilMax) / 2;
@@ -284,6 +285,14 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 
 	public void setMaxDepth(int maxDepth) {
 		this.maxDepth = maxDepth;
+	}
+
+	public int getInitialDepth() {
+		return initialDepth;
+	}
+
+	public void setInitialDepth(int initialDepth) {
+		this.initialDepth = initialDepth;
 	}
 }
 
