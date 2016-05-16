@@ -32,7 +32,7 @@ public class MulinoClient {
 	private Socket playerSocket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private static int time=50;
+	private static int time=45;
 	private static boolean whiteIA = true;
 	private static boolean blackIA = true;
 	private static boolean debug = false;
@@ -84,7 +84,7 @@ public class MulinoClient {
             System.out.println("-b --black     Set the player to Black");
             System.out.println("-h --human     Set the player as Human (default is IA)");
             System.out.println("-t <time>      Search w/ iterative deepening for <time> seconds");
-            System.out.println("-d --debug     Print the debug output to standard output");
+//          System.out.println("-d --debug     Print the debug output to standard output");
             System.exit(-1);
         }
 			
@@ -112,6 +112,16 @@ public class MulinoClient {
             case "--debug":
                 debug = true;
                 break;	
+            default:
+            	System.out.println(args[i].toString()+" not recognized.");
+            	System.out.println("Usage:");
+                System.out.println("-w --white     Set the player to White");
+                System.out.println("-b --black     Set the player to Black");
+                System.out.println("-h --human     Set the player as Human (default is IA)");
+                System.out.println("-t <time>      Search w/ iterative deepening for <time> seconds");
+//              System.out.println("-d --debug     Print the debug output to standard output");
+                System.exit(-1);
+            	
 			}
 		}
 		
