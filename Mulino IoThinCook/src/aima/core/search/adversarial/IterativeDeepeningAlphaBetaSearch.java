@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import aima.core.search.framework.Metrics;
 
@@ -129,6 +130,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue) && currDepthLimit<maxDepth);
 		Double max= -10000000.0;
 		ACTION actionMax= null;
+		List<ACTION> listMaxAction = new ArrayList<ACTION>();
 		
 		for(Map.Entry<ACTION, Double> entry : table.entrySet()){
 			if(entry.getValue()>max){
@@ -140,7 +142,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		ACTION previousActionMax = null;
 		double previousMaxValue = Double.NEGATIVE_INFINITY;
 		for(Map.Entry<ACTION, Double> entry : previousDepthTable.entrySet()){
-			if(entry.getValue()>previousMaxValue){
+			if(entry.getValue()>=previousMaxValue){
 				previousMaxValue=entry.getValue();
 				previousActionMax=entry.getKey();
 			}
@@ -154,6 +156,13 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				currentActionMax=entry.getKey();
 			}
 		}
+		
+		for(Map.Entry<ACTION, Double> entry : currentDepthTable.entrySet()){
+			if(entry.getValue()==currentMaxValue){
+				listMaxAction.add(entry.getKey());
+			}
+		}
+
 		if(logEnabled){
 			System.out.println("Miglior azione depth precedente: "+previousActionMax+" con valore: "+previousMaxValue);
 			System.out.println("Miglior azione depth corrente: "+currentActionMax+" con valore: "+currentMaxValue);
@@ -163,9 +172,13 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				System.out.println("Azione migliore (prec): "+previousActionMax+" con valore: "+previousMaxValue);
 			 return previousActionMax;
 		}else{
-			if(logEnabled)
-				System.out.println("Azione migliore (curr): "+currentActionMax+" con valore: "+currentMaxValue);
-			 return currentActionMax;
+			ACTION definitive = listMaxAction.get(new Random().nextInt(listMaxAction.size()));
+			if(logEnabled) {
+				System.out.println(listMaxAction.toString());
+				System.out.println("Azione migliore (curr): "+definitive+" con valore: "+currentMaxValue);
+				
+			}
+			return definitive;
 		}
 		
 		// SI PUò PENSARE DI RANDOMIZZARE LE MOSSE A PARI VALORE, TANTO PER RENDERE FRIZZANTE IL GIOCO
