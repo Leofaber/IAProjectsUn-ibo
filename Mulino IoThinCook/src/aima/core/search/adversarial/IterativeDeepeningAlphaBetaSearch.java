@@ -162,7 +162,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 				listMaxAction.add(entry.getKey());
 			}
 		}
-
+		
 		if(logEnabled){
 			System.out.println("Miglior azione depth precedente: "+previousActionMax+" con valore: "+previousMaxValue);
 			System.out.println("Miglior azione depth corrente: "+currentActionMax+" con valore: "+currentMaxValue);
@@ -176,7 +176,6 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			if(logEnabled) {
 				System.out.println(listMaxAction.toString());
 				System.out.println("Azione migliore (curr): "+definitive+" con valore: "+currentMaxValue);
-				
 			}
 			return definitive;
 		}
