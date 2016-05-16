@@ -149,7 +149,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 		ACTION currentActionMax = null;
 		double currentMaxValue = Double.NEGATIVE_INFINITY;
 		for(Map.Entry<ACTION, Double> entry : currentDepthTable.entrySet()){
-			if(entry.getValue()>currentMaxValue){
+			if(entry.getValue()>=currentMaxValue){
 				currentMaxValue=entry.getValue();
 				currentActionMax=entry.getKey();
 			}
@@ -158,7 +158,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			System.out.println("Miglior azione depth precedente: "+previousActionMax+" con valore: "+previousMaxValue);
 			System.out.println("Miglior azione depth corrente: "+currentActionMax+" con valore: "+currentMaxValue);
 		}
-		if(previousMaxValue > currentMaxValue && (!currentDepthTable.containsKey(previousActionMax) || currentMaxValue==Double.NEGATIVE_INFINITY)){
+		if(previousMaxValue > currentMaxValue && !currentDepthTable.containsKey(previousActionMax)){
 			if(logEnabled)
 				System.out.println("Azione migliore (prec): "+previousActionMax+" con valore: "+previousMaxValue);
 			 return previousActionMax;

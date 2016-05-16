@@ -21,8 +21,8 @@ public class MulinoIterativeDeepeningAlphaBetaSearch extends
 			super.setMaxDepth(7);
 			super.setInitialDepth(5);
 		}else if(game instanceof MulinoGamePhase2){
-			super.setMaxDepth(10);
-			super.setInitialDepth(8);
+			super.setMaxDepth(9);
+			super.setInitialDepth(7);
 		}else if(game instanceof MulinoGamePhase3){
 			super.setMaxDepth(8);
 			super.setInitialDepth(6);
