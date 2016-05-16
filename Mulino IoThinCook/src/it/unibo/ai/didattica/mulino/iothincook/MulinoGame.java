@@ -203,7 +203,7 @@ public class MulinoGame implements Game<MulinoState, String, Checker> {
 	}
 	
 	//genera la lista dei checker del giocatore player
-	private List<String> opponentCheckers(MulinoState state, Checker player){
+	public static List<String> opponentCheckers(MulinoState state, Checker player){
 		List<String> result = new ArrayList<String>();
 		for(Entry<String,Checker> entry: state.getBoard().entrySet())
 			if(entry.getValue()==player)
