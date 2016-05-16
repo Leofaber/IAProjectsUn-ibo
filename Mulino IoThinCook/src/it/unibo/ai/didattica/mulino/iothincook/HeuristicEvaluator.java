@@ -438,26 +438,51 @@ public class HeuristicEvaluator {
 	 * fase 2: il primo che arriva a 3 pedine perde.
 	 *  fase 3: il primo che arriva a 2 pedine perde.
 	 */ 
-	private double winningConfiguration(){ 
+	public double winningConfiguration(){ 
 		int whiteCheckersOnBoard = state.getWhiteCheckersOnBoard(); 
 		int blackCheckersOnBoard = state.getBlackCheckersOnBoard(); 
 		switch(getPhase()){ 
-			case FIRST: return 0; 
+			case FIRST: 
+			 
+				return 0; 
+			
 			case SECOND: 
-				switch (player){ 
-					case WHITE: if( whiteCheckersOnBoard>3 && blackCheckersOnBoard<=3 ) 
-									return 1; 
-								else if (whiteCheckersOnBoard<=3 && blackCheckersOnBoard>3) 
-									return -1; 
-								else 
-									return 0; 
-					case BLACK: if( whiteCheckersOnBoard>3 && blackCheckersOnBoard<=3 ) 
-									return -1; 
-								else if (whiteCheckersOnBoard<=3 && blackCheckersOnBoard>3) 
-									return 1; 
-								else 
-									return 0; 
-					default: break; 
+				 
+
+				switch (player){
+				
+					 
+					case WHITE: 
+						
+					try {
+						if( (whiteCheckersOnBoard>3 && blackCheckersOnBoard<=3) || cantMoveConfiguration(Checker.BLACK)) 
+							return 1; 
+						else if (  (whiteCheckersOnBoard<=3 && blackCheckersOnBoard>3)   || cantMoveConfiguration(Checker.WHITE)) 
+							return -1; 
+						else 
+						
+						return 0;
+					} catch (InvalidPositionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+					
+					case BLACK: 
+						
+					try {
+						if(   (whiteCheckersOnBoard>3 && blackCheckersOnBoard<=3)   || cantMoveConfiguration(Checker.WHITE)) 
+							return -1; 
+						else if (  (whiteCheckersOnBoard<=3 && blackCheckersOnBoard>3)   || cantMoveConfiguration(Checker.BLACK)) 
+							return 1; 
+						else 
+							return 0;
+					} catch (InvalidPositionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+					default: 
+						
+						break; 
 				} 
 			case FINAL: 
 				switch (player){ 
@@ -479,6 +504,43 @@ public class HeuristicEvaluator {
 		} 
 	}
 
+	public boolean cantMoveConfiguration(Checker opponentPlayer) throws InvalidPositionException{
+ 		
+		switch(opponentPlayer){
+			case BLACK:
+				for( String opponentPosition : MulinoGame.opponentCheckers(state, Checker.BLACK) ){
+					for( String adjacentPosition : state.getAdjacentPositions(opponentPosition) ){
+						if( state.getBoard().get(adjacentPosition) == Checker.EMPTY ){
+							return false;
+						}
+					}
+				}
+				
+				break;
+		
+			case WHITE:
+				for( String opponentPosition : MulinoGame.opponentCheckers(state, Checker.WHITE) ){
+					for( String adjacentPosition : state.getAdjacentPositions(opponentPosition) ){
+						if( state.getBoard().get(adjacentPosition) == Checker.EMPTY ){
+							return false;
+						}
+					}
+				}
+				
+				break;
+			
+			default:
+				break;
+			
+			
+		}
+		
+		return true;
+		
+	}
+	
+	
+	
 	/*
 	 * Ritorna 1 se c'è almeno 1 morris avversario
 	 * 
