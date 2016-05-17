@@ -127,6 +127,12 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			}
 //			if (!exit && results.size() == 1 && isSignificantlyBetter(resultValue, secondBestValue))
 //				break;
+			if(currDepthLimit == maxDepth && (System.currentTimeMillis()-startTime)<(maxTime - 25000)){
+				maxDepth++;
+				if(logEnabled)
+					System.out.println("Profondità massima aumentata a: "+maxDepth);					
+			}
+			
 		} while (!exit && maxDepthReached && !hasSafeWinner(resultValue) && currDepthLimit<maxDepth);
 		Double max= -10000000.0;
 		ACTION actionMax= null;
