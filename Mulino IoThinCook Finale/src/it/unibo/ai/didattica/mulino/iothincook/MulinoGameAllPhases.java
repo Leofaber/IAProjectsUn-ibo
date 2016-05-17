@@ -224,7 +224,7 @@ public class MulinoGameAllPhases implements Game<MulinoState, String, Checker> {
 			default:
 				break;
 			}			
-			if(newState.getBlackCheckers()==9 && newState.getWhiteCheckers()==9)
+			if(newState.getBlackCheckers()==0 && newState.getWhiteCheckers()==0)
 				newState.setCurrentPhase(Phase.SECOND);
 			return newState;
 		
@@ -348,34 +348,7 @@ public class MulinoGameAllPhases implements Game<MulinoState, String, Checker> {
 			newNumMorris=newState.getNumberOfMorris(player);
 			return newNumMorris-oldNumMorris>0;
 			
-		case FINAL:
-			fromAction=action.substring(0,2);
-			toAction=action.substring(2,4);
-			newState.setArrayOfMorris();
-			oldNumMorris=newState.getNumberOfMorris(player);
-			if (newState.isCheckerInTris(player,fromAction)){
-				if(newState.getBoard().get(fromAction).equals(player)){
-					newState.getBoard().put(fromAction,Checker.EMPTY);
-					newState.getBoard().put(toAction, player);
-				}else
-					System.out.println("C'è qualche problema -.-");
-	
-				newState.setArrayOfMorris();			
-				newNumMorris=newState.getNumberOfMorris(player);
-				return newNumMorris == oldNumMorris;
-			}
-			else{
-				if(newState.getBoard().get(fromAction).equals(player)){
-					newState.getBoard().put(fromAction,Checker.EMPTY);
-					newState.getBoard().put(toAction, player);
-				}else
-					System.out.println("C'è qualche problema -.-");
-	
-				newState.setArrayOfMorris();			
-				newNumMorris=newState.getNumberOfMorris(player);
-				return newNumMorris-oldNumMorris>0;
-				}
-			
+		
 		case SECOND:			
 			fromAction=action.substring(0,2);
 			toAction=action.substring(2,4);
@@ -390,7 +363,7 @@ public class MulinoGameAllPhases implements Game<MulinoState, String, Checker> {
 		
 				newState.setArrayOfMorris();			
 				newNumMorris=newState.getNumberOfMorris(player);
-				return newNumMorris == oldNumMorris;	
+				return newNumMorris.equals(oldNumMorris);	
 				
 			}else{
 				if(newState.getBoard().get(fromAction).equals(player)){
@@ -403,7 +376,37 @@ public class MulinoGameAllPhases implements Game<MulinoState, String, Checker> {
 				newNumMorris=newState.getNumberOfMorris(player);			
 				return newNumMorris-oldNumMorris>0;
 			}
+			
+		case FINAL:
+			fromAction=action.substring(0,2);
+			toAction=action.substring(2,4);
+			newState.setArrayOfMorris();
+			oldNumMorris=newState.getNumberOfMorris(player);
+			if (newState.isCheckerInTris(player,fromAction)){
+				if(newState.getBoard().get(fromAction).equals(player)){
+					newState.getBoard().put(fromAction,Checker.EMPTY);
+					newState.getBoard().put(toAction, player);
+				}else
+					System.out.println("C'è qualche problema -.-");
+	
+				newState.setArrayOfMorris();			
+				newNumMorris=newState.getNumberOfMorris(player);
+				return newNumMorris.equals(oldNumMorris);
+			}
+			else{
+				if(newState.getBoard().get(fromAction).equals(player)){
+					newState.getBoard().put(fromAction,Checker.EMPTY);
+					newState.getBoard().put(toAction, player);
+				}else
+					System.out.println("C'è qualche problema -.-");
+	
+				newState.setArrayOfMorris();			
+				newNumMorris=newState.getNumberOfMorris(player);
+				return newNumMorris-oldNumMorris>0;
+				}
+			
 		default:
+			System.out.println("DEFAULT");
 			return false;
 		}
 	}
