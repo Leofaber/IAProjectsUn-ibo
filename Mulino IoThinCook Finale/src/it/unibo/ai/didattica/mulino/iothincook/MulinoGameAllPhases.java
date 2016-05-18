@@ -311,7 +311,7 @@ public class MulinoGameAllPhases implements Game<MulinoState, String, Checker> {
 		return evaluator.evaluate();
 	}
 	
-	private List<String> playerCheckers(MulinoState state, Checker player){
+	public static List<String> playerCheckers(MulinoState state, Checker player){
 		List<String> result = new ArrayList<String>();
 		for(Entry<String,Checker> entry: state.getBoard().entrySet())
 			if(entry.getValue()==player)

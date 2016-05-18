@@ -17,10 +17,7 @@ import it.unibo.ai.didattica.mulino.domain.State;
 import it.unibo.ai.didattica.mulino.domain.State.Checker;
 import it.unibo.ai.didattica.mulino.domain.State.Phase;
 import it.unibo.ai.didattica.mulino.engine.TCPMulino;
-import it.unibo.ai.didattica.mulino.iothincook.MulinoGame;
 import it.unibo.ai.didattica.mulino.iothincook.MulinoGameAllPhases;
-import it.unibo.ai.didattica.mulino.iothincook.MulinoGamePhase2;
-import it.unibo.ai.didattica.mulino.iothincook.MulinoGamePhase3;
 import it.unibo.ai.didattica.mulino.iothincook.MulinoIterativeDeepeningAlphaBetaSearch;
 import it.unibo.ai.didattica.mulino.iothincook.MulinoState;
 

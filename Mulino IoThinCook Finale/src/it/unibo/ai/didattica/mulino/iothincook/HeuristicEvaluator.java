@@ -538,7 +538,7 @@ public double evaluate(){
  		
 		switch(opponentPlayer){
 			case BLACK:
-				for( String opponentPosition : MulinoGame.opponentCheckers(state, Checker.BLACK) ){
+				for( String opponentPosition : MulinoGameAllPhases.playerCheckers(state, Checker.BLACK) ){
 					for( String adjacentPosition : state.getAdjacentPositions(opponentPosition) ){
 						if( state.getBoard().get(adjacentPosition) == Checker.EMPTY ){
 							return false;
@@ -549,7 +549,7 @@ public double evaluate(){
 				break;
 		
 			case WHITE:
-				for( String opponentPosition : MulinoGame.opponentCheckers(state, Checker.WHITE) ){
+				for( String opponentPosition : MulinoGameAllPhases.playerCheckers(state, Checker.WHITE) ){
 					for( String adjacentPosition : state.getAdjacentPositions(opponentPosition) ){
 						if( state.getBoard().get(adjacentPosition) == Checker.EMPTY ){
 							return false;

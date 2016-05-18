@@ -180,7 +180,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 			System.out.println("Miglior azione depth corrente: "+currentActionMax+" con valore: "+currentMaxValue);
 		}
 //		if(previousMaxValue > currentMaxValue && !currentDepthTable.containsKey(previousActionMax)){
-		if(!currentDepthTable.containsKey(previousActionMax)){
+		if(previousActionMax!=null && !currentDepthTable.containsKey(previousActionMax)){
 			ACTION definitive;
 			if(listPrecMaxAction.size()>0)
 				definitive= listPrecMaxAction.get(new Random().nextInt(listPrecMaxAction.size()));
