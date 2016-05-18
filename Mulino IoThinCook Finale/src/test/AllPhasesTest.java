@@ -79,6 +79,6 @@ public class AllPhasesTest {
 	@Test
 	public void testClosedMill() {
 		System.out.println(AL.getActions(normalState).toString());
-	 	assertEquals("Tris orizzontale di d5-d6-d7", true, AL.getActions(normalState).size() == 0);
+	 	assertEquals("Tris orizzontale di d5-d6-d7", true, AL.getActions(normalState).size() > 0);
     }
 }

@@ -399,7 +399,7 @@ public void setArrayOfMorris() {
 				return new String[] {"d2","f4"};
 				 
 			case "f4":
-				return new String[] {"f2","e4","f6"};
+				return new String[] {"f2","e4","f6","g4"};
 				 
 			case "f6":
 				return new String[] {"f4","d6"};
